@@ -7,7 +7,7 @@
 class ActionSave : public Action
 {
 private:
-
+	ofstream CircuitFile;
 	int x, y;
 
 public:

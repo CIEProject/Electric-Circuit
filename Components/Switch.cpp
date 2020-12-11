@@ -13,7 +13,7 @@ void Switch::Draw(UI* pUI)
 	int ylabel = m_pGfxInfo->PointsList[0].y + 50;
 
 	pUI->labelMsg(getlabel(), xlabel, ylabel);
-	if(SwitchStatus==OPEN)
+	if(CompStatus==OPEN)
 		pUI->DrawOpenSwitch(*m_pGfxInfo, selected);
 	else
 		pUI->DrawClosedSwitch(*m_pGfxInfo, selected);
@@ -27,9 +27,17 @@ void Switch::Operate()
 
 }
 void Switch::Load(int Value, string Label) {
-	SwitchStatus = Status(Value);
+	CompStatus = Status(Value);
 	setlabel(Label);
 }
+void Switch::SaveCircuit(ofstream& CircuitFile)
+{
+	CircuitFile << "SWT" <<"\t"<<ID<< "\t" <<getLabel()<<"\t"<<getCompState()<<"\t"<< m_pGfxInfo->PointsList[0].x
+	<< "\t" << m_pGfxInfo->PointsList[0].y<< endl;
+	ID++;
+}
+//file << "RES" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+//<< endl;
 ALLCOMPS Switch::whichComponent() {
 	return 	SWITCH;
 }

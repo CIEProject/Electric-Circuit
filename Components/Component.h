@@ -12,8 +12,9 @@ private:
 	string m_Label;
 	
 protected:
+	static int ID;
 	int MaxFuzeCurrent = 0;
-	Status SwitchStatus;
+	Status CompStatus;
 	//Each component has two ending terminals (term1, term2)
 	double term1_volt, term2_volt;	//voltage at terminals 1&2
 	double resistance, sourceVoltage; // internal resistance and voltage jump introduced by source
@@ -26,7 +27,7 @@ protected:
 	bool selected;
 	GraphicsInfo *m_pGfxInfo;	//The parameters required to draw a component
 public:
-	
+	static void resetID();
 	void addTerm1Conn(Connection*);
 	void addTerm2Conn(Connection*);
 	void setlabel(string s) ;
@@ -55,8 +56,8 @@ public:
 	int getResistance();
 	void setSourceVoltage(int V);
 	int getBatteryVoltage();
-	void setSwitchState(int S);
-	int getSwitchState();
+	void setState(int S);
+	int getCompState();
 	//void setTerm1Volt(double v);		//sets the voltage at terminal1
 	//void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1
@@ -70,6 +71,7 @@ public:
 	virtual ALLCOMPS whichComponent() = 0;
 	virtual void Draw(UI*) = 0;	//for each component to Draw itself
 	virtual void Load(int Value, string )=0;
+	virtual void SaveCircuit(ofstream& CircuitFile) = 0;
 	int getCompCenterX(UI*); // get horizontal/vertical centers of the component
 	int getCompCenterY(UI*);
 	int getGraphicsInfoY();

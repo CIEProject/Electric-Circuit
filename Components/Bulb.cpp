@@ -14,7 +14,12 @@ void Bulb::Draw(UI* pUI)
 	pUI->DrawBulb(*m_pGfxInfo,selected); //update to draw Bulb
 
 }
-
+void Bulb::SaveCircuit(ofstream& CircuitFile)
+{
+	CircuitFile << "BLB" << "\t" << ID << "\t" << getLabel() << "\t" << resistance<< "\t" << m_pGfxInfo->PointsList[0].x
+		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
+	ID++;
+}
 void Bulb::Operate()
 {
 

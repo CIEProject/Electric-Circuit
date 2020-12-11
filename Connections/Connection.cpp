@@ -35,6 +35,13 @@ void Connection::Draw(UI* pUI)
 void Connection::setLabel(string s) {
 	c_label = s;
 }
+void Connection::save(ofstream& CircuitFile,int comp1, int comp2) {
+	int x1 = pGfxInfo->PointsList[0].x;
+	int x2 = pGfxInfo->PointsList[1].x;
+	int y1 = pGfxInfo->PointsList[0].y;
+	int y2 = pGfxInfo->PointsList[1].y;
+	CircuitFile << comp1 << "\t" << comp2 << "\t" << x1 << "\t" << y1 << "\t" << x2 << "\t" << y2 << endl;
+}
 string Connection::getLabel() {
 	return c_label;
 	}

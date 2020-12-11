@@ -365,9 +365,25 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 	if (isExist == 0)
 		return nullptr;
 }
-void ApplicationManager::Save(fstream& file, string name)
+//void ApplicationManager::Save(fstream& file, string name)
+//{
+void ApplicationManager::Save(ofstream& CircuitFile)
 {
-	file.open(name, ios::out);
+
+	for (int i = 0; i < CompCount; i++)
+		CompList[i]->SaveCircuit(CircuitFile);
+	Component::resetID();
+	CircuitFile << "Connection \n" << CompCount << endl;
+	for (int i = 0; i < ConnCount; i++) {
+		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
+		int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
+		ConnList[i]->save(CircuitFile, comp1, comp2);
+	}
+}
+		//for (int i = 0; i < getConnCount(); i++)
+			//getConnList()[i]->SaveCircuit(CircuitFile);
+	
+	/*file.open(name, ios::out);
 	file << CompCount << endl;
 	for (int i = 0; i < CompCount; i++)
 	{
@@ -384,16 +400,16 @@ void ApplicationManager::Save(fstream& file, string name)
 			file << "FUZ" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getMaxFuze() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
 			<< endl;
 		if (CompList[i]->whichComponent() == SWITCH)
-			file << "SWT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getSwitchState() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+			file << "SWT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getCompState() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
 			<< endl;
 		if (CompList[i]->whichComponent() == BUZZER)
 			file << "BZR" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
 			<< endl;
 		if (CompList[i]->whichComponent() == BULB)
 			file << "BLB" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-	}
-	file << "Connection \n" << CompCount << endl;;
+			<< endl;*/
+	//}
+	/*file << "Connection \n" << CompCount << endl;;
 
 	for (int i = 0; i < ConnCount; i++) {
 		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
@@ -406,7 +422,7 @@ void ApplicationManager::Save(fstream& file, string name)
 		file << comp1 << "\t" << comp2 << "\t" << x1 << "\t" << y1 << "\t" << x2 << "\t" << y2 << endl;
 	}
 	file.close();
-}
+}*/
 int ApplicationManager::getCompOrder(Component* comp) {
 	for (int i = 0; i < CompCount; i++) {
 		if (comp == CompList[i])

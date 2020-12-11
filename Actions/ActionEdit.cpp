@@ -107,8 +107,8 @@ void ActionEdit::Execute()
 				}
 				case 2:
 				{
-					value = pUI->GetSrting(to_string(comp1->getSwitchState()), to_string(comp1->getSwitchState()));
-					comp1->setSwitchState(stod(value));
+					value = pUI->GetSrting(to_string(comp1->getCompState()), to_string(comp1->getCompState()));
+					comp1->setState(stod(value));
 					break;
 				}
 				case 3:

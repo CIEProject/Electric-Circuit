@@ -15,7 +15,12 @@ void Buzzer::Draw(UI* pUI)
 	pUI->DrawBuzzer(*m_pGfxInfo,selected); //update to draw resistor
 
 }
-
+void Buzzer::SaveCircuit(ofstream& CircuitFile)
+{
+	CircuitFile << "BZR" << "\t" << ID << "\t" << getLabel() << "\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
+		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
+	ID++;
+}
 void Buzzer::Operate()
 {
 

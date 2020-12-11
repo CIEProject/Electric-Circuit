@@ -1,12 +1,12 @@
 #include "Component.h"
-
+int Component::ID = 1;
 Component::Component(GraphicsInfo *r_GfxInfo)
 {
 	m_pGfxInfo = r_GfxInfo;	
 	term1_volt = term2_volt = 0;
 	term1_conn_count = term2_conn_count = 0;
 	selected = false;
-	SwitchStatus = CLOSED;
+	CompStatus = CLOSED;
 }
 
 Component::Component()
@@ -15,7 +15,10 @@ Component::Component()
 	term1_volt = term2_volt = 0;
 	term1_conn_count = term2_conn_count = 0;
 	selected = false;
-	SwitchStatus = CLOSED;
+	CompStatus = CLOSED;
+}
+void Component::resetID(){
+	ID = 1;
 }
 void Component::addTerm1Conn(Connection* c) {
 	term1_conns[term1_conn_count++] = c;
@@ -112,20 +115,20 @@ string Component::getLabel() {
 int Component::getResistance() {
 	return resistance;
 }
-void Component::setSwitchState(int S) {
+void Component::setState(int S) {
 	switch (S) {
 	case 1:
-		SwitchStatus = CLOSED;
+		CompStatus = CLOSED;
 		break;
 	case 0:
-		SwitchStatus = OPEN;
+		CompStatus = OPEN;
 		break;
 	default:
-		SwitchStatus = CLOSED;
+		CompStatus = CLOSED;
 	}
 }
-int Component::getSwitchState() {
-	return SwitchStatus;
+int Component::getCompState() {
+	return CompStatus;
 }
 Component::~Component()
 {

@@ -21,6 +21,12 @@ void Resistor::Draw(UI* pUI)
 	
 	
 }
+void Resistor::SaveCircuit(ofstream& CircuitFile)
+{
+	CircuitFile << "RES" << "\t" << ID << "\t" << getLabel() << "\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
+		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
+	ID++;
+}
 void Resistor::Operate()
 {
 

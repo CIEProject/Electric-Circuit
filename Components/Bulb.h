@@ -9,6 +9,7 @@ public:
 	virtual void Draw(UI*);	//Draws the Bulb
 	virtual void Operate();
 	virtual void Load(int Value, string);
+	virtual void SaveCircuit(ofstream& CircuitFile);
 	virtual ALLCOMPS Bulb::whichComponent();
 
 };

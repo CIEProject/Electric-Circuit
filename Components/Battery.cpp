@@ -21,6 +21,12 @@ void Battery::Draw(UI* pUI)
 
 
 }
+void Battery::SaveCircuit(ofstream& CircuitFile)
+{
+	CircuitFile << "BAT" << "\t" << ID << "\t" << getLabel() << "\t" << getBatteryVoltage() << "\t" << m_pGfxInfo->PointsList[0].x
+		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
+	ID++;
+}
 
 void Battery::Operate()
 {

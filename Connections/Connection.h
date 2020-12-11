@@ -14,6 +14,7 @@ public:
 	
 	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr);
 	void Load(Component* cmp1, Component* cmp2);
+	void save(ofstream& CircuitFile,int comp1, int comp2);
 	void setLabel(string s);
 	string getLabel();
 	double lineslope();

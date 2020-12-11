@@ -48,7 +48,7 @@ void ActionAddSwitch::Execute()
 	string value = pUI->GetSrting("Enter Switch Value: 1 means closed while 0 means open switch","");
 	if (value != "1" && value != "0")
 		value = "1";
-	pR->setSwitchState(stod(value));
+	pR->setState(stod(value));
 
 	
 
