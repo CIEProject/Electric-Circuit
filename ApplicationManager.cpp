@@ -19,7 +19,7 @@
 #include<cmath>
 
 using namespace std;
-
+//github test
 
 ApplicationManager::ApplicationManager()
 {
