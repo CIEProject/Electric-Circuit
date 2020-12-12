@@ -17,7 +17,7 @@ if (fileName == "") //Conditon in case the user does not enter any name
 	+ ".txt";
 	CircuitFile.open(fileName);
 	CircuitFile.clear();
-	pManager->Save(CircuitFile);
+	pManager->SaveCircuit(CircuitFile);
 	CircuitFile << "END_OF_FILE" << endl;
 	pManager->GetUI()->PrintMsg("Circuit has been saved successfully");
 	CircuitFile.close();

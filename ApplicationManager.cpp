@@ -367,7 +367,7 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 }
 //void ApplicationManager::Save(fstream& file, string name)
 //{
-void ApplicationManager::Save(ofstream& CircuitFile)
+void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 {
 
 	for (int i = 0; i < CompCount; i++)
@@ -380,8 +380,6 @@ void ApplicationManager::Save(ofstream& CircuitFile)
 		ConnList[i]->save(CircuitFile, comp1, comp2);
 	}
 }
-		//for (int i = 0; i < getConnCount(); i++)
-			//getConnList()[i]->SaveCircuit(CircuitFile);
 	
 	/*file.open(name, ios::out);
 	file << CompCount << endl;

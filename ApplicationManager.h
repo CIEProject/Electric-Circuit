@@ -55,7 +55,7 @@ public:
 	void reArrange();//description the in the implementation
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
 	Connection* GetConnByCordinates(int x, int y);//returns pointer to the connection if (x,y) is in the component region
-	void Save(ofstream& file);
+	void SaveCircuit(ofstream& file);
 	int ApplicationManager::getCompOrder(Component* comp);//returns the index of the component in CompList
 	void Load(ifstream& file, string name);
 				// Simulation Mode Functions //
