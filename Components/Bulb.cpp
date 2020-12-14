@@ -16,9 +16,13 @@ void Bulb::Draw(UI* pUI)
 }
 void Bulb::SaveCircuit(ofstream& CircuitFile)
 {
+	string s = getlabel();
+	if (getlabel() == "")
+		setlabel("Bulb");
 	CircuitFile << "BLB" << "\t" << ID << "\t" << getLabel() << "\t" << resistance<< "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
+	setlabel(s);
 }
 void Bulb::Operate()
 {

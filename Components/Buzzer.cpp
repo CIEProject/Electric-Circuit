@@ -17,9 +17,13 @@ void Buzzer::Draw(UI* pUI)
 }
 void Buzzer::SaveCircuit(ofstream& CircuitFile)
 {
+	string s = getlabel();
+	if (getlabel() == "")
+		setlabel("Buzzer");
 	CircuitFile << "BZR" << "\t" << ID << "\t" << getLabel() << "\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
+	setlabel(s);
 }
 void Buzzer::Operate()
 {

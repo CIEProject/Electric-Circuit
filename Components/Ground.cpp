@@ -23,9 +23,13 @@ void Ground::Draw(UI* pUI)
 }
 void Ground::SaveCircuit(ofstream& CircuitFile)
 {
+	string s = getlabel();
+	if (getlabel() == "")
+		setlabel("Ground");
 	CircuitFile << "GND" << "\t" << ID << "\t" << getLabel() << "\t" << -1 << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
+	setlabel(s);
 }
 void Ground::Operate()
 {

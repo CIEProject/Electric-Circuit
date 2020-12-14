@@ -32,9 +32,13 @@ void Switch::Load(int Value, string Label) {
 }
 void Switch::SaveCircuit(ofstream& CircuitFile)
 {
+	string s = getlabel();
+	if (getlabel() == "")
+		setlabel("Switch");
 	CircuitFile << "SWT" <<"\t"<<ID<< "\t" <<getLabel()<<"\t"<<getCompState()<<"\t"<< m_pGfxInfo->PointsList[0].x
 	<< "\t" << m_pGfxInfo->PointsList[0].y<< endl;
 	ID++;
+	setlabel(s);
 }
 //file << "RES" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
 //<< endl;

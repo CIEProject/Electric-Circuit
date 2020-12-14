@@ -23,9 +23,13 @@ void Fuze::Draw(UI* pUI)
 }
 void Fuze::SaveCircuit(ofstream& CircuitFile)
 {
+	string s = getlabel();
+	if (getlabel() == "")
+		setlabel("Fuse");
 	CircuitFile << "FUZ" << "\t" << ID << "\t" << getLabel() << "\t" << getMaxFuze() << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
+	setlabeL(s);
 }
 void Fuze::Operate()
 {

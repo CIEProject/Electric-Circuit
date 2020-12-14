@@ -369,11 +369,11 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 //{
 void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 {
-
+	CircuitFile << CompCount << endl;
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->SaveCircuit(CircuitFile);
 	Component::resetID();
-	CircuitFile << "Connection \n" << CompCount << endl;
+	CircuitFile << "Connections \n" << CompCount << endl;
 	for (int i = 0; i < ConnCount; i++) {
 		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
 		int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
@@ -488,7 +488,7 @@ void ApplicationManager::Load(ifstream& file, string name)
 					comp->Load(Value, Label);
 					AddComponent(comp);
 				}
-				if (CompName == "FUS")
+				if (CompName == "FUZ")
 				{
 					Fuze* comp = new Fuze(G);
 					comp->Load(Value, Label);
