@@ -1,8 +1,0 @@
-3
-BLB	1	Bulb	2	193	140
-RES	2	Resistor	1	247	200
-RES	3	Resistor	1	335	88
-Connections 
-3
-3	2	335	113	297	225
-3	1	335	113	243	165

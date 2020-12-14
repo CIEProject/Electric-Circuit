@@ -1,6 +1,0 @@
-BLB	1		2	324	234
-RES	2		1	706	230
-Connection 
-2
-2	1	706	255	374	259
-END_OF_FILE

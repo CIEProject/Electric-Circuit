@@ -1,7 +1,0 @@
-2
-FUZ	1	fdg	0	342	157
-BZR	2	dfgd	1	578	289
-Connections 
-2
-1	2	392	182	578	314
-
