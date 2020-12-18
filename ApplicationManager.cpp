@@ -250,6 +250,7 @@ UI* ApplicationManager::GetUI()
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
 bool ApplicationManager::ValidateCircuit() {
+
 	return true;
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {

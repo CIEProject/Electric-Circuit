@@ -49,6 +49,7 @@ public:
 	int getMaxFuze() {
 		return MaxFuzeCurrent;
 	}
+	void reArrange();
 	int getTermcount(TerminalNum Term);
 	Connection** getTermConnections(TerminalNum Term);
 	string getLabel();

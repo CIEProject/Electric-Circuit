@@ -40,8 +40,6 @@ void Switch::SaveCircuit(ofstream& CircuitFile)
 	ID++;
 	setlabel(s);
 }
-//file << "RES" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-//<< endl;
 ALLCOMPS Switch::whichComponent() {
 	return 	SWITCH;
 }

@@ -95,7 +95,35 @@ void Component::deletecon(Connection* pCon) {
 		if (term2_conns[i] == pCon)
 			term2_conns[i] = nullptr;
 	}
+	reArrange();
 }
+void Component::reArrange() {
+	Connection* tempConnList[MAX_CONNS];
+	int counter = 0;
+	for (int i = 0; i < term1_conn_count; i++)
+		if (term1_conns[i] != nullptr) {
+			tempConnList[counter] = term1_conns[i];
+			counter++;
+		}
+	for (int i = 0; i < term1_conn_count; i++) {
+		term1_conns[i] = tempConnList[i];
+		tempConnList[i] = nullptr;
+	}
+	term1_conn_count = counter;
+	counter = 0;
+	for (int i = 0; i < term2_conn_count; i++)
+		if (term2_conns[i] != nullptr) {
+			tempConnList[counter] = term2_conns[i];
+			counter++;
+		}
+	for (int i = 0; i < term2_conn_count; i++) {
+		term2_conns[i] = tempConnList[i];
+		tempConnList[i] = nullptr;
+	}
+	term2_conn_count = counter;
+}
+
+
 bool Component::isSelected() {
 	
 	return selected;
