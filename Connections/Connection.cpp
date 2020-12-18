@@ -87,6 +87,12 @@ int Connection::WhichComp(Component* comp) {
 	else
 		return 0;
 }
+bool Connection::validate(Connection* Conn) {
+	if ((Comp1 == Conn->getComp(1) || Comp1 == Conn->getComp(2)) && (Comp2 == Conn->getComp(1) || Comp2 == Conn->getComp(2))||(Comp1==Comp2))
+		return false;
+	else
+		return true;
+}
 
 bool Connection::isSelected() {
 

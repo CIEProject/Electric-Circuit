@@ -13,6 +13,7 @@
 #include"Actions/ExitAction.h"
 #include"Actions/ActionSave.h"
 #include"Actions/ActionLoad.h"
+#include"Actions/ActionSwitchSimulation.h"
 #include"Actions/ActionAddLabel.h"
 
 #include <iostream>
@@ -210,9 +211,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DEL:
 		pAct = new ActionDelete(this);
 		break;
-	/*case SIM_MODE:
-		pAct = new Action(this);
-		break;*/ //TODO
+	case SIM_MODE:
+		pAct = new ActionSwitchSimulation(this);
+		break; //TODO
 	
 
 	case EXIT:
@@ -249,9 +250,30 @@ UI* ApplicationManager::GetUI()
 }
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
-bool ApplicationManager::ValidateCircuit() {
-
-	return true;
+bool ApplicationManager::ValidateCircuit(){
+	bool validation = true;
+	for (int i = 0; i < CompCount; i++) {
+		if (!(CompList[i]->validate()))
+			validation = false;
+	}
+	int counter=0;
+	////////////////////////////////////////////
+	for (int i = 0; i < CompCount; i++) {
+		if (dynamic_cast<Ground*>(CompList[i]))
+			counter++;
+		}
+	if (counter != 1)
+		validation = false;
+	////////////////////////////////////////////
+	for (int i = 0; i < ConnCount-1; i++) {
+		for (int j = i + 1; j < ConnCount; j++) {
+			if (!(ConnList[i]->validate(ConnList[j])))
+				validation = false;
+		}
+	}
+	////////////////////////////////////////////
+	return validation;
+	
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	UI* pUI = GetUI();

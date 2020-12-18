@@ -49,7 +49,7 @@ class UI
 		ITM_DELETE,
 		ITM_SAVE,
 		ITM_LOAD,
-		//ITM_SIMU,			//TODO: Add more items names here
+		ITM_SIMU,			//TODO: Add more items names here
 		ITM_EXIT,		//Exit item
 		
 		ITM_DSN_CNT	

@@ -24,6 +24,7 @@ public:
 	void setNewComp(int n, Component*);
 	void deleteGraphics();
 	int WhichComp(Component*);
+	bool validate(Connection*);
 	bool isSelected();
 	void Selection();
 	void unSelect();

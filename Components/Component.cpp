@@ -60,6 +60,12 @@ string Component::getlabel()const {
 void Component::setresistance(double R) {
 	resistance = R;
 }
+bool Component::validate() {
+	if (term1_conn_count == 1 && term2_conn_count == 1)
+		return true;
+	else
+		return false;
+}
 void Component::setSourceVoltage(int V) {
 	sourceVoltage = V;
 }

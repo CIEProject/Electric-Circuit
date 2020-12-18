@@ -35,7 +35,7 @@ public:
 	Component(GraphicsInfo *r_GfxInfo);
 	Component();
 	void setresistance(double R);
-	
+	bool validate();
 	//Connection** getTerm1_conns();
 	//Connection** getTerm2_conns();
 	void deleteGraphics();
