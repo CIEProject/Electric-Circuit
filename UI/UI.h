@@ -119,6 +119,7 @@ public:
 
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
+	void ClearToolBarArea()const;
 
 		
 	// Draws a resistor

@@ -223,6 +223,13 @@ void UI::ClearDrawingArea() const
 	pWind->DrawRectangle(0, ToolBarHeight, width, height - StatusBarHeight);
 	
 }
+void UI::ClearToolBarArea() const
+{
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, width, ToolBarHeight);
+
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 

@@ -251,6 +251,8 @@ UI* ApplicationManager::GetUI()
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
 bool ApplicationManager::ValidateCircuit(){
+	////////////////////////////////////////
+	
 	bool validation = true;
 	for (int i = 0; i < CompCount; i++) {
 		if (!(CompList[i]->validate()))
@@ -258,13 +260,14 @@ bool ApplicationManager::ValidateCircuit(){
 	}
 	int counter=0;
 	////////////////////////////////////////////
+	//makes sure there is only one ground
 	for (int i = 0; i < CompCount; i++) {
 		if (dynamic_cast<Ground*>(CompList[i]))
 			counter++;
 		}
 	if (counter != 1)
 		validation = false;
-	////////////////////////////////////////////
+	///////////////////////////////////////////
 	for (int i = 0; i < ConnCount-1; i++) {
 		for (int j = i + 1; j < ConnCount; j++) {
 			if (!(ConnList[i]->validate(ConnList[j])))
@@ -403,7 +406,7 @@ void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 		ConnList[i]->save(CircuitFile, comp1, comp2);
 	}
 }
-	
+	//old save
 	/*file.open(name, ios::out);
 	file << CompCount << endl;
 	for (int i = 0; i < CompCount; i++)
