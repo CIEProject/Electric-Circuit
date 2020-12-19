@@ -61,6 +61,7 @@ void Component::setresistance(double R) {
 	resistance = R;
 }
 bool Component::validate() {
+	//makes sure that this components has only one connection at each terminal
 	if (term1_conn_count == 1 && term2_conn_count == 1)
 		return true;
 	else

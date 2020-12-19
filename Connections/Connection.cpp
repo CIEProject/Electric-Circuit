@@ -88,7 +88,12 @@ int Connection::WhichComp(Component* comp) {
 		return 0;
 }
 bool Connection::validate(Connection* Conn) {
-	if ((Comp1 == Conn->getComp(1) || Comp1 == Conn->getComp(2)) && (Comp2 == Conn->getComp(1) || Comp2 == Conn->getComp(2))||(Comp1==Comp2))
+	//this function makes sure that there is not a closed circle between only two components and that no coneection is made between the terminals of the same component
+	if ((Comp1 == Conn->getComp(1) || Comp1 == Conn->getComp(2)) && (Comp2 == Conn->getComp(1) || Comp2 == Conn->getComp(2)))
+		return false;
+	else if (Comp1 == Comp2)
+		return false;
+	else if (Conn->getComp(1) == Conn->getComp(2))
 		return false;
 	else
 		return true;
