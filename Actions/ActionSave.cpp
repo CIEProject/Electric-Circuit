@@ -12,9 +12,9 @@ void ActionSave::Execute()
 {
 	UI* pUI = pManager->GetUI();
 string fileName = pUI->GetSrting("Enter File name please ", ""); //Gets the name of the file from the user
+fileName = fileName + ".txt";
 if (fileName == "") //Conditon in case the user does not enter any name
-	fileName = "test";
-	+ ".txt";
+	fileName = "test.txt";
 	CircuitFile.open(fileName);
 	CircuitFile.clear();
 	pManager->SaveCircuit(CircuitFile);

@@ -257,7 +257,7 @@ bool ApplicationManager::ValidateCircuit(){
 	if (CompCount != ConnCount|| ConnCount == 1 || ConnCount == 0)
 		return false;
 	else {
-
+		///////////////////////////////////////////////
 		for (int i = 0; i < CompCount; i++) {
 			if (!(CompList[i]->validate()))
 				return false;
@@ -303,9 +303,8 @@ bool ApplicationManager::ValidateCircuit(){
 			}
 			counter = 1;
 			//for (int j = 0; j < CompCount - 1; j++) 
-			while (comp1 != CompList[i]) {
-				if (counter > CompCount)
-					return false;
+			while (comp1 != CompList[i]&& counter <= CompCount) {
+			
 				if (conn1 == comp1->getTermConnections(TERM1)[0])
 					conn1 = comp1->getTermConnections(TERM2)[0];
 				else {
