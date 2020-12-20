@@ -254,59 +254,46 @@ bool ApplicationManager::ValidateCircuit(){
 	bool validation = true;
 	
 	////////////////////////////////////////
-	
-	
-	for (int i = 0; i < CompCount; i++) {
-		if (!(CompList[i]->validate()))
-			validation = false;
-	}
-	int counter=0;
-	////////////////////////////////////////////
-	//makes sure there is only one ground
-	for (int i = 0; i < CompCount; i++) {
-		if (dynamic_cast<Ground*>(CompList[i]))
-			counter++;
-		}
-	if (counter != 1)
-		validation = false;
-	///////////////////////////////////////////
-	//makes sure that there are reasonable number of connections
-	if(ConnCount==1|| ConnCount==0)
-		validation = false;
+	if (CompCount != ConnCount|| ConnCount == 1 || ConnCount == 0)
+		return false;
 	else {
+
+		for (int i = 0; i < CompCount; i++) {
+			if (!(CompList[i]->validate()))
+				return false;
+		}
+		int counter = 0;
+		////////////////////////////////////////////
+		//makes sure there is only one ground
+		for (int i = 0; i < CompCount; i++) {
+			if (dynamic_cast<Ground*>(CompList[i]))
+				counter++;
+		}
+		if (counter != 1)
+			return false;
+		///////////////////////////////////////////
+		//makes sure that there are reasonable number of connections
 
 		for (int i = 0; i < ConnCount - 1; i++) {
 			for (int j = i + 1; j < ConnCount; j++) {
 				if (!(ConnList[i]->validate(ConnList[j])))
-					validation = false;
+					return false;
 			}
 		}
-	}
-	/// ////////////////////////////////////////
-	//this one might need extra work, but the main idea is that it makes sure that there are only circuit and not two or three series connected circuits, it is not working yet 
-	//it only needs more time in order to implement it correctly
-	/*for (int i = 0; i < CompCount; i++) {
+
+		/// ////////////////////////////////////////
+		//this one might need extra work, but the main idea is that it makes sure that there are only circuit and not two or three series connected circuits, it is not working yet 
+		//it only needs more time in order to implement it correctly
 		Connection* conn1;
 		Component* comp1;
-		comp1 = CompList[i];
+		counter = 0;
 		int temp;
-		conn1 = comp1->getTermConnections(TERM1)[0];
-		temp = conn1->WhichComp(CompList[i]);
-		switch (temp) {
-		case 1:
-			comp1 = conn1->getComp(2);
-			break;
-		case 2:
-			comp1 = conn1->getComp(1);
-		}
-		for (int j = 0; j < CompCount - 1; j++) {
-			if (conn1 == comp1->getTermConnections(TERM1)[0])
-				conn1 = comp1->getTermConnections(TERM2)[0];
-			else {
-				conn1 == comp1->getTermConnections(TERM1)[0];
+		for (int i = 0; i < CompCount; i++) {
 
-			}
-			temp = conn1->WhichComp(comp1);
+			comp1 = CompList[i];
+
+			conn1 = comp1->getTermConnections(TERM1)[0];
+			temp = conn1->WhichComp(CompList[i]);
 			switch (temp) {
 			case 1:
 				comp1 = conn1->getComp(2);
@@ -314,15 +301,35 @@ bool ApplicationManager::ValidateCircuit(){
 			case 2:
 				comp1 = conn1->getComp(1);
 			}
+			counter = 1;
+			//for (int j = 0; j < CompCount - 1; j++) 
+			while (comp1 != CompList[i]) {
+				if (counter > CompCount)
+					return false;
+				if (conn1 == comp1->getTermConnections(TERM1)[0])
+					conn1 = comp1->getTermConnections(TERM2)[0];
+				else {
+					conn1 = comp1->getTermConnections(TERM1)[0];
 
+				}
+				temp = conn1->WhichComp(comp1);
+				switch (temp) {
+				case 1:
+					comp1 = conn1->getComp(2);
+					break;
+				case 2:
+					comp1 = conn1->getComp(1);
+				}
+				counter++;
+				
+			}
 
+			if (counter != CompCount)
+				return false;
 		}
-		if (comp1 != CompList[i])
-			validation = false;
-	}*/
-	////////////////////////////////////////////
-	return validation;
-	
+		////////////////////////////////////////////
+		return validation;
+	}
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	UI* pUI = GetUI();
