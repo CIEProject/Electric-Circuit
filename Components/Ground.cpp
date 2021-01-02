@@ -5,7 +5,7 @@
 #include "..\UI\UI.h"
 Ground::Ground(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	resistance = 2;
+	resistance = 0;
 	sourceVoltage = 0;
 }
 

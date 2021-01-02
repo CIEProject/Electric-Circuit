@@ -20,6 +20,7 @@ UI::UI()
 	ChangeTitle("Circuit Simulator Project");
 
 	CreateDesignToolBar();	//Create the desgin toolbar
+	//CreateSimulationToolBar();
 	CreateStatusBar();		//Create Status bar
 	xtemp = 0;
 	ytemp = 0;
@@ -271,9 +272,21 @@ void UI::CreateDesignToolBar()
 //Draws the menu (toolbar) in the simulation mode
 void UI::CreateSimulationToolBar()
 {
-	AppMode = SIMULATION;	//Simulation Mode
-	//TODO: Write code to draw the simualtion toolbar (similar to that of design toolbar drawing)
+		AppMode = SIMULATION;	//Simulation Mode
 
+		string SimulationMenuImages[ITM_SIM_CNT];
+		SimulationMenuImages[ITM_CIRC_SIM] = "images\\Menu\\SMenu_Simulate.jpg";
+		SimulationMenuImages[ITM_AMMETER] = "images\\Menu\\SMenu_Ammeter.jpg";
+		SimulationMenuImages[ITM_VOLTMETER] = "images\\Menu\\SMenu_Voltmeter.jpg";
+		SimulationMenuImages[ITM_EXIT2] = "images\\Menu\\Menu_Exit.jpg";
+
+		for (int i = 0; i < ITM_SIM_CNT; i++)
+		{
+			pWind->DrawImage(SimulationMenuImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
+		}
+		pWind->SetPen(RED, 3);
+		pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
+	
 }
 
 //======================================================================================//

@@ -38,6 +38,87 @@ ApplicationManager::ApplicationManager()
 	pUI = new UI;
 }
 ////////////////////////////////////////////////////////////////////
+double ApplicationManager::calculateNetResistance() {
+	double NetR=0;
+	for (int i = 0; i < CompCount; i++) {
+		NetR += CompList[i]->getResistance();
+	}
+	return NetR;
+}
+double ApplicationManager::calculateNetVoltage() {
+	double NetV = 0;
+	for (int i = 0; i < CompCount; i++) {
+		NetV += CompList[i]->getSourceVoltage();
+	}
+	return NetV;
+}
+void ApplicationManager::calculateTermsVoltage() {
+	double remainingVoltage = calculateNetVoltage();
+	double AllVoltage = calculateNetVoltage();
+	double current;
+	Component* comp1=nullptr,*ground=nullptr;
+	Connection* conn1;
+	int temp;
+	for (int i = 0; i < CompCount; i++) {
+		if (dynamic_cast<Ground*>(CompList[i])) {
+			comp1 = CompList[i];
+			
+		}
+	}
+	ground = comp1;
+	current = calculateNetVoltage() / calculateNetResistance();
+	conn1 = comp1->getTermConnections(TERM1)[0];
+	temp = conn1->WhichComp(comp1);
+	switch (temp) {
+	case 1:
+		comp1 = conn1->getComp(2);
+		break;
+	case 2:
+		comp1 = conn1->getComp(1);
+	}
+	switch (comp1->whichTerminal(conn1)) {
+	case TERM1:
+		comp1->setTerm1Volt(0);
+		comp1->setTerm2Volt(comp1->getResistance() * current);
+		break;
+	case TERM2:
+		comp1->setTerm2Volt(0);
+		comp1->setTerm1Volt(comp1->getResistance() * current);
+		break;
+	}
+	pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
+	remainingVoltage -= comp1->getResistance() * current;
+	while (comp1 !=ground) {
+
+		if (conn1 == comp1->getTermConnections(TERM1)[0])
+			conn1 = comp1->getTermConnections(TERM2)[0];
+		else {
+			conn1 = comp1->getTermConnections(TERM1)[0];
+
+		}
+		temp = conn1->WhichComp(comp1);
+		switch (temp) {
+		case 1:
+			comp1 = conn1->getComp(2);
+			break;
+		case 2:
+			comp1 = conn1->getComp(1);
+		}
+		switch (comp1->whichTerminal(conn1)) {
+		case TERM1:
+			comp1->setTerm1Volt(AllVoltage-remainingVoltage);
+			comp1->setTerm2Volt(comp1->getResistance() * current+ AllVoltage - remainingVoltage);
+			break;
+		case TERM2:
+			comp1->setTerm2Volt(AllVoltage - remainingVoltage);
+			comp1->setTerm1Volt(comp1->getResistance() * current+ AllVoltage - remainingVoltage);
+			break;
+		}
+		pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
+		remainingVoltage -= comp1->getResistance() * current;
+		
+	}
+}
 void ApplicationManager::AddComponent(Component* pComp)
 {
 	CompList[CompCount++] = pComp;
@@ -61,7 +142,11 @@ void ApplicationManager::DelSelected() {
 			if (ConnList[i]->isSelected())
 				DelConn(ConnList[i]);
 	}
+
 	reArrange();
+	for (int i = 0; i < CompCount; i++)
+			CompList[i]->reArrange();
+
 
 }
 void ApplicationManager::DelComponent(Component* pComp)
@@ -142,6 +227,7 @@ void ApplicationManager::reArrange() {
 	for (int i = 0; i < CompCount; i++) {
 		CompList[i] = tempCompList[i];
 		tempCompList[i] = nullptr;
+		
 	}
 	CompCount = counter;
 	counter = 0;
