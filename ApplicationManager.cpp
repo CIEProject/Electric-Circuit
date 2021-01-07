@@ -15,7 +15,8 @@
 #include"Actions/ActionLoad.h"
 #include"Actions/ActionSwitchSimulation.h"
 #include"Actions/ActionAddLabel.h"
-
+#include"Actions/ActionDropDown.h"
+#include"Actions/ActionSwitchReal.h"
 #include <iostream>
 #include<cmath>
 
@@ -297,6 +298,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DEL:
 		pAct = new ActionDelete(this);
 		break;
+	case DROP_DOWN:
+		pAct = new ActionDropDown(this);
+		break;
+	case SWITCH_IMG:
+		pAct = new ActionSwitchReal(this);
+		break;
 	case SIM_MODE:
 		pAct = new ActionSwitchSimulation(this);
 		break; //TODO
@@ -327,6 +334,7 @@ void ApplicationManager::UpdateInterface()
 		if (ConnList[i] != nullptr) {
 			ConnList[i]->Draw(pUI);
 		}
+	GetUI()->CreateDropDownMenu();
 }
 
 ////////////////////////////////////////////////////////////////////

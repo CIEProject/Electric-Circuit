@@ -207,6 +207,12 @@
     <ClCompile Include="Actions\ActionSwitchSimulation.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionDropDown.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionSwitchReal.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -347,6 +353,12 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionSwitchSimulation.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionDropDown.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionSwitchReal.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

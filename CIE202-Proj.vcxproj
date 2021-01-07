@@ -120,10 +120,12 @@
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwitch.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
+    <ClCompile Include="Actions\ActionDropDown.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
+    <ClCompile Include="Actions\ActionSwitchReal.cpp" />
     <ClCompile Include="Actions\ActionSwitchSimulation.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
@@ -186,10 +188,12 @@
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwitch.h" />
     <ClInclude Include="Actions\ActionDelete.h" />
+    <ClInclude Include="Actions\ActionDropDown.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
+    <ClInclude Include="Actions\ActionSwitchReal.h" />
     <ClInclude Include="Actions\ActionSwitchSimulation.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="ApplicationManager.h" />
