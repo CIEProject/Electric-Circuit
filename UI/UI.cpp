@@ -167,8 +167,8 @@ ActionType UI::GetUserAction()
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
-	else 
-	{
+	else {
+
 		if (y >= 0 && y < ToolBarHeight)
 		{
 			int ClickedItemOrder = (x / ToolItemWidth);
@@ -181,7 +181,6 @@ ActionType UI::GetUserAction()
 			}
 		}
 	}
-
 }
 int UI::getXtemp() {
 	return xtemp;

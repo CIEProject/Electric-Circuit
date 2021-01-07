@@ -17,6 +17,7 @@
 #include"Actions/ActionAddLabel.h"
 #include"Actions/ActionDropDown.h"
 #include"Actions/ActionSwitchReal.h"
+#include"Actions/ActionAmmeter.h"
 #include <iostream>
 #include<cmath>
 
@@ -307,7 +308,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case SIM_MODE:
 		pAct = new ActionSwitchSimulation(this);
 		break; //TODO
-	
+	case AMMETER:
+		pAct = new ActionAmmeter(this);
+		break;
 
 	case EXIT:
 		pAct = new ExitAction(this);	
@@ -726,7 +729,7 @@ void ApplicationManager::ToSimulation() {
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {
 	// TODO
-	return 0;
+	return calculateNetVoltage() / calculateNetResistance();
 }
 
 // Calculates voltage at each component terminal

@@ -10,12 +10,6 @@ struct Point
 	int x,y;
 };
 
-
-//A structure to contain drawing parameters for each component/connection
-//Each component stores its drawing points in this struct 
-//For example, a resistor can store points of the rectangluar area it occupies
-//The Connection can store the points of its line segments
-//this structure can be extended if desired
 struct GraphicsInfo
 {
 	int PointsCount;
