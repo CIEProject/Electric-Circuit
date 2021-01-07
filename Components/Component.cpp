@@ -61,6 +61,7 @@ void Component::setresistance(double R) {
 	resistance = R;
 }
 bool Component::validate() {
+	//makes sure that this components has only one connection at each terminal
 	if (term1_conn_count == 1 && term2_conn_count == 1)
 		return true;
 	else
@@ -69,7 +70,7 @@ bool Component::validate() {
 void Component::setSourceVoltage(int V) {
 	sourceVoltage = V;
 }
-int Component::getBatteryVoltage() {
+int Component::getSourceVoltage() {
 	return sourceVoltage;
 }
 
@@ -101,7 +102,7 @@ void Component::deletecon(Connection* pCon) {
 		if (term2_conns[i] == pCon)
 			term2_conns[i] = nullptr;
 	}
-	reArrange();
+	
 }
 void Component::reArrange() {
 	Connection* tempConnList[MAX_CONNS];
@@ -163,6 +164,23 @@ void Component::setState(int S) {
 }
 int Component::getCompState() {
 	return CompStatus;
+}
+void Component::setTerm1Volt(double v) {
+	term1_volt = v;
+}//sets the voltage at terminal1
+void Component::setTerm2Volt(double v) {
+	term2_volt = v;
+}	//sets the voltage at terminal2
+TerminalNum Component::whichTerminal(Connection* Conn) {
+	for (int i = 0; i < term1_conn_count; i++) {
+		if (term1_conns[i] == Conn)
+			return TERM1;
+	}
+	
+	for (int i = 0; i < term2_conn_count; i++)
+		if (term2_conns[i]==Conn) {
+			return TERM2;
+		}
 }
 Component::~Component()
 {

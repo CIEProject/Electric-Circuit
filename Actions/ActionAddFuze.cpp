@@ -45,14 +45,10 @@ void ActionAddFuze::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 	Fuze* pR = new Fuze(pGInfo);
-	string value = pUI->GetSrting("Enter Maximum Fuze Current value Value: default value is 10","10");
+	string value = pUI->GetSrting("Enter resistance Value: default value is 2","");
 	while (value == "")
-		value = pUI->GetSrting("Enter Maximum Fuze Current value Value: default value is 10","10");
+		value = pUI->GetSrting("Enter resistance Value: default value is 2","");
 	pR->setresistance(stod(value));
-
-("Enter Label: Resistor","Resistor");
-
-
 	pUI->ClearStatusBar();
 
 	

@@ -43,7 +43,9 @@ public:
 	//Gets a pointer to UI Object
 	UI* GetUI();
 	
-	
+	double calculateNetResistance();
+	double calculateNetVoltage();
+	void calculateTermsVoltage();
 	void AddComponent(Component* pComp); //Adds a new component to the list of components
 	void AddConnection(Connection* pConn);//Adds a new connection to the list of connection
 	void DelSelected();//deletes all components/connections that are selected by the user, can be more than one at once

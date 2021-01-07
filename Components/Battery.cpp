@@ -5,8 +5,8 @@
 #include "..\UI\UI.h"
 Battery::Battery(GraphicsInfo* r_GfxInfo) :Component(r_GfxInfo)
 {
-	resistance = 2;
-	sourceVoltage = 0;
+	resistance = 0;
+	sourceVoltage = 10;
 }
 
 void Battery::Draw(UI* pUI)
@@ -26,7 +26,7 @@ void Battery::SaveCircuit(ofstream& CircuitFile)
 	string s = getlabel();
 	if (s == "")
 		setlabel("Battery");
-	CircuitFile << "BAT" << "\t" << ID << "\t" << getLabel() << "\t" << getBatteryVoltage() << "\t" << m_pGfxInfo->PointsList[0].x
+	CircuitFile << "BAT" << "\t" << ID << "\t" << getLabel() << "\t" << getSourceVoltage() << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	setlabel(s);
 	ID++;

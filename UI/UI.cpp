@@ -20,6 +20,7 @@ UI::UI()
 	ChangeTitle("Circuit Simulator Project");
 
 	CreateDesignToolBar();	//Create the desgin toolbar
+	//CreateSimulationToolBar();
 	CreateStatusBar();		//Create Status bar
 	xtemp = 0;
 	ytemp = 0;
@@ -223,14 +224,13 @@ void UI::ClearDrawingArea() const
 	pWind->DrawRectangle(0, ToolBarHeight, width, height - StatusBarHeight);
 	
 }
-
-void UI::ClearToolBar() const
+void UI::ClearToolBarArea() const
 {
-	//pWind->SetPen(RED, 1);
-	//pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(0, ToolBarHeight, width, ToolBarHeight);
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, width, ToolBarHeight);
+
 }
-//
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
 void UI::CreateDesignToolBar() 
@@ -272,20 +272,21 @@ void UI::CreateDesignToolBar()
 //Draws the menu (toolbar) in the simulation mode
 void UI::CreateSimulationToolBar()
 {
-	AppMode = SIMULATION;	//Simulation Mode
+		AppMode = SIMULATION;	//Simulation Mode
 
-	string SimulationMenuImages[ITM_SIM_CNT];
-	SimulationMenuImages[ITM_CIRC_SIM] = "images\\Simulation Menu\\SMenu_Simulate.jpg";
-	SimulationMenuImages[ITM_AMMETER] = "images\\Simulation Menu\\SMenu_Ammeter.jpg";
-	SimulationMenuImages[ITM_VOLTMETER] = "images\\Simulation Menu\\SMenu_Voltmeter.jpg";
-	SimulationMenuImages[ITM_EXIT2] = "images\\Simulation Menu\\SMenu_Exit.jpg";
+		string SimulationMenuImages[ITM_SIM_CNT];
+		SimulationMenuImages[ITM_CIRC_SIM] = "images\\Menu\\SMenu_Simulate.jpg";
+		SimulationMenuImages[ITM_AMMETER] = "images\\Menu\\SMenu_Ammeter.jpg";
+		SimulationMenuImages[ITM_VOLTMETER] = "images\\Menu\\SMenu_Voltmeter.jpg";
+		SimulationMenuImages[ITM_EXIT2] = "images\\Menu\\Menu_Exit.jpg";
+
+		for (int i = 0; i < ITM_SIM_CNT; i++)
+		{
+			pWind->DrawImage(SimulationMenuImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
+		}
+		pWind->SetPen(RED, 3);
+		pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
 	
-	for (int i = 0; i < ITM_SIM_CNT; i++)
-	{
-		pWind->DrawImage(SimulationMenuImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
-	}
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
 }
 
 //======================================================================================//

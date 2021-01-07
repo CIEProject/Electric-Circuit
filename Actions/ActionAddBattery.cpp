@@ -45,9 +45,9 @@ void ActionAddBattery::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 	Battery* pB = new Battery(pGInfo);
-	string value = pUI->GetSrting("Enter Voltage Value: default value is 20","20");
-	while (value == "")
-		value = pUI->GetSrting("Enter Voltage Value: default value is 20","20");
+	string value = pUI->GetSrting("Enter Voltage Value: default value is 20","");
+	if (value == "")
+		value = "20";
 	pB->setSourceVoltage(stod(value));
 
 

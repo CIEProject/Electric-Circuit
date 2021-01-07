@@ -45,9 +45,9 @@ void ActionAddRes::Execute()
 		pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 			Resistor* pR = new Resistor(pGInfo);
-			string value = pUI->GetSrting("Enter Resistance Value: default value is 1");
-			while (value == "")
-				value = pUI->GetSrting("Enter Resistance Value: default value is 1");
+			string value = pUI->GetSrting("Enter Resistance Value: default value is 1","");
+			if (value == "")
+				value = "1";
 			pR->setresistance(stod(value));
 
 
