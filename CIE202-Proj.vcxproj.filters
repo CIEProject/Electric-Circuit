@@ -207,6 +207,9 @@
     <ClCompile Include="Actions\ActionSwitchSimulation.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionAmmeter.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -347,6 +350,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionSwitchSimulation.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAmmeter.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

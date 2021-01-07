@@ -6,7 +6,7 @@
 enum TerminalNum { TERM1, TERM2 };
 enum Status{OPEN,CLOSED};
 //All possible actions
-enum ActionType 
+enum ActionType
 {
 	ADD_RESISTOR,		//Add Resistor
 	ADD_BULB,			//Add Bulb
@@ -15,7 +15,7 @@ enum ActionType
 	ADD_SWITCH,				//Add Switch
 	ADD_BATTERY,
 	ADD_GROUND,
-	
+
 	ADD_CONNECTION,		//Add Wire Connection
 
 	ADD_Label,			//Add Label to a Component, a Connection
@@ -36,6 +36,9 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
+	AMMETER,
+	VOLTMETER,
+	SIMU,
 
 	EXIT,		//Exit the application
 

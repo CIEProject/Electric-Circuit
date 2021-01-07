@@ -15,6 +15,7 @@
 #include"Actions/ActionLoad.h"
 #include"Actions/ActionSwitchSimulation.h"
 #include"Actions/ActionAddLabel.h"
+#include"..\Electric-Circuit\Actions\ActionAmmeter.h"
 
 #include <iostream>
 #include<cmath>
@@ -248,6 +249,13 @@ ActionType ApplicationManager::GetUserAction()
 	//Call input to get what action is reuired from the user
 	return pUI->GetUserAction();
 }
+
+double ApplicationManager::getCurrent()
+{
+	return calculateNetVoltage() / calculateNetResistance();
+}
+
+
 ////////////////////////////////////////////////////////////////////
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
@@ -299,12 +307,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SIM_MODE:
 		pAct = new ActionSwitchSimulation(this);
-		break; //TODO
-	
-
+		break;
+	case AMMETER:
+		pAct = new ActionAmmeter(this);
+		break;
 	case EXIT:
 		pAct = new ExitAction(this);	
 		break;
+
 	}
 	if (pAct)
 	{
@@ -340,7 +350,7 @@ bool ApplicationManager::ValidateCircuit(){
 	bool validation = true;
 	
 	////////////////////////////////////////
-	if (CompCount != ConnCount|| ConnCount == 1 || ConnCount == 0)
+	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0)
 		return false;
 	else {
 		///////////////////////////////////////////////

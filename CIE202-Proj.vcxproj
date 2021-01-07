@@ -119,6 +119,7 @@
     <ClCompile Include="Actions\ActionAddLabel.cpp" />
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwitch.cpp" />
+    <ClCompile Include="Actions\ActionAmmeter.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Actions\ActionAddLabel.h" />
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwitch.h" />
+    <ClInclude Include="Actions\ActionAmmeter.h" />
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />

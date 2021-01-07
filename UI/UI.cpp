@@ -148,9 +148,19 @@ ActionType UI::GetUserAction()
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
-	else	//Application is in Simulation mode
+	else 
 	{
-		return SIM_MODE;	//This should be changed after creating the compelete simulation bar 
+		if (y >= 0 && y < ToolBarHeight)
+		{
+			int ClickedItemOrder = (x / ToolItemWidth);
+			switch (ClickedItemOrder)
+			{
+			case ITM_EXIT2: return EXIT;
+			case ITM_AMMETER: return AMMETER;
+			case ITM_VOLTMETER: return VOLTMETER;
+			case ITM_CIRC_SIM: return SIMU;
+			}
+		}
 	}
 
 }
@@ -275,10 +285,10 @@ void UI::CreateSimulationToolBar()
 		AppMode = SIMULATION;	//Simulation Mode
 
 		string SimulationMenuImages[ITM_SIM_CNT];
-		SimulationMenuImages[ITM_CIRC_SIM] = "images\\Menu\\SMenu_Simulate.jpg";
-		SimulationMenuImages[ITM_AMMETER] = "images\\Menu\\SMenu_Ammeter.jpg";
-		SimulationMenuImages[ITM_VOLTMETER] = "images\\Menu\\SMenu_Voltmeter.jpg";
-		SimulationMenuImages[ITM_EXIT2] = "images\\Menu\\Menu_Exit.jpg";
+		SimulationMenuImages[ITM_CIRC_SIM] = "images\\Simulation Menu\\SMenu_Simulate.jpg";
+		SimulationMenuImages[ITM_AMMETER] = "images\\Simulation Menu\\SMenu_Ammeter.jpg";
+		SimulationMenuImages[ITM_VOLTMETER] = "images\\Simulation Menu\\SMenu_Voltmeter.jpg";
+		SimulationMenuImages[ITM_EXIT2] = "images\\Simulation Menu\\SMenu_Exit.jpg";
 
 		for (int i = 0; i < ITM_SIM_CNT; i++)
 		{
