@@ -501,7 +501,7 @@ void UI::DrawConnection(const GraphicsInfo &r_GfxInfo, bool selected) const
 	if (selected)
 		pWind->SetPen(RED, PEN_THICKNESS);
 	else
-		pWind->SetPen(BLUE, PEN_THICKNESS);
+		pWind->SetPen(BLACK, PEN_THICKNESS);
 
 	
 	//pWind->DrawImage(WireImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, length, COMP_HEIGHT);
