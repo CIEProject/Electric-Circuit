@@ -44,16 +44,26 @@ class UI
 		ITM_BATTERY,
 		ITM_GROUND,
 		ITM_CONNECTION,
+		ITM_DROP,
+		//Exit item
+		ITM_SIMU,
+		ITM_EXIT,
+		ITM_DSN_CNT	
+		//no. of design menu items ==> This should be the last line in this enum
+	};
+
+
+	enum DsgnDropMenuItem 
+	{
+	
 		ITM_EDIT,
 		ITM_LABEL,
 		ITM_DELETE,
 		ITM_SAVE,
 		ITM_LOAD,
-		ITM_SIMU,			//TODO: Add more items names here
-		ITM_EXIT,		//Exit item
+		ITM_REAL,
+		ITM_DRP_CNT
 		
-		ITM_DSN_CNT	
-		//no. of design menu items ==> This should be the last line in this enum
 	};
 
 
@@ -70,9 +80,9 @@ class UI
 	
 	};
 
-
-	MODE AppMode;		//Application Mode (design or simulation)
 	
+	MODE AppMode;		//Application Mode (design or simulation)
+	ImageType img;
 	static const int	width = 1200, height = 650,	//Window width and height
 		wx = 15, wy = 15,			//Window starting coordinates
 		StatusBarHeight = 50,	//Status Bar Height
@@ -94,7 +104,7 @@ class UI
 	//ApplicationManager* pmanager;
 	int xtemp, ytemp;
 public:
-	
+	bool dropdown;
 	UI();
 	static int getToolBarHeight() ;
 	static int Height();
@@ -116,13 +126,14 @@ public:
 	void ChangeTitle(string Title) const;
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
+	void CreateDropDownMenu();
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateStatusBar() const;	//Create Status bar
-
+	
 	void ClearStatusBar() const;		//Clears the status bar
 	void ClearDrawingArea() const;	//Clears the drawing area
 	void ClearToolBarArea()const;
-		
+	void SwitchImageType();
 	// Draws a resistor
 	void DrawResistor(const GraphicsInfo &r_GfxInfo, bool selected = false) const;
 	void DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected = false) const;

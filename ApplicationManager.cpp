@@ -15,8 +15,8 @@
 #include"Actions/ActionLoad.h"
 #include"Actions/ActionSwitchSimulation.h"
 #include"Actions/ActionAddLabel.h"
-#include"..\Electric-Circuit\Actions\ActionAmmeter.h"
-
+#include"Actions/ActionDropDown.h"
+#include"Actions/ActionSwitchReal.h"
 #include <iostream>
 #include<cmath>
 
@@ -249,13 +249,6 @@ ActionType ApplicationManager::GetUserAction()
 	//Call input to get what action is reuired from the user
 	return pUI->GetUserAction();
 }
-
-double ApplicationManager::getCurrent()
-{
-	return calculateNetVoltage() / calculateNetResistance();
-}
-
-
 ////////////////////////////////////////////////////////////////////
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
@@ -305,16 +298,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DEL:
 		pAct = new ActionDelete(this);
 		break;
+	case DROP_DOWN:
+		pAct = new ActionDropDown(this);
+		break;
+	case SWITCH_IMG:
+		pAct = new ActionSwitchReal(this);
+		break;
 	case SIM_MODE:
 		pAct = new ActionSwitchSimulation(this);
-		break;
-	case AMMETER:
-		pAct = new ActionAmmeter(this);
-		break;
+		break; //TODO
+	
+
 	case EXIT:
 		pAct = new ExitAction(this);	
 		break;
-
 	}
 	if (pAct)
 	{
@@ -337,6 +334,7 @@ void ApplicationManager::UpdateInterface()
 		if (ConnList[i] != nullptr) {
 			ConnList[i]->Draw(pUI);
 		}
+	GetUI()->CreateDropDownMenu();
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -350,7 +348,7 @@ bool ApplicationManager::ValidateCircuit(){
 	bool validation = true;
 	
 	////////////////////////////////////////
-	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0)
+	if (CompCount != ConnCount|| ConnCount == 1 || ConnCount == 0)
 		return false;
 	else {
 		///////////////////////////////////////////////

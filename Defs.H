@@ -17,7 +17,8 @@ enum ActionType
 	ADD_GROUND,
 
 	ADD_CONNECTION,		//Add Wire Connection
-
+	SWITCH_IMG,
+	DROP_DOWN,
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -36,9 +37,6 @@ enum ActionType
 
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
-	AMMETER,
-	VOLTMETER,
-	SIMU,
 
 	EXIT,		//Exit the application
 
@@ -46,7 +44,10 @@ enum ActionType
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 
 };
-
+enum ImageType {
+	Schem,
+	Real,
+};
 enum  MODE	//Modes of operation
 {
 	DESIGN,

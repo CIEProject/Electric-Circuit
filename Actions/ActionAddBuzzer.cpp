@@ -52,7 +52,8 @@ void ActionAddBuzzer::Execute()
 }
 
 void ActionAddBuzzer::Undo()
-{}
+{
+}
 
 void ActionAddBuzzer::Redo()
 {}
