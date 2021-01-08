@@ -54,7 +54,7 @@ double ApplicationManager::calculateNetVoltage() {
 	}
 	return NetV;
 }
-void ApplicationManager::calculateTermsVoltage() {
+void ApplicationManager::test() {
 	double remainingVoltage = calculateNetVoltage();
 	double AllVoltage = calculateNetVoltage();
 	double current;
