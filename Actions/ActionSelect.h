@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_SELECT_H
+#define ACTION_SELECT_H
 
 #include "Action.h"
 #include "..\Components\Component.h"
@@ -7,9 +8,9 @@
 class ActionSelect : public Action
 {
 private:
-	
+
 	int x, y;
-	
+
 public:
 	ActionSelect(ApplicationManager* pApp);
 	virtual ~ActionSelect(void);
@@ -20,3 +21,4 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+#endif

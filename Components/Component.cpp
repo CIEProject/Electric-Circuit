@@ -1,8 +1,8 @@
 #include "Component.h"
 int Component::ID = 1;
-Component::Component(GraphicsInfo *r_GfxInfo)
+Component::Component(GraphicsInfo* r_GfxInfo)
 {
-	m_pGfxInfo = r_GfxInfo;	
+	m_pGfxInfo = r_GfxInfo;
 	term1_volt = term2_volt = 0;
 	term1_conn_count = term2_conn_count = 0;
 	selected = false;
@@ -17,7 +17,7 @@ Component::Component()
 	selected = false;
 	CompStatus = CLOSED;
 }
-void Component::resetID(){
+void Component::resetID() {
 	ID = 1;
 }
 void Component::addTerm1Conn(Connection* c) {
@@ -49,9 +49,8 @@ Connection** Component::getTermConnections(TerminalNum Term) {
 	default:
 		return nullptr;
 	}
-		
 }
-void Component::setlabel(string s)  {
+void Component::setlabel(string s) {
 	m_Label = s;
 }
 string Component::getlabel()const {
@@ -75,10 +74,10 @@ int Component::getSourceVoltage() {
 }
 
 int Component::getCompCenterX(UI* pUI) {
-	return m_pGfxInfo->PointsList[0].x+pUI->getCompWidth()/2;
+	return m_pGfxInfo->PointsList[0].x + pUI->getCompWidth() / 2;
 }
 int Component::getCompCenterY(UI* pUI) {
-	return m_pGfxInfo->PointsList[0].y+pUI->getCompHeight()/2;
+	return m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
 }
 GraphicsInfo* Component::getGraphics() {
 	return m_pGfxInfo;
@@ -102,7 +101,6 @@ void Component::deletecon(Connection* pCon) {
 		if (term2_conns[i] == pCon)
 			term2_conns[i] = nullptr;
 	}
-	
 }
 void Component::reArrange() {
 	Connection* tempConnList[MAX_CONNS];
@@ -130,9 +128,7 @@ void Component::reArrange() {
 	term2_conn_count = counter;
 }
 
-
 bool Component::isSelected() {
-	
 	return selected;
 }
 void Component::Selection() {
@@ -176,11 +172,22 @@ TerminalNum Component::whichTerminal(Connection* Conn) {
 		if (term1_conns[i] == Conn)
 			return TERM1;
 	}
-	
+
 	for (int i = 0; i < term2_conn_count; i++)
-		if (term2_conns[i]==Conn) {
+		if (term2_conns[i] == Conn) {
 			return TERM2;
 		}
+}
+bool Component::isInRegion(int x, int y, UI* pUI) {
+	int x1, y1, x2, y2;
+	x1 = m_pGfxInfo->PointsList[0].x;
+	y1 = m_pGfxInfo->PointsList[0].y;
+	x2 = m_pGfxInfo->PointsList[1].x;
+	y2 = m_pGfxInfo->PointsList[1].y;
+	if ((x >= x1) && (x <= x2) && (y >= y1) && (y <= y2))
+		return true;
+	else
+		return false;
 }
 Component::~Component()
 {
@@ -189,9 +196,7 @@ Component::~Component()
 		term1_conns[i] = nullptr;
 	}
 	for (int i = 0; i < term1_conn_count; i++) {
-		delete	term2_conns[i];	
+		delete	term2_conns[i];
 		term1_conns[i] = nullptr;
 	}*/
-
 }
-

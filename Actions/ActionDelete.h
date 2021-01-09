@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_DELETE_H
+#define ACTION_DELETE_H
 
 #include "Action.h"
 //Class responsible for adding a new resistor action
@@ -15,3 +16,4 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+#endif 

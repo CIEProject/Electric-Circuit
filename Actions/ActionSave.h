@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef ACTION_SAVE_H
+#define ACTION_SAVE_H
 #include "Action.h"
 #include "..\Components\Component.h"
 
@@ -20,3 +20,4 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+#endif

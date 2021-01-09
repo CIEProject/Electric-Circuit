@@ -28,7 +28,7 @@ void ActionAddConnection::Execute()
 		Component* comp2 = pManager->GetComponentByCordinates(Cx2, Cy2);
 
 		pUI->ClearStatusBar();
-		if (!(comp2 == nullptr)) {
+		if (comp2 != nullptr&&comp2!=comp1) {
 			GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 
 			//Calculate the rectangle Corners

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_ADD_SWITCH_H
+#define ACTION_ADD_SWITCH_H
 
 #include "Action.h"
 #include "..\Components\Switch.h"
@@ -21,3 +22,4 @@ public:
 
 	virtual void ActionAddSwitch::Redo();
 };
+#endif

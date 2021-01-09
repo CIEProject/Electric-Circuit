@@ -1,5 +1,6 @@
-#pragma once
-#include "Action.h"
+#ifndef ACTION_AMMTER_H
+#define ACTION_AMMETER_H
+#include"Action.h"
 
 class ActionAmmeter : public Action
 {
@@ -12,6 +13,6 @@ public:
 private:
 	int x, y;
 };
-
+#endif
 
 

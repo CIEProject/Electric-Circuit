@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_EXIT_H
+#define ACTION_EXIT_H
 
 #include "Action.h"
 class ExitAction : public Action
@@ -13,3 +14,4 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+#endif

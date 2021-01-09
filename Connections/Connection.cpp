@@ -14,14 +14,14 @@ void Connection::Load(Component* cmp1, Component* cmp2) {
 	GraphicsInfo *G1, *G2;
 	G1 = Comp1->getGraphics();
 	G2 = Comp2->getGraphics();
-	if (pGfxInfo->PointsList[0].x < G1->PointsList[0].x)
+	if (pGfxInfo->PointsList[0].x < G1->PointsList[0].x+25)
 		Comp1->addTerm1Conn(this);
 	else
 		Comp1->addTerm2Conn(this);
-	if (pGfxInfo->PointsList[1].x < G1->PointsList[1].x)
+	if (pGfxInfo->PointsList[1].x < G2->PointsList[0].x+25)
 		Comp2->addTerm1Conn(this);
 	else
-		Comp1->addTerm2Conn(this);
+		Comp2->addTerm2Conn(this);
 }
 
 void Connection::Draw(UI* pUI)

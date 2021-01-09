@@ -4,6 +4,7 @@
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 #include "..\Defs.h"
 #include <string>
+
 using namespace std;
 struct Point
 {
@@ -76,7 +77,7 @@ class UI
 
 	
 	MODE AppMode;		//Application Mode (design or simulation)
-	ImageType img;
+	ImageType imgType;
 	static const int	width = 1200, height = 650,	//Window width and height
 		wx = 15, wy = 15,			//Window starting coordinates
 		StatusBarHeight = 50,	//Status Bar Height

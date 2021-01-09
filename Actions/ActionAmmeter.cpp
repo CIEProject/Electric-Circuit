@@ -20,7 +20,9 @@ void ActionAmmeter::Execute()
 	pUI->GetPointClicked(x, y);
 	Component* pComp = pManager->GetComponentByCordinates(x, y);
 	if (pComp != nullptr)
-		pManager->GetUI()->GetSrting("The current = " + to_string(pManager->CalculateCurrent()));
+		pManager->GetUI()->PrintMsg("The current = " + to_string(pManager->CalculateCurrent()));
+	else
+		pManager->GetUI()->ClearStatusBar();
 }
 
 void ActionAmmeter::Undo()

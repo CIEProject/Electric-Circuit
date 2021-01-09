@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_LOAD_H
+#define ACTION_LOAD_H
 #include "Action.h"
 #include"..\Components\Component.h"
 #include <fstream>
@@ -16,3 +17,4 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+#endif

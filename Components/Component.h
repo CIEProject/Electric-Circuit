@@ -83,7 +83,7 @@ public:
 	
 //virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
 
-	//bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
+	bool isInRegion(int x, int y, UI* pUI); // whether this point lies inside the component
 	TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 
 	//Destructor must be virtual

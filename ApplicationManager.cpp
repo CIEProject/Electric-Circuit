@@ -41,7 +41,7 @@ ApplicationManager::ApplicationManager()
 }
 ////////////////////////////////////////////////////////////////////
 double ApplicationManager::calculateNetResistance() {
-	double NetR=0;
+	double NetR = 0;
 	for (int i = 0; i < CompCount; i++) {
 		NetR += CompList[i]->getResistance();
 	}
@@ -58,13 +58,12 @@ void ApplicationManager::test() {
 	double remainingVoltage = calculateNetVoltage();
 	double AllVoltage = calculateNetVoltage();
 	double current;
-	Component* comp1=nullptr,*ground=nullptr;
+	Component* comp1 = nullptr, * ground = nullptr;
 	Connection* conn1;
 	int temp;
 	for (int i = 0; i < CompCount; i++) {
 		if (dynamic_cast<Ground*>(CompList[i])) {
 			comp1 = CompList[i];
-			
 		}
 	}
 	ground = comp1;
@@ -90,13 +89,11 @@ void ApplicationManager::test() {
 	}
 	pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
 	remainingVoltage -= comp1->getResistance() * current;
-	while (comp1 !=ground) {
-
+	while (comp1 != ground) {
 		if (conn1 == comp1->getTermConnections(TERM1)[0])
 			conn1 = comp1->getTermConnections(TERM2)[0];
 		else {
 			conn1 = comp1->getTermConnections(TERM1)[0];
-
 		}
 		temp = conn1->WhichComp(comp1);
 		switch (temp) {
@@ -108,17 +105,16 @@ void ApplicationManager::test() {
 		}
 		switch (comp1->whichTerminal(conn1)) {
 		case TERM1:
-			comp1->setTerm1Volt(AllVoltage-remainingVoltage);
-			comp1->setTerm2Volt(comp1->getResistance() * current+ AllVoltage - remainingVoltage);
+			comp1->setTerm1Volt(AllVoltage - remainingVoltage);
+			comp1->setTerm2Volt(comp1->getResistance() * current + AllVoltage - remainingVoltage);
 			break;
 		case TERM2:
 			comp1->setTerm2Volt(AllVoltage - remainingVoltage);
-			comp1->setTerm1Volt(comp1->getResistance() * current+ AllVoltage - remainingVoltage);
+			comp1->setTerm1Volt(comp1->getResistance() * current + AllVoltage - remainingVoltage);
 			break;
 		}
 		pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
 		remainingVoltage -= comp1->getResistance() * current;
-		
 	}
 }
 void ApplicationManager::AddComponent(Component* pComp)
@@ -139,7 +135,7 @@ void ApplicationManager::DelSelected() {
 			}
 		}
 	}
-	for (int i = 0; i < ConnCount; i++){
+	for (int i = 0; i < ConnCount; i++) {
 		if (ConnList[i] != nullptr)
 			if (ConnList[i]->isSelected())
 				DelConn(ConnList[i]);
@@ -147,9 +143,7 @@ void ApplicationManager::DelSelected() {
 
 	reArrange();
 	for (int i = 0; i < CompCount; i++)
-			CompList[i]->reArrange();
-
-
+		CompList[i]->reArrange();
 }
 void ApplicationManager::DelComponent(Component* pComp)
 {
@@ -158,30 +152,23 @@ void ApplicationManager::DelComponent(Component* pComp)
 			CompList[i]->deleteGraphics();
 			delete CompList[i];
 			CompList[i] = nullptr;
-			
-			
 		}
 	}
-	
-	
 }
 void ApplicationManager::DelConn(Connection* pConn)
 {
 	for (int i = 0; i < ConnCount; i++) {
-		 
-		if (ConnList[i] == pConn&& pConn!=nullptr) {
+		if (ConnList[i] == pConn && pConn != nullptr) {
 			Component* comp2 = ConnList[i]->getComp(1);
 			Component* comp3 = ConnList[i]->getComp(2);
 			comp2->deletecon(ConnList[i]);
 			comp3->deletecon(ConnList[i]);
 			ConnList[i]->deleteGraphics();
 			delete ConnList[i];
-			
+
 			ConnList[i] = nullptr;
-			
 		}
 	}
-
 }
 void ApplicationManager::DelAll() {
 	for (int i = 0; i < CompCount; i++) {
@@ -194,34 +181,42 @@ void ApplicationManager::DelAll() {
 }
 void ApplicationManager::AddConnection(Connection* pConn) {
 	ConnList[ConnCount++] = pConn;
+
+}
+void ApplicationManager::UnselectAll() {
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] != nullptr)
+			CompList[i]->unSelect();
+	}
+	for (int i = 0; i < ConnCount; i++)
+		if (ConnList[i] != nullptr)
+			ConnList[i]->unSelect();
 }
 void ApplicationManager::UnselectAll(Component* pComp) {
-	for (int i = 0; i < CompCount; i++){
-		if(CompList[i]!=pComp&&CompList[i]!=nullptr)
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] != pComp && CompList[i] != nullptr)
 			CompList[i]->unSelect();
-}
+	}
 	for (int i = 0; i < ConnCount; i++)
-		if(ConnList[i]!=nullptr)
-		ConnList[i]->unSelect();
+		if (ConnList[i] != nullptr)
+			ConnList[i]->unSelect();
 }
 void ApplicationManager::UnselectAll(Connection* pConn) {
-	
 	for (int i = 0; i < CompCount; i++)
-		if(CompList[i]!=nullptr)
+		if (CompList[i] != nullptr)
 			CompList[i]->unSelect();
 	for (int i = 0; i < ConnCount; i++) {
-		if (ConnList[i] != nullptr&& ConnList[i] != pConn) 
+		if (ConnList[i] != nullptr && ConnList[i] != pConn)
 			ConnList[i]->unSelect();
-	
 	}
 }
 /*reArrange function is used when a component and/or a connection is deleted, it sets the right actual number of components
 and removes the ones that are nullptrs*/
 void ApplicationManager::reArrange() {
-	Component* tempCompList[MaxCompCount];	
+	Component* tempCompList[MaxCompCount];
 	Connection* tempConnList[MaxConnCount];
 	int counter = 0;
-	for(int i=0;i<CompCount;i++)
+	for (int i = 0; i < CompCount; i++)
 		if (CompList[i] != nullptr) {
 			tempCompList[counter] = CompList[i];
 			counter++;
@@ -229,7 +224,6 @@ void ApplicationManager::reArrange() {
 	for (int i = 0; i < CompCount; i++) {
 		CompList[i] = tempCompList[i];
 		tempCompList[i] = nullptr;
-		
 	}
 	CompCount = counter;
 	counter = 0;
@@ -243,12 +237,12 @@ void ApplicationManager::reArrange() {
 		tempConnList[i] = nullptr;
 	}
 	ConnCount = counter;
-	
 }
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
 	return pUI->GetUserAction();
+
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -307,13 +301,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SIM_MODE:
 		pAct = new ActionSwitchSimulation(this);
-		break; //TODO
+		break;
 	case AMMETER:
 		pAct = new ActionAmmeter(this);
 		break;
 
 	case EXIT:
-		pAct = new ExitAction(this);	
+		pAct = new ExitAction(this);
 		break;
 	}
 	if (pAct)
@@ -347,12 +341,14 @@ UI* ApplicationManager::GetUI()
 }
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
-bool ApplicationManager::ValidateCircuit(){
+bool ApplicationManager::ValidateCircuit() {
 	bool validation = true;
-	
+
 	////////////////////////////////////////
-	if (CompCount != ConnCount|| ConnCount == 1 || ConnCount == 0)
+	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0) {
+		pUI->PrintMsg("Not all components are connected, please make sure they are in series");
 		return false;
+	}
 	else {
 		///////////////////////////////////////////////
 		for (int i = 0; i < CompCount; i++) {
@@ -379,14 +375,13 @@ bool ApplicationManager::ValidateCircuit(){
 		}
 
 		/// ////////////////////////////////////////
-		//this one might need extra work, but the main idea is that it makes sure that there are only circuit and not two or three series connected circuits, it is not working yet 
+		//this one might need extra work, but the main idea is that it makes sure that there are only circuit and not two or three series connected circuits, it is not working yet
 		//it only needs more time in order to implement it correctly
 		Connection* conn1;
 		Component* comp1;
 		counter = 0;
 		int temp;
 		for (int i = 0; i < CompCount; i++) {
-
 			comp1 = CompList[i];
 
 			conn1 = comp1->getTermConnections(TERM1)[0];
@@ -399,14 +394,12 @@ bool ApplicationManager::ValidateCircuit(){
 				comp1 = conn1->getComp(1);
 			}
 			counter = 1;
-			//for (int j = 0; j < CompCount - 1; j++) 
-			while (comp1 != CompList[i]&& counter <= CompCount) {
-			
+			//for (int j = 0; j < CompCount - 1; j++)
+			while (comp1 != CompList[i] && counter <= CompCount) {
 				if (conn1 == comp1->getTermConnections(TERM1)[0])
 					conn1 = comp1->getTermConnections(TERM2)[0];
 				else {
 					conn1 = comp1->getTermConnections(TERM1)[0];
-
 				}
 				temp = conn1->WhichComp(comp1);
 				switch (temp) {
@@ -417,7 +410,6 @@ bool ApplicationManager::ValidateCircuit(){
 					comp1 = conn1->getComp(1);
 				}
 				counter++;
-				
 			}
 
 			if (counter != CompCount)
@@ -425,6 +417,12 @@ bool ApplicationManager::ValidateCircuit(){
 		}
 		////////////////////////////////////////////
 		return validation;
+	}
+}
+void ApplicationManager::printInfo(int xi,int yi) {
+	Component* pcomp = GetComponentByCordinates(xi, yi);
+	if (pcomp != nullptr) {
+		pUI->PrintMsg(to_string(pcomp->getResistance()));
 	}
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
@@ -443,7 +441,6 @@ Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 
 				break;
 			}
-
 		}
 	}
 	if (isExist == 0)
@@ -467,17 +464,18 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 			y1 = ConnList[i]->getgraphics()->PointsList[0].y;
 			y2 = ConnList[i]->getgraphics()->PointsList[1].y;
 			slope = ConnList[i]->lineslope();
-			
-			for(int j=-5;j<=5;j++) {
+
+			for (int j = -5; j <= 5; j++) {
 				/*the reason for this loop is that sometimes the click is more >x1 && >x2
 								if the line the somewhat vertical*/
 				if ((x + j >= x2 && x + j <= x1) || (x + j >= x1 && x + j <= x2)) {
-					for (int k = -4; k <= 4; k++){
-						/*while the reason for this loop is that the user 
+					for (int k = -4; k <= 4; k++) {
+						/*while the reason for this loop is that the user
 		click is never exactly on the line equation so it checks if it is on any other near parallel line*/
-						if(x1!=x2){
-						right = slope*(x - (x1+k));
-						left = y - (y1 + k);}
+						if (x1 != x2) {
+							right = slope * (x - (x1 + k));
+							left = y - (y1 + k);
+						}
 						else {
 							right = x - (x1 + k);
 							left = 0;
@@ -490,50 +488,6 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 					}
 				}
 			}
-			/*if (x1 > x2) {
-				for (int j = -5; j <= 5; j++) {
-				if ((x+j) >= x2 && (x+j) <= x1) {
-					for (int k = -5; k <= 5; k++) {
-						if (x1 != x2) {
-							right = y - (y1 + k);
-							left = slope * (x - (x1 + k));
-						}
-						else {
-							left = x - (x1 + k);
-							right = 0;
-						}
-						if (right == left) {
-							return ConnList[i];
-
-							isExist = 1;
-							break;
-						
-						}
-					}
-					}
-				}
-			}
-			if (x2 >= x1) {
-				for (int j = -5; j <= 5; j++) {
-					if ((x + j) >= x1 && (x + j) <= x2) {
-						for (int k = -5; k <= 5; k++) {
-							if (x1 != x2) {
-								right = y - (y2 + k);
-								left = slope * (x - (x2 + k));
-							}
-							else {
-								left = x - (x2 + k);
-								right = 0;
-							}
-							if (right == left) {
-								return ConnList[i];
-								isExist = 1;
-								break;
-							}
-						}
-					}
-				}
-			}*/
 			
 		}
 	}
@@ -555,47 +509,47 @@ void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 		ConnList[i]->save(CircuitFile, comp1, comp2);
 	}
 }
-	//old save
-	/*file.open(name, ios::out);
-	file << CompCount << endl;
-	for (int i = 0; i < CompCount; i++)
-	{
-		if (CompList[i]->whichComponent() == RESISTOR)
-			file << "RES" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-		if (CompList[i]->whichComponent() == GROUND)
-			file << "GND" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << -1 << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-		if (CompList[i]->whichComponent() == BATTERY)
-			file << "BAT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getBatteryVoltage() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-		if (CompList[i]->whichComponent() == FUZE)
-			file << "FUZ" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getMaxFuze() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-		if (CompList[i]->whichComponent() == SWITCH)
-			file << "SWT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getCompState() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-		if (CompList[i]->whichComponent() == BUZZER)
-			file << "BZR" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;
-		if (CompList[i]->whichComponent() == BULB)
-			file << "BLB" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-			<< endl;*/
-	//}
-	/*file << "Connection \n" << CompCount << endl;;
+//old save
+/*file.open(name, ios::out);
+file << CompCount << endl;
+for (int i = 0; i < CompCount; i++)
+{
+	if (CompList[i]->whichComponent() == RESISTOR)
+		file << "RES" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;
+	if (CompList[i]->whichComponent() == GROUND)
+		file << "GND" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << -1 << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;
+	if (CompList[i]->whichComponent() == BATTERY)
+		file << "BAT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getBatteryVoltage() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;
+	if (CompList[i]->whichComponent() == FUZE)
+		file << "FUZ" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getMaxFuze() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;
+	if (CompList[i]->whichComponent() == SWITCH)
+		file << "SWT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getCompState() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;
+	if (CompList[i]->whichComponent() == BUZZER)
+		file << "BZR" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;
+	if (CompList[i]->whichComponent() == BULB)
+		file << "BLB" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
+		<< endl;*/
+		//}
+		/*file << "Connection \n" << CompCount << endl;;
 
-	for (int i = 0; i < ConnCount; i++) {
-		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
-		int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
-		GraphicsInfo* G = ConnList[i]->getgraphics();
-		int x1 = G->PointsList[0].x;
-		int x2 = G->PointsList[1].x;
-		int y1 = G->PointsList[0].y;
-		int y2 = G->PointsList[1].y;
-		file << comp1 << "\t" << comp2 << "\t" << x1 << "\t" << y1 << "\t" << x2 << "\t" << y2 << endl;
-	}
-	file.close();
-}*/
+		for (int i = 0; i < ConnCount; i++) {
+			int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
+			int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
+			GraphicsInfo* G = ConnList[i]->getgraphics();
+			int x1 = G->PointsList[0].x;
+			int x2 = G->PointsList[1].x;
+			int y1 = G->PointsList[0].y;
+			int y2 = G->PointsList[1].y;
+			file << comp1 << "\t" << comp2 << "\t" << x1 << "\t" << y1 << "\t" << x2 << "\t" << y2 << endl;
+		}
+		file.close();
+	}*/
 int ApplicationManager::getCompOrder(Component* comp) {
 	for (int i = 0; i < CompCount; i++) {
 		if (comp == CompList[i])
@@ -619,9 +573,6 @@ void ApplicationManager::Load(ifstream& file, string name)
 		{
 			if (CompName != "Connections")
 			{
-
-
-
 				file >> ID;
 				file >> Label;
 				file >> Value;
@@ -676,13 +627,12 @@ void ApplicationManager::Load(ifstream& file, string name)
 					AddComponent(comp);
 				}
 			}
-			else if(CompName == "Connections") { //This means that the Components are are loaded and it is time for connection to be loaded
+			else if (CompName == "Connections") { //This means that the Components are are loaded and it is time for connection to be loaded
 				int comp1;
 				int comp2;
 				int graphicspoint;
 				file >> num;
 				while (file >> comp1) {
-
 					file >> comp2;
 
 					file >> graphicspoint;
@@ -698,15 +648,8 @@ void ApplicationManager::Load(ifstream& file, string name)
 					C->Load(CompList[comp1 - 1], CompList[comp2 - 1]);
 					AddConnection(C);
 				}
-
-
-
 			}
-
 		}
-
-
-
 	}
 	else
 		pUI->PrintMsg("File open failure! ");
@@ -736,7 +679,6 @@ double ApplicationManager::CalculateCurrent() {
 void ApplicationManager::CalculateVoltages(double current) {
 	// TODO
 }
-
 
 ////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()

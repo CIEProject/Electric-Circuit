@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ACTION_SWITCH_SIMU_H
+#define ACTION_SWITCH_SIMU_H
 
 #include "Action.h"
 
@@ -15,3 +16,4 @@ public:
 	virtual void Undo();
 	virtual void Redo();
 };
+#endif
