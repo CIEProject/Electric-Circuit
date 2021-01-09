@@ -4,7 +4,7 @@
 
 //Terminals
 enum TerminalNum { TERM1, TERM2 };
-enum Status{OPEN,CLOSED};
+enum Status { OPEN, CLOSED };
 //All possible actions
 enum ActionType
 {
@@ -43,7 +43,6 @@ enum ActionType
 	EXIT,		//Exit the application
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
-
 };
 enum ImageType {
 	Schem,
@@ -60,13 +59,12 @@ enum ALLCOMPS
 	BULB,
 	BUZZER,
 	FUZE,
-	SWITCH,				
+	SWITCH,
 	BATTERY,
 	GROUND,
 };
 
 //Maximum number of connections that can be connected to any output components
 #define MAX_CONNS 20
-
 
 #endif

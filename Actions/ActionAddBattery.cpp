@@ -11,7 +11,6 @@ ActionAddBattery::~ActionAddBattery(void)
 
 void ActionAddBattery::Execute()
 {
-
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
 
@@ -26,12 +25,10 @@ void ActionAddBattery::Execute()
 		&& Cx > UI::getCompWidth() / 2
 		&& Cx < UI::getWidth() - UI::getCompWidth() / 2)) {
 		pUI->GetPointClicked(Cx, Cy);
-
 	}
 
 	//Clear Status Bar
 	pUI->ClearStatusBar();
-
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 
@@ -45,20 +42,14 @@ void ActionAddBattery::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 	Battery* pB = new Battery(pGInfo);
-	string value = pUI->GetSrting("Enter Voltage Value: default value is 20","");
+	string value = pUI->GetSrting("Enter Voltage Value: default value is 20", "");
 	if (value == "")
 		value = "20";
 	pB->setSourceVoltage(stod(value));
 
-
-
 	pUI->ClearStatusBar();
 
-
-
 	pManager->AddComponent(pB);
-
-
 }
 
 void ActionAddBattery::Undo()

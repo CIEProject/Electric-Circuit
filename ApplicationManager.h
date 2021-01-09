@@ -64,7 +64,6 @@ public:
 
 	double CalculateCurrent();
 	void ToSimulation(); // Switches to simulation mode
-	void CalculateVoltages(double current);
 
 	//destructor
 	~ApplicationManager();

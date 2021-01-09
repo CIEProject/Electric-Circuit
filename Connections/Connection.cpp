@@ -8,17 +8,16 @@ Connection::Connection(GraphicsInfo* r_GfxInfo, Component* cmp1, Component* cmp2
 	selected = false;
 }
 void Connection::Load(Component* cmp1, Component* cmp2) {
-	
 	Comp1 = cmp1;
 	Comp2 = cmp2;
-	GraphicsInfo *G1, *G2;
+	GraphicsInfo* G1, * G2;
 	G1 = Comp1->getGraphics();
 	G2 = Comp2->getGraphics();
-	if (pGfxInfo->PointsList[0].x < G1->PointsList[0].x+25)
+	if (pGfxInfo->PointsList[0].x < G1->PointsList[0].x + 25)
 		Comp1->addTerm1Conn(this);
 	else
 		Comp1->addTerm2Conn(this);
-	if (pGfxInfo->PointsList[1].x < G2->PointsList[0].x+25)
+	if (pGfxInfo->PointsList[1].x < G2->PointsList[0].x + 25)
 		Comp2->addTerm1Conn(this);
 	else
 		Comp2->addTerm2Conn(this);
@@ -29,13 +28,13 @@ void Connection::Draw(UI* pUI)
 	int xlabel = (pGfxInfo->PointsList[0].x + pGfxInfo->PointsList[1].x) / 2;
 	int ylabel = ((pGfxInfo->PointsList[0].y + pGfxInfo->PointsList[1].y) / 2) + 10;
 	pUI->labelMsg(c_label, xlabel, ylabel);
-	
-	pUI->DrawConnection(*pGfxInfo,selected);
+
+	pUI->DrawConnection(*pGfxInfo, selected);
 }
 void Connection::setLabel(string s) {
 	c_label = s;
 }
-void Connection::save(ofstream& CircuitFile,int comp1, int comp2) {
+void Connection::save(ofstream& CircuitFile, int comp1, int comp2) {
 	int x1 = pGfxInfo->PointsList[0].x;
 	int x2 = pGfxInfo->PointsList[1].x;
 	int y1 = pGfxInfo->PointsList[0].y;
@@ -44,14 +43,14 @@ void Connection::save(ofstream& CircuitFile,int comp1, int comp2) {
 }
 string Connection::getLabel() {
 	return c_label;
-	}
+}
 double Connection::lineslope() {
 	double x1 = pGfxInfo->PointsList[0].x;
 	double x2 = pGfxInfo->PointsList[1].x;
 	double y1 = pGfxInfo->PointsList[0].y;
 	double y2 = pGfxInfo->PointsList[1].y;
-	
-		return ((y2 - y1) / (x2 - x1));
+
+	return ((y2 - y1) / (x2 - x1));
 }
 Component* Connection::getComp(int n) {
 	switch (n) {
@@ -64,7 +63,6 @@ Component* Connection::getComp(int n) {
 	default:
 		return nullptr;
 	}
-	
 }
 void Connection::setNewComp(int n, Component* comp) {
 	switch (n) {
@@ -100,7 +98,6 @@ bool Connection::validate(Connection* Conn) {
 }
 
 bool Connection::isSelected() {
-
 	return selected;
 }
 void Connection::Selection() {

@@ -4,7 +4,6 @@
 #include "Action.h"
 #include "..\Components\Switch.h"
 
-
 //Class responsible for adding a new resistor action
 class ActionAddSwitch : public Action
 {

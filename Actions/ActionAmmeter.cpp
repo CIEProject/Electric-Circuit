@@ -2,15 +2,12 @@
 #include "..\ApplicationManager.h"
 #include "..\UI\UI.h"
 
-
 ActionAmmeter::ActionAmmeter(ApplicationManager* pApp) :Action(pApp)
 {
-
 }
 
 ActionAmmeter::~ActionAmmeter()
 {
-
 }
 
 void ActionAmmeter::Execute()

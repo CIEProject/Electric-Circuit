@@ -11,7 +11,6 @@ ActionAddConnection::~ActionAddConnection(void)
 
 void ActionAddConnection::Execute()
 {
-
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
 
@@ -28,14 +27,14 @@ void ActionAddConnection::Execute()
 		Component* comp2 = pManager->GetComponentByCordinates(Cx2, Cy2);
 
 		pUI->ClearStatusBar();
-		if (comp2 != nullptr&&comp2!=comp1) {
+		if (comp2 != nullptr && comp2 != comp1) {
 			GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 
 			//Calculate the rectangle Corners
 			int compWidth = pUI->getCompWidth();
 			int compHeight = pUI->getCompHeight();
 			x1 = comp1->getCompCenterX(pUI);
-			x2 = comp2->getCompCenterX(pUI);		
+			x2 = comp2->getCompCenterX(pUI);
 			y1 = comp1->getCompCenterY(pUI);
 			y2 = comp2->getCompCenterY(pUI);
 
@@ -46,7 +45,6 @@ void ActionAddConnection::Execute()
 			else {
 				pGInfo->PointsList[0].x = x1 - (compWidth / 2);
 				pGInfo->PointsList[0].y = y1;
-
 			}
 			if (Cx2 > x2) {
 				pGInfo->PointsList[1].x = x2 + (compWidth / 2);
@@ -55,12 +53,7 @@ void ActionAddConnection::Execute()
 			else {
 				pGInfo->PointsList[1].x = x2 - (compWidth / 2);
 				pGInfo->PointsList[1].y = y2;
-
 			}
-
-
-
-
 
 			Connection* pC = new Connection(pGInfo, comp1, comp2);
 			if (Cx1 > x1)
@@ -73,13 +66,12 @@ void ActionAddConnection::Execute()
 			else
 				comp2->addTerm1Conn(pC);
 
-
 			pManager->AddConnection(pC);
 		}
 	}
 }
 
- void ActionAddConnection::Undo()
+void ActionAddConnection::Undo()
 {}
 
 void ActionAddConnection::Redo()

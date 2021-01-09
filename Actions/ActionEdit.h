@@ -10,7 +10,6 @@
 //Class responsible for adding a new resistor action
 class ActionEdit : public Action
 {
-
 public:
 	ActionEdit(ApplicationManager* pApp);
 	virtual ~ActionEdit(void);

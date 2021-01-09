@@ -181,7 +181,6 @@ void ApplicationManager::DelAll() {
 }
 void ApplicationManager::AddConnection(Connection* pConn) {
 	ConnList[ConnCount++] = pConn;
-
 }
 void ApplicationManager::UnselectAll() {
 	for (int i = 0; i < CompCount; i++) {
@@ -242,7 +241,6 @@ ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
 	return pUI->GetUserAction();
-
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -345,6 +343,7 @@ bool ApplicationManager::ValidateCircuit() {
 	bool validation = true;
 
 	////////////////////////////////////////
+	//makes sure that there are reasonable number of connections
 	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0) {
 		pUI->PrintMsg("Not all components are connected, please make sure they are in series");
 		return false;
@@ -352,8 +351,10 @@ bool ApplicationManager::ValidateCircuit() {
 	else {
 		///////////////////////////////////////////////
 		for (int i = 0; i < CompCount; i++) {
-			if (!(CompList[i]->validate()))
+			if (!(CompList[i]->validate())) {
+				pUI->PrintMsg("each component must have only one connection per terminal ");
 				return false;
+			}
 		}
 		int counter = 0;
 		////////////////////////////////////////////
@@ -362,21 +363,25 @@ bool ApplicationManager::ValidateCircuit() {
 			if (dynamic_cast<Ground*>(CompList[i]))
 				counter++;
 		}
-		if (counter != 1)
+		if (counter != 1) {
+			pUI->PrintMsg("the cirucit must have one ground only");
 			return false;
+		}
 		///////////////////////////////////////////
-		//makes sure that there are reasonable number of connections
 
 		for (int i = 0; i < ConnCount - 1; i++) {
 			for (int j = i + 1; j < ConnCount; j++) {
-				if (!(ConnList[i]->validate(ConnList[j])))
+				if (!(ConnList[i]->validate(ConnList[j]))) {
+					pUI->PrintMsg("you cant establish a connection between two components only ");
 					return false;
+				}
 			}
 		}
 
 		/// ////////////////////////////////////////
-		//this one might need extra work, but the main idea is that it makes sure that there are only circuit and not two or three series connected circuits, it is not working yet
-		//it only needs more time in order to implement it correctly
+		//the main idea of the following function is that it makes sure
+		//that there are only circuit and not two or three series connected circuits.
+
 		Connection* conn1;
 		Component* comp1;
 		counter = 0;
@@ -412,14 +417,16 @@ bool ApplicationManager::ValidateCircuit() {
 				counter++;
 			}
 
-			if (counter != CompCount)
+			if (counter != CompCount) {
+				pUI->PrintMsg("you cannot make multiple circuits");
 				return false;
+			}
 		}
 		////////////////////////////////////////////
 		return validation;
 	}
 }
-void ApplicationManager::printInfo(int xi,int yi) {
+void ApplicationManager::printInfo(int xi, int yi) {
 	Component* pcomp = GetComponentByCordinates(xi, yi);
 	if (pcomp != nullptr) {
 		pUI->PrintMsg(to_string(pcomp->getResistance()));
@@ -488,14 +495,12 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 					}
 				}
 			}
-			
 		}
 	}
 	if (isExist == 0)
 		return nullptr;
 }
-//void ApplicationManager::Save(fstream& file, string name)
-//{
+
 void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 {
 	CircuitFile << CompCount << endl;
@@ -509,47 +514,7 @@ void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 		ConnList[i]->save(CircuitFile, comp1, comp2);
 	}
 }
-//old save
-/*file.open(name, ios::out);
-file << CompCount << endl;
-for (int i = 0; i < CompCount; i++)
-{
-	if (CompList[i]->whichComponent() == RESISTOR)
-		file << "RES" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;
-	if (CompList[i]->whichComponent() == GROUND)
-		file << "GND" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << -1 << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;
-	if (CompList[i]->whichComponent() == BATTERY)
-		file << "BAT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getBatteryVoltage() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;
-	if (CompList[i]->whichComponent() == FUZE)
-		file << "FUZ" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getMaxFuze() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;
-	if (CompList[i]->whichComponent() == SWITCH)
-		file << "SWT" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getCompState() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;
-	if (CompList[i]->whichComponent() == BUZZER)
-		file << "BZR" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;
-	if (CompList[i]->whichComponent() == BULB)
-		file << "BLB" << "\t" << i + 1 << "\t" << CompList[i]->getLabel() << "\t" << CompList[i]->getResistance() << "\t" << CompList[i]->getGraphicsInfoX() << "\t" << CompList[i]->getGraphicsInfoY()
-		<< endl;*/
-		//}
-		/*file << "Connection \n" << CompCount << endl;;
 
-		for (int i = 0; i < ConnCount; i++) {
-			int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
-			int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
-			GraphicsInfo* G = ConnList[i]->getgraphics();
-			int x1 = G->PointsList[0].x;
-			int x2 = G->PointsList[1].x;
-			int y1 = G->PointsList[0].y;
-			int y2 = G->PointsList[1].y;
-			file << comp1 << "\t" << comp2 << "\t" << x1 << "\t" << y1 << "\t" << x2 << "\t" << y2 << endl;
-		}
-		file.close();
-	}*/
 int ApplicationManager::getCompOrder(Component* comp) {
 	for (int i = 0; i < CompCount; i++) {
 		if (comp == CompList[i])
@@ -627,7 +592,8 @@ void ApplicationManager::Load(ifstream& file, string name)
 					AddComponent(comp);
 				}
 			}
-			else if (CompName == "Connections") { //This means that the Components are are loaded and it is time for connection to be loaded
+			else if (CompName == "Connections") {
+				//This means that the Components are are loaded and it is time for connection to be loaded
 				int comp1;
 				int comp2;
 				int graphicspoint;
@@ -665,20 +631,15 @@ void ApplicationManager::ToSimulation() {
 		this->IsSimulation = true;
 		// Compute all needed voltages and current
 		double current = CalculateCurrent();
-		CalculateVoltages(current);
 	}
 }
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {
-	// TODO
 	return calculateNetVoltage() / calculateNetResistance();
 }
 
 // Calculates voltage at each component terminal
-void ApplicationManager::CalculateVoltages(double current) {
-	// TODO
-}
 
 ////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()

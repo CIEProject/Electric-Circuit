@@ -4,7 +4,6 @@
 #include "Action.h"
 #include "..\Components\Component.h"
 
-
 class ActionSelect : public Action
 {
 private:

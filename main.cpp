@@ -1,4 +1,3 @@
-	
 #include <iostream>
 #include <sstream>
 #include <cmath>
@@ -6,13 +5,12 @@
 
 int main()
 {
-
 	ActionType ActType;
 	//Create an object of ApplicationManager
 	ApplicationManager AppManager;
 
 	do
-	{		
+	{
 		//Read user action
 		ActType = AppManager.GetUserAction();
 
@@ -21,10 +19,7 @@ int main()
 
 		//Update the drawing window
 		AppManager.UpdateInterface();
-	
+	} while (ActType != EXIT);
 
-	}while(ActType != EXIT);
-		
 	return 0;
 }
-

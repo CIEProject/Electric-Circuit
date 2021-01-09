@@ -5,7 +5,6 @@
 //Class responsible for adding a new resistor action
 class ActionDelete : public Action
 {
-
 public:
 	ActionDelete(ApplicationManager* pApp);
 	virtual ~ActionDelete(void);

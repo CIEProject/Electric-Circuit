@@ -3,7 +3,6 @@
 #include "Action.h"
 #include "..\Components\Fuze.h"
 
-
 //Class responsible for adding a new resistor action
 class ActionAddFuze : public Action
 {

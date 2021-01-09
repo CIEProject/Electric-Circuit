@@ -1,7 +1,7 @@
 #include "ActionAddSwitch.h"
 #include "..\ApplicationManager.h"
 #include "..\UI\UI.h"
-ActionAddSwitch::ActionAddSwitch(ApplicationManager * pApp) :Action(pApp)
+ActionAddSwitch::ActionAddSwitch(ApplicationManager* pApp) :Action(pApp)
 {
 }
 
@@ -11,7 +11,6 @@ ActionAddSwitch::~ActionAddSwitch(void)
 
 void ActionAddSwitch::Execute()
 {
-
 	//Get a Pointer to the user Interfaces
 	UI* pUI = pManager->GetUI();
 
@@ -26,12 +25,10 @@ void ActionAddSwitch::Execute()
 		&& Cx > UI::getCompWidth() / 2
 		&& Cx < UI::getWidth() - UI::getCompWidth() / 2)) {
 		pUI->GetPointClicked(Cx, Cy);
-
 	}
 
 	//Clear Status Bar
 	pUI->ClearStatusBar();
-
 
 	GraphicsInfo* pGInfo = new GraphicsInfo(2); //Gfx info to be used to construct the Comp
 
@@ -45,19 +42,14 @@ void ActionAddSwitch::Execute()
 	pGInfo->PointsList[1].y = Cy + compHeight / 2;
 
 	Switch* pR = new Switch(pGInfo);
-	string value = pUI->GetSrting("Enter Switch Value: 1 means closed while 0 means open switch","");
+	string value = pUI->GetSrting("Enter Switch Value: 1 means closed while 0 means open switch", "");
 	if (value != "1" && value != "0")
 		value = "1";
 	pR->setState(stod(value));
 
-	
-
 	pUI->ClearStatusBar();
 
-
 	pManager->AddComponent(pR);
-
-
 }
 
 void ActionAddSwitch::Undo()

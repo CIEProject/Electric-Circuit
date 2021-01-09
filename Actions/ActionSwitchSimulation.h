@@ -3,7 +3,6 @@
 
 #include "Action.h"
 
-
 class ActionSwitchSimulation : public Action
 {
 public:

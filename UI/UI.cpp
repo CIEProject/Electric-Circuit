@@ -27,7 +27,6 @@ UI::UI()
 
 int UI::getToolBarHeight() {
 	return ToolBarHeight;
-	
 }
 int UI::Height() {
 	return height;
@@ -133,12 +132,12 @@ ActionType UI::GetUserAction()
 		}
 
 		//[2] User clicks on the drawing area
-		if (dropdown == true) { 
+		if (dropdown == true) {
 			dropdown = false; //for one time use only
 			if (x >= ITM_DROP * ToolItemWidth && x < ((ITM_DROP + 1) * ToolItemWidth) &&
 				y >= ToolBarHeight && y <= (ITM_DRP_CNT + 1) * ToolBarHeight) {
 				int ClickedItem = (y / ToolBarHeight) - 1;
-				
+
 				switch (ClickedItem) {
 				case ITM_REAL: return SWITCH_IMG;
 				case ITM_LABEL: return ADD_Label;
@@ -148,7 +147,6 @@ ActionType UI::GetUserAction()
 				case ITM_LOAD: return LOAD;
 				}
 			}
-			
 		}
 		if (y >= ToolBarHeight && y < height - StatusBarHeight)
 		{

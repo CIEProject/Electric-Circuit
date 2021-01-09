@@ -15,8 +15,6 @@ void ActionDropDown::Execute()
 		pUI->dropdown = false;
 	else
 		pUI->dropdown = true;
-
-
 }
 void ActionDropDown::Undo()
 {}

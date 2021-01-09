@@ -3,7 +3,6 @@
 #include "Action.h"
 #include "..\Components\Ground.h"
 
-
 //Class responsible for adding a new resistor action
 class ActionAddGround : public Action
 {

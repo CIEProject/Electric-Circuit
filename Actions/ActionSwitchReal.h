@@ -2,8 +2,6 @@
 #define ActionSwitchReal_H
 #include "Action.h"
 
-
-
 //Class responsible for adding a new resistor action
 class ActionSwitchReal : public Action
 {
@@ -19,4 +17,3 @@ public:
 	virtual void ActionSwitchReal::Redo();
 };
 #endif
-

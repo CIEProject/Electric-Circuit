@@ -3,7 +3,6 @@
 #include "Action.h"
 #include "..\Components\Battery.h"
 
-
 //Class responsible for adding a new resistor action
 class ActionAddBattery : public Action
 {

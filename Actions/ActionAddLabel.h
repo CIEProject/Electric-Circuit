@@ -10,7 +10,6 @@
 //Class responsible for adding a new resistor action
 class ActionAddLabel : public Action
 {
-
 public:
 	ActionAddLabel(ApplicationManager* pApp);
 	virtual ~ActionAddLabel(void);

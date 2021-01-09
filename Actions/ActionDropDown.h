@@ -2,8 +2,6 @@
 #define ActionDropDown_H
 #include "Action.h"
 
-
-
 //Class responsible for adding a new resistor action
 class ActionDropDown : public Action
 {

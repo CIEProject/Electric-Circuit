@@ -3,7 +3,6 @@
 #include "Action.h"
 #include "..\Components\Component.h"
 
-
 class ActionSave : public Action
 {
 private:
