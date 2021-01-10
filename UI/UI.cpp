@@ -170,6 +170,8 @@ ActionType UI::GetUserAction()
 			case ITM_AMMETER: return AMMETER;
 			case ITM_VOLTMETER: return VOLTMETER;
 			case ITM_CIRC_SIM: return SIMU;
+			case ITM_DSN: return DSN_MODE;
+
 			default: return DSN_TOOL;
 			}
 		}
@@ -317,6 +319,7 @@ void UI::CreateSimulationToolBar()
 	SimulationMenuImages[ITM_AMMETER] = "images\\Simulation Menu\\SMenu_Ammeter.jpg";
 	SimulationMenuImages[ITM_VOLTMETER] = "images\\Simulation Menu\\SMenu_Voltmeter.jpg";
 	SimulationMenuImages[ITM_EXIT2] = "images\\Simulation Menu\\SMenu_Exit.jpg";
+	SimulationMenuImages[ITM_DSN] = "images\\Simulation Menu\\SMenu_SwitchDesign.jpg";
 
 	for (int i = 0; i < ITM_SIM_CNT; i++)
 	{

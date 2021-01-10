@@ -62,6 +62,7 @@ class UI
 		ITM_CIRC_SIM,	//Circuit Simulate menu item
 		ITM_AMMETER,
 		ITM_VOLTMETER,
+		ITM_DSN,
 		ITM_EXIT2,
 		//TODO:Add more items names here
 

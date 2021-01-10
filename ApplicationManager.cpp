@@ -19,6 +19,8 @@
 #include"Actions/ActionSwitchReal.h"
 #include"Actions/ActionAmmeter.h"
 #include"Actions/ActionAddModule1.h"
+#include"Actions/ActionDesign.h"
+
 #include <iostream>
 #include<cmath>
 
@@ -300,6 +302,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SIM_MODE:
 		pAct = new ActionSwitchSimulation(this);
+		break;
+	case DSN_MODE:
+		pAct = new ActionDesign(this);
 		break;
 	case AMMETER:
 		pAct = new ActionAmmeter(this);
