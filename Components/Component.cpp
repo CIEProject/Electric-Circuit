@@ -178,16 +178,27 @@ TerminalNum Component::whichTerminal(Connection* Conn) {
 			return TERM2;
 		}
 }
-bool Component::isInRegion(int x, int y, UI* pUI) {
+bool Component::isInRegion(int x, int y) {
 	int x1, y1, x2, y2;
 	x1 = m_pGfxInfo->PointsList[0].x;
 	y1 = m_pGfxInfo->PointsList[0].y;
 	x2 = m_pGfxInfo->PointsList[1].x;
 	y2 = m_pGfxInfo->PointsList[1].y;
-	if ((x >= x1) && (x <= x2) && (y >= y1) && (y <= y2))
+	if ((x >= x1) &&
+		(x <= x2) &&
+		(y >= y1) &&
+		(y <= y2))
 		return true;
 	else
 		return false;
+}
+Connection* Component::getOtherFirstTerminalConnections(Connection* conn) {
+	if (conn == term1_conns[0])
+		return term2_conns[0];
+	else if (conn == term2_conns[0])
+		return term1_conns[0];
+	else
+		return nullptr;
 }
 Component::~Component()
 {

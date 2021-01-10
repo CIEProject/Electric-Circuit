@@ -21,6 +21,7 @@ ActionAddLabel::ActionAddLabel(ApplicationManager* pApp) :Action(pApp)
 		string value = pUI->GetSrting("Enter label for the selected connection","");
 		conn1->setLabel(value);
 	}
+	pUI->ClearStatusBar();
 }
 
 ActionAddLabel::~ActionAddLabel(void)

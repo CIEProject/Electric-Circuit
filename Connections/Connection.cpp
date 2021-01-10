@@ -112,3 +112,11 @@ void Connection::unSelect() {
 GraphicsInfo* Connection::getgraphics() const {
 	return pGfxInfo;
 }
+Component* Connection::getOtherComponent(Component* Cmpnt) {
+	if (Cmpnt == Comp1)
+		return Comp2;
+	else if (Cmpnt == Comp2)
+		return Comp1;
+	else
+		return nullptr;
+}

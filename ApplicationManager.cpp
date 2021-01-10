@@ -72,14 +72,7 @@ void ApplicationManager::test() {
 	ground = comp1;
 	current = calculateNetVoltage() / calculateNetResistance();
 	conn1 = comp1->getTermConnections(TERM1)[0];
-	temp = conn1->WhichComp(comp1);
-	switch (temp) {
-	case 1:
-		comp1 = conn1->getComp(2);
-		break;
-	case 2:
-		comp1 = conn1->getComp(1);
-	}
+	comp1 = conn1->getOtherComponent(comp1);
 	switch (comp1->whichTerminal(conn1)) {
 	case TERM1:
 		comp1->setTerm1Volt(0);
@@ -93,19 +86,8 @@ void ApplicationManager::test() {
 	pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
 	remainingVoltage -= comp1->getResistance() * current;
 	while (comp1 != ground) {
-		if (conn1 == comp1->getTermConnections(TERM1)[0])
-			conn1 = comp1->getTermConnections(TERM2)[0];
-		else {
-			conn1 = comp1->getTermConnections(TERM1)[0];
-		}
-		temp = conn1->WhichComp(comp1);
-		switch (temp) {
-		case 1:
-			comp1 = conn1->getComp(2);
-			break;
-		case 2:
-			comp1 = conn1->getComp(1);
-		}
+		conn1 = comp1->getOtherFirstTerminalConnections(conn1);
+		comp1 = conn1->getOtherComponent(comp1);
 		switch (comp1->whichTerminal(conn1)) {
 		case TERM1:
 			comp1->setTerm1Volt(AllVoltage - remainingVoltage);
@@ -348,7 +330,6 @@ UI* ApplicationManager::GetUI()
 ////////////////////////////////////////////////////////////////////
 // Validates the circuit before going into simultion mode
 bool ApplicationManager::ValidateCircuit() {
-	bool validation = true;
 
 	////////////////////////////////////////
 	//makes sure that there are reasonable number of connections
@@ -387,41 +368,22 @@ bool ApplicationManager::ValidateCircuit() {
 		}
 
 		/// ////////////////////////////////////////
-		//the main idea of the following function is that it makes sure
+		//the main idea of the following part is that it makes sure
 		//that there are only circuit and not two or three series connected circuits.
 
 		Connection* conn1;
 		Component* comp1;
 		counter = 0;
-		int temp;
+
 		for (int i = 0; i < CompCount; i++) {
 			comp1 = CompList[i];
 
 			conn1 = comp1->getTermConnections(TERM1)[0];
-			temp = conn1->WhichComp(CompList[i]);
-			switch (temp) {
-			case 1:
-				comp1 = conn1->getComp(2);
-				break;
-			case 2:
-				comp1 = conn1->getComp(1);
-			}
+			comp1 = conn1->getOtherComponent(comp1);
 			counter = 1;
-			//for (int j = 0; j < CompCount - 1; j++)
 			while (comp1 != CompList[i] && counter <= CompCount) {
-				if (conn1 == comp1->getTermConnections(TERM1)[0])
-					conn1 = comp1->getTermConnections(TERM2)[0];
-				else {
-					conn1 = comp1->getTermConnections(TERM1)[0];
-				}
-				temp = conn1->WhichComp(comp1);
-				switch (temp) {
-				case 1:
-					comp1 = conn1->getComp(2);
-					break;
-				case 2:
-					comp1 = conn1->getComp(1);
-				}
+				conn1 = comp1->getOtherFirstTerminalConnections(conn1);
+				comp1 =conn1->getOtherComponent(comp1);
 				counter++;
 			}
 
@@ -431,7 +393,7 @@ bool ApplicationManager::ValidateCircuit() {
 			}
 		}
 		////////////////////////////////////////////
-		return validation;
+		return true;
 	}
 }
 void ApplicationManager::printInfo(int xi, int yi) {
@@ -441,25 +403,12 @@ void ApplicationManager::printInfo(int xi, int yi) {
 	}
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
-	UI* pUI = GetUI();
-	int  isExist = 0;
-	int ydifference, xdifference;
-	int compheight = pUI->getCompHeight();
-	int compwidth = pUI->getCompWidth();
 	for (int i = 0; i < CompCount; i++) {
-		if (CompList[i] != nullptr) {
-			ydifference = abs(y - CompList[i]->getCompCenterY(pUI));
-			xdifference = abs(x - CompList[i]->getCompCenterX(pUI));
-			if ((ydifference <= compheight / 2) && (xdifference <= compwidth / 2)) {
-				isExist = 1;
-				return CompList[i];
+		if (CompList[i]->isInRegion(x, y))
+			return CompList[i];
 
-				break;
-			}
-		}
 	}
-	if (isExist == 0)
-		return nullptr;
+	return nullptr;
 }
 
 Connection* ApplicationManager::GetConnByCordinates(int x, int y) {

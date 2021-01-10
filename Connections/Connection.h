@@ -11,24 +11,31 @@ class Connection
 	string c_label;
 	bool selected;
 public:
-	
 	Connection(GraphicsInfo* r_GfxInfo, Component* cmp1 = nullptr, Component* cmp2 = nullptr);
-	void Load(Component* cmp1, Component* cmp2);
-	void save(ofstream& CircuitFile,int comp1, int comp2);
-	void setLabel(string s);
-	string getLabel();
+	virtual void Draw(UI*);	//for connection to Draw itself
+	
+
+	bool isSelected();
+	void unSelect();
+	void Selection();
+	//////////////////
+	bool validate(Connection*);
+	///////////////
+	Component* getComp(int n);
 	double lineslope();
 	GraphicsInfo* getgraphics() const;
-	virtual void Draw(UI*);	//for connection to Draw itself
-	Component* getComp(int n);
-	void setNewComp(int n, Component*);
-	void deleteGraphics();
 	int WhichComp(Component*);
-	bool validate(Connection*);
-	bool isSelected();
-	void Selection();
-	void unSelect();
-	//Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection
+	string getLabel();
+	///////////////////////
+
+	void deleteGraphics();
+	void setLabel(string s);
+	void setNewComp(int n, Component*);
+
+	////////
+	void Load(Component* cmp1, Component* cmp2);
+	void save(ofstream& CircuitFile, int comp1, int comp2);
+	Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection
 
 };
 #endif
