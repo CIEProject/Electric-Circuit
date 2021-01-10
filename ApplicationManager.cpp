@@ -18,6 +18,7 @@
 #include"Actions/ActionDropDown.h"
 #include"Actions/ActionSwitchReal.h"
 #include"Actions/ActionAmmeter.h"
+#include"Actions/ActionAddModule1.h"
 #include <iostream>
 #include<cmath>
 
@@ -303,7 +304,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case AMMETER:
 		pAct = new ActionAmmeter(this);
 		break;
-
+	case MODULE1:
+		pAct = new ActionAddModule1(this);
+		break;
 	case EXIT:
 		pAct = new ExitAction(this);
 		break;
@@ -631,6 +634,7 @@ void ApplicationManager::ToSimulation() {
 		this->IsSimulation = true;
 		// Compute all needed voltages and current
 		double current = CalculateCurrent();
+
 	}
 }
 ////////////////////////////////////////////////////////////////////

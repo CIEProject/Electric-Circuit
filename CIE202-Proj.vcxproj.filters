@@ -216,6 +216,15 @@
     <ClCompile Include="Actions\ActionAmmeter.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionAddModule1.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionDesign.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Module1.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -366,6 +375,15 @@
     </ClInclude>
     <ClInclude Include="Actions\ActionAmmeter.h">
       <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAddModule1.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionDesign.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Module1.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

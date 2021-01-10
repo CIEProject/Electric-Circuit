@@ -35,6 +35,7 @@ class UI
 		ITM_SWITCH,
 		ITM_BATTERY,
 		ITM_GROUND,
+		ITM_MODULE1,
 		ITM_CONNECTION,
 		ITM_DROP,
 		//Exit item
@@ -101,7 +102,9 @@ public:
 
 	// Input Functions  ---------------------------
 	void GetPointClicked(int&, int&);	//Get coordinate where user clicks
-	string GetSrting(string msg = "Enter Value", string value = "1");		//Returns a string entered by the user
+	string GetSrting(string msg = "Enter Value", string value = "");
+	//the other "value" parameter was added so the user can edit the label without having to write it again
+	//Returns a string entered by the user
 
 	ActionType GetUserAction(); //Reads the user click and maps it to an action
 	int getXtemp();
@@ -128,6 +131,7 @@ public:
 	void DrawFuze(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawModule1(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
 

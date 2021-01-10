@@ -19,6 +19,7 @@ void ActionAddConnection::Execute()
 
 	pUI->GetPointClicked(Cx1, Cy1);
 	Component* comp1 = pManager->GetComponentByCordinates(Cx1, Cy1);
+	pUI->ClearStatusBar();
 	if (!(comp1 == nullptr)) {
 		pUI->ClearStatusBar();
 
@@ -68,6 +69,12 @@ void ActionAddConnection::Execute()
 
 			pManager->AddConnection(pC);
 		}
+		else {
+			pUI->PrintMsg("No components was selected. ");
+		}
+	}
+	else{
+		pUI->PrintMsg("No components was selected. ");
 	}
 }
 

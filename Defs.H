@@ -34,7 +34,7 @@ enum ActionType
 
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
-
+	MODULE1,
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
 	AMMETER,
@@ -62,6 +62,7 @@ enum ALLCOMPS
 	SWITCH,
 	BATTERY,
 	GROUND,
+	MODULE_1,
 };
 
 //Maximum number of connections that can be connected to any output components

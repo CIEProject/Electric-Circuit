@@ -122,6 +122,7 @@ ActionType UI::GetUserAction()
 			case ITM_SWITCH:return ADD_SWITCH;
 			case ITM_BATTERY:return ADD_BATTERY;
 			case ITM_GROUND:return ADD_GROUND;
+			case ITM_MODULE1: return MODULE1;
 			case ITM_CONNECTION: return ADD_CONNECTION;
 			case ITM_DROP: return DROP_DOWN;
 			case ITM_SIMU: return SIM_MODE;
@@ -290,6 +291,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_GROUND] = "images\\Menu\\Menu_Ground.jpg";
 	MenuItemImages[ITM_SWITCH] = "images\\Menu\\Menu_Switch.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
+	MenuItemImages[ITM_MODULE1] = "images\\Menu\\Menu_Module1.jpg";
 	MenuItemImages[ITM_CONNECTION] = "images\\Menu\\Menu_Wire.jpg";
 	MenuItemImages[ITM_SIMU] = "images\\Menu\\Menu_Play.jpg";
 	MenuItemImages[ITM_DROP] = "images\\Menu\\Menu_DropDown.jpg";
@@ -463,6 +465,23 @@ void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 			BuzzerImage = "Images\\Comp\\Real_Buzzer.jpg";
 	}
 	pWind->DrawImage(BuzzerImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawModule1(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string Module1Image;
+	//if (imgType == Schem) {
+		if (selected)
+			Module1Image = "Images\\Comp\\Module1_HI.jpg";
+		else
+			Module1Image = "Images\\Comp\\Module1.jpg";
+	//}
+	/*else {
+		if (selected)
+			Module1Image = "Images\\Comp\\Real_Module1_HI.jpg";
+		else
+			Module1Image = "Images\\Comp\\Real_Module1.jpg";
+	}*/
+	pWind->DrawImage(Module1Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 //TODO: Add similar functions to draw all other components
 
