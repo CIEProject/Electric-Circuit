@@ -26,7 +26,7 @@ void Resistor::SaveCircuit(ofstream& CircuitFile)
 	string s = getlabel();
 	if (getlabel() == "")
 		setlabel("Resistor");
-	CircuitFile << "RES" << "\t" << ID << "\t" << getLabel() << "\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
+	CircuitFile << "RES" << "\t" << ID << "\t" << getLabel() << "\t\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
 	setlabel(s);

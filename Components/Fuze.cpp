@@ -26,7 +26,7 @@ void Fuze::SaveCircuit(ofstream& CircuitFile)
 	string s = getlabel();
 	if (getlabel() == "")
 		setlabel("Fuse");
-	CircuitFile << "FUZ" << "\t" << ID << "\t" << getLabel() << "\t" << getResistance() << "\t" << m_pGfxInfo->PointsList[0].x
+	CircuitFile << "FUZ" << "\t" << ID << "\t" << getLabel() << "\t\t" << getResistance() << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
 	setlabel(s);

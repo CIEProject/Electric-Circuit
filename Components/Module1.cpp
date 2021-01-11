@@ -22,7 +22,7 @@ void Module1::SaveCircuit(ofstream& CircuitFile)
 	string s = getlabel();
 	if (getlabel() == "")
 		setlabel("Module1");
-	CircuitFile << "MOD1" << "\t" << ID << "\t" << getLabel() << "\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
+	CircuitFile << "MOD1" << "\t" << ID << "\t" << getLabel() << "\t\t" << resistance << "\t" << m_pGfxInfo->PointsList[0].x
 		<< "\t" << m_pGfxInfo->PointsList[0].y << endl;
 	ID++;
 	setlabel(s);

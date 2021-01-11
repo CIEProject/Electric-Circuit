@@ -63,33 +63,7 @@ void ActionEdit::Execute()
 					break;
 					
 			}
-			//case FUZE:
-			//{	//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
-			//	string value;
-			//	int intValue;
-			//	do {
-			//		value = pUI->GetSrting("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ", "");
-			//	} while (value != "1" && value != "2" && value != "3");
-			//	intValue = stod(value);
-			//	switch (intValue) {
-			//	case 1:
-			//	{
 
-			//		value = pUI->GetSrting(comp1->getLabel(), comp1->getLabel());
-			//		comp1->setlabel(value);
-			//		break;
-			//	}
-			//	case 2:
-			//	{
-			//		value = pUI->GetSrting(to_string(comp1->getMaxFuze()), to_string(comp1->getMaxFuze()));
-			//		comp1->setMaxFuze(stod(value));
-			//		break;
-			//	}
-			//	case 3:
-			//		break;
-			//	}
-			//	break;
-			//}
 			case SWITCH:
 			{	//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
 				string value;

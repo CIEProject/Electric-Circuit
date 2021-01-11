@@ -464,7 +464,7 @@ void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
 	for (int i = 0; i < CompCount; i++)
 		CompList[i]->SaveCircuit(CircuitFile);
 	Component::resetID();
-	CircuitFile << "Connections \n" << CompCount << endl;
+	CircuitFile << "Connections \n" << ConnCount << endl;
 	for (int i = 0; i < ConnCount; i++) {
 		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
 		int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
@@ -512,6 +512,7 @@ void ApplicationManager::Load(ifstream& file, string name)
 					comp->Load(Value, Label);
 					AddComponent(comp);
 				}
+				
 				if (CompName == "SWT")
 				{
 					Switch* comp = new Switch(G);
@@ -545,6 +546,12 @@ void ApplicationManager::Load(ifstream& file, string name)
 				if (CompName == "BZR")
 				{
 					Buzzer* comp = new Buzzer(G);
+					comp->Load(Value, Label);
+					AddComponent(comp);
+				}
+				if (CompName == "MOD1")
+				{
+					Module1* comp = new Module1(G);
 					comp->Load(Value, Label);
 					AddComponent(comp);
 				}

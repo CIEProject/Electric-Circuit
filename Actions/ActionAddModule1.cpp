@@ -48,7 +48,7 @@ void ActionAddModule1::Execute()
 	string value[4];
 	for (int i = 0; i < 4; i++)
 	{
-		value[i] = pUI->GetSrting("Enter Resistance Value: default value is 1", "");
+		value[i] = pUI->GetSrting("Enter Resistance Value for resistor "+to_string(i+1)+" : default value is 1", "");
 		if (value[i] == "")
 			value[i] = "1";
 	}

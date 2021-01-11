@@ -34,8 +34,8 @@ void Switch::SaveCircuit(ofstream& CircuitFile)
 {
 	string s = getlabel();
 	if (getlabel() == "")
-		setlabel("Switch");
-	CircuitFile << "SWT" <<"\t"<<ID<< "\t" <<getLabel()<<"\t"<<getCompState()<<"\t"<< m_pGfxInfo->PointsList[0].x
+		setlabel("DefaultLabel");
+	CircuitFile << "SWT" <<"\t"<<ID<< "\t" <<getLabel()<<"\t\t"<<getCompState()<<"\t"<< m_pGfxInfo->PointsList[0].x
 	<< "\t" << m_pGfxInfo->PointsList[0].y<< endl;
 	ID++;
 	setlabel(s);
