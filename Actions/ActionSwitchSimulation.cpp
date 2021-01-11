@@ -16,7 +16,7 @@ void ActionSwitchSimulation::Execute()
 		pManager->UnselectAll();
 		UI* pUI = pManager->GetUI();
 		pUI->ClearStatusBar();
-		pUI->dropdown = false;
+		pUI->dropdown1 = false;
 		pUI->ClearToolBarArea();
 		pUI->CreateSimulationToolBar();
 	}

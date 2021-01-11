@@ -11,10 +11,10 @@ ActionDropDown::~ActionDropDown(void)
 void ActionDropDown::Execute()
 {
 	UI* pUI = pManager->GetUI();
-	if (pUI->dropdown)
-		pUI->dropdown = false;
+	if (pUI->dropdown1)
+		pUI->dropdown1 = false;
 	else
-		pUI->dropdown = true;
+		pUI->dropdown1 = true;
 }
 void ActionDropDown::Undo()
 {}

@@ -4,7 +4,8 @@ UI::UI()
 {
 	AppMode = DESIGN;	//Design Mode is the startup mode
 	imgType = Schem;
-	dropdown = false;
+	dropdown1 = false;
+	dropdown2 = false;
 	//Initilaize interface colors
 	DrawColor = BLACK;
 	SelectColor = BLUE;
@@ -122,9 +123,9 @@ ActionType UI::GetUserAction()
 			case ITM_SWITCH:return ADD_SWITCH;
 			case ITM_BATTERY:return ADD_BATTERY;
 			case ITM_GROUND:return ADD_GROUND;
-			case ITM_MODULE1: return MODULE1;
 			case ITM_CONNECTION: return ADD_CONNECTION;
-			case ITM_DROP: return DROP_DOWN;
+			case ITM_DROP1: return DROP_DOWN1;
+			case ITM_DROP2: return DROP_DOWN2;
 			case ITM_SIMU: return SIM_MODE;
 			case ITM_EXIT:	return EXIT;
 
@@ -133,10 +134,10 @@ ActionType UI::GetUserAction()
 		}
 
 		//[2] User clicks on the drawing area
-		if (dropdown == true) {
-			dropdown = false; //for one time use only
-			if (x >= ITM_DROP * ToolItemWidth && x < ((ITM_DROP + 1) * ToolItemWidth) &&
-				y >= ToolBarHeight && y <= (ITM_DRP_CNT + 1) * ToolBarHeight) {
+		if (dropdown1 == true) {
+			dropdown1 = false; //for one time use only
+			if (x >= ITM_DROP1 * ToolItemWidth && x < ((ITM_DROP1 + 1) * ToolItemWidth) &&
+				y >= ToolBarHeight && y <= (ITM_DRP1_CNT + 1) * ToolBarHeight) {
 				int ClickedItem = (y / ToolBarHeight) - 1;
 
 				switch (ClickedItem) {
@@ -146,6 +147,20 @@ ActionType UI::GetUserAction()
 				case ITM_DELETE:return DEL;
 				case ITM_SAVE: return SAVE;
 				case ITM_LOAD: return LOAD;
+				}
+			}
+		}
+		if (dropdown2 == true) {
+			dropdown2 = false; //for one time use only
+			if (x >= ITM_DROP2 * ToolItemWidth && x < ((ITM_DROP2 + 1) * ToolItemWidth) &&
+				y >= ToolBarHeight && y <= (ITM_DRP2_CNT + 1) * ToolBarHeight) {
+				int ClickedItem = (y / ToolBarHeight) - 1;
+
+				switch (ClickedItem) {
+				case ITM_MODULE1: return MODULE1;
+				case ITM_MODULE2: return MODULE2;
+				case ITM_MODULE3:return MODULE3;
+				case ITM_MODULE4:return MODULE4;
 				}
 			}
 		}
@@ -259,9 +274,9 @@ void UI::SwitchImageType() {
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //Draws the menu (toolbar) in the Design mode
-void UI::CreateDropDownMenu() {
-	if (dropdown == true) {
-		string DropMenuImages[ITM_DRP_CNT];
+void UI::CreateDropDown1Menu() {
+	if (dropdown1 == true) {
+		string DropMenuImages[ITM_DRP1_CNT];
 		DropMenuImages[ITM_EDIT] = "images\\Menu\\Menu_Edit.jpg";
 		DropMenuImages[ITM_LABEL] = "images\\Menu\\Menu_Label.jpg";
 		DropMenuImages[ITM_DELETE] = "images\\Menu\\Menu_Delete.jpg";
@@ -269,14 +284,32 @@ void UI::CreateDropDownMenu() {
 		DropMenuImages[ITM_LOAD] = "images\\Menu\\Menu_Load.jpg";
 		DropMenuImages[ITM_REAL] = "images\\Menu\\Menu_Real.jpg";
 
-		for (int i = 0; i < ITM_DRP_CNT; i++)
+		for (int i = 0; i < ITM_DRP1_CNT; i++)
 		{
-			pWind->DrawImage(DropMenuImages[i], ITM_DROP * ToolItemWidth, (i + 1) * ToolBarHeight, ToolItemWidth, ToolBarHeight);
+			pWind->DrawImage(DropMenuImages[i], ITM_DROP1 * ToolItemWidth, (i + 1) * ToolBarHeight, ToolItemWidth, ToolBarHeight);
 		}
 		pWind->SetPen(RED, 3);
 		pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
 	}
 }
+void UI::CreateDropDown2Menu() {
+	if (dropdown2 == true) {
+		string DropMenuImages[ITM_DRP2_CNT];
+		DropMenuImages[ITM_MODULE1] = "images\\Menu\\Menu_Module1.jpg";
+		DropMenuImages[ITM_MODULE2] = "images\\Menu\\Menu_Module2.jpg";
+		DropMenuImages[ITM_MODULE3] = "images\\Menu\\Menu_Module3.jpg";
+		DropMenuImages[ITM_MODULE4] = "images\\Menu\\Menu_Module4.jpg";
+
+
+		for (int i = 0; i < ITM_DRP2_CNT; i++)
+		{
+			pWind->DrawImage(DropMenuImages[i], ITM_DROP2 * ToolItemWidth, (i + 1) * ToolBarHeight, ToolItemWidth, ToolBarHeight);
+		}
+		pWind->SetPen(RED, 3);
+		pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
+	}
+}
+
 void UI::CreateDesignToolBar()
 {
 	AppMode = DESIGN;	//Design Mode
@@ -296,7 +329,8 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_MODULE1] = "images\\Menu\\Menu_Module1.jpg";
 	MenuItemImages[ITM_CONNECTION] = "images\\Menu\\Menu_Wire.jpg";
 	MenuItemImages[ITM_SIMU] = "images\\Menu\\Menu_Play.jpg";
-	MenuItemImages[ITM_DROP] = "images\\Menu\\Menu_DropDown.jpg";
+	MenuItemImages[ITM_DROP1] = "images\\Menu\\Menu_DropDown1.jpg";
+	MenuItemImages[ITM_DROP2] = "images\\Menu\\Menu_DropDown2.jpg";
 
 	//TODO: Prepare image for each menu item and add it to the list
 
@@ -472,19 +506,42 @@ void UI::DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected) const
 void UI::DrawModule1(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
 	string Module1Image;
-	//if (imgType == Schem) {
 		if (selected)
 			Module1Image = "Images\\Comp\\Module1_HI.jpg";
 		else
 			Module1Image = "Images\\Comp\\Module1.jpg";
-	//}
-	/*else {
-		if (selected)
-			Module1Image = "Images\\Comp\\Real_Module1_HI.jpg";
-		else
-			Module1Image = "Images\\Comp\\Real_Module1.jpg";
-	}*/
+	
 	pWind->DrawImage(Module1Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawModule2(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string Module2Image;
+	if (selected)
+		Module2Image = "Images\\Comp\\Module2_HI.jpg";
+	else
+		Module2Image = "Images\\Comp\\Module2.jpg";
+
+	pWind->DrawImage(Module2Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawModule3(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string Module3Image;
+	if (selected)
+		Module3Image = "Images\\Comp\\Module3_HI.jpg";
+	else
+		Module3Image = "Images\\Comp\\Module3.jpg";
+
+	pWind->DrawImage(Module3Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
+}
+void UI::DrawModule4(const GraphicsInfo& r_GfxInfo, bool selected) const
+{
+	string Module4Image;
+	if (selected)
+		Module4Image = "Images\\Comp\\Module4_HI.jpg";
+	else
+		Module4Image = "Images\\Comp\\Module4.jpg";
+
+	pWind->DrawImage(Module4Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
 //TODO: Add similar functions to draw all other components
 

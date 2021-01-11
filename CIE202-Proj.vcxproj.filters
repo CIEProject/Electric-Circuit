@@ -225,6 +225,18 @@
     <ClCompile Include="Components\Module1.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Module2.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Module3.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Module4.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionDropDown2.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -384,6 +396,18 @@
     </ClInclude>
     <ClInclude Include="Components\Module1.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Module2.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Module3.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Module4.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionDropDown2.h">
+      <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

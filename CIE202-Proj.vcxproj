@@ -124,6 +124,7 @@
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionDesign.cpp" />
     <ClCompile Include="Actions\ActionDropDown.cpp" />
+    <ClCompile Include="Actions\ActionDropDown2.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
@@ -174,6 +175,9 @@
     <ClCompile Include="Components\Fuze.cpp" />
     <ClCompile Include="Components\Ground.cpp" />
     <ClCompile Include="Components\Module1.cpp" />
+    <ClCompile Include="Components\Module2.cpp" />
+    <ClCompile Include="Components\Module3.cpp" />
+    <ClCompile Include="Components\Module4.cpp" />
     <ClCompile Include="Components\Resistor.cpp" />
     <ClCompile Include="Components\Switch.cpp" />
     <ClCompile Include="Connections\Connection.cpp" />
@@ -196,6 +200,7 @@
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionDesign.h" />
     <ClInclude Include="Actions\ActionDropDown.h" />
+    <ClInclude Include="Actions\ActionDropDown2.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionSave.h" />
@@ -230,6 +235,9 @@
     <ClInclude Include="Components\Fuze.h" />
     <ClInclude Include="Components\Ground.h" />
     <ClInclude Include="Components\Module1.h" />
+    <ClInclude Include="Components\Module2.h" />
+    <ClInclude Include="Components\Module3.h" />
+    <ClInclude Include="Components\Module4.h" />
     <ClInclude Include="Components\Resistor.h" />
     <ClInclude Include="Components\Switch.h" />
     <ClInclude Include="Connections\Connection.h" />

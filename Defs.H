@@ -18,7 +18,8 @@ enum ActionType
 
 	ADD_CONNECTION,		//Add Wire Connection
 	SWITCH_IMG,
-	DROP_DOWN,
+	DROP_DOWN1,
+	DROP_DOWN2,
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -35,6 +36,9 @@ enum ActionType
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 	MODULE1,
+	MODULE2,
+	MODULE3,
+	MODULE4,
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
 	AMMETER,
@@ -63,6 +67,9 @@ enum ALLCOMPS
 	BATTERY,
 	GROUND,
 	MODULE_1,
+	MODULE_2,
+	MODULE_3,
+	MODULE_4,
 };
 
 //Maximum number of connections that can be connected to any output components

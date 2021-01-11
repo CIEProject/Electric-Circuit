@@ -35,9 +35,9 @@ class UI
 		ITM_SWITCH,
 		ITM_BATTERY,
 		ITM_GROUND,
-		ITM_MODULE1,
 		ITM_CONNECTION,
-		ITM_DROP,
+		ITM_DROP1,
+		ITM_DROP2,
 		//Exit item
 		ITM_SIMU,
 		ITM_EXIT,
@@ -45,7 +45,7 @@ class UI
 		//no. of design menu items ==> This should be the last line in this enum
 	};
 
-	enum DsgnDropMenuItem
+	enum DsgnDrop1MenuItem
 	{
 		ITM_EDIT,
 		ITM_LABEL,
@@ -53,9 +53,16 @@ class UI
 		ITM_SAVE,
 		ITM_LOAD,
 		ITM_REAL,
-		ITM_DRP_CNT
+		ITM_DRP1_CNT
 	};
-
+	enum DsgnDrop2MenuItem
+	{
+		ITM_MODULE1,
+		ITM_MODULE2,
+		ITM_MODULE3,
+		ITM_MODULE4,
+		ITM_DRP2_CNT
+	};
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
 		//Note: Items are ordered here as they appear in menu
@@ -92,7 +99,8 @@ class UI
 	//ApplicationManager* pmanager;
 	int xtemp, ytemp;
 public:
-	bool dropdown;
+	bool dropdown1;
+	bool dropdown2;
 	UI();
 	static int getToolBarHeight();
 	static int Height();
@@ -115,7 +123,8 @@ public:
 	void ChangeTitle(string Title) const;
 
 	void CreateDesignToolBar();	//Tool bar of the design mode
-	void CreateDropDownMenu();
+	void CreateDropDown1Menu();
+	void CreateDropDown2Menu();
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateStatusBar() const;	//Create Status bar
 
@@ -133,6 +142,9 @@ public:
 	void DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawBuzzer(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawModule1(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawModule2(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawModule3(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
+	void DrawModule4(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	///TODO: Make similar functions for drawing all other components, connections, .. etc
 
