@@ -537,7 +537,6 @@ Component** ApplicationManager::getCompList() {
 void ApplicationManager::Load(ifstream& file, string name)
 {
 	GraphicsInfo* G = new GraphicsInfo(2);
-
 	file.open(name);
 	if (!file.fail())
 	{
@@ -557,7 +556,6 @@ void ApplicationManager::Load(ifstream& file, string name)
 				file >> graphicInfoX;
 				file >> graphicInfoY;
 				G = new GraphicsInfo(2);
-
 				G->PointsList[0].x = graphicInfoX;
 				G->PointsList[0].y = graphicInfoY;
 				G->PointsList[1].x = graphicInfoX + pUI->getCompWidth();;
@@ -657,19 +655,20 @@ void ApplicationManager::Load(ifstream& file, string name)
 	}
 	else
 		pUI->PrintMsg("File open failure! ");
-
 	file.close();
 }
 ////////////////////////////////////////////////////////////////////
-void ApplicationManager::ToSimulation() {
-	if (!ValidateCircuit()) {
-		// TODO
+void ApplicationManager::ToSimulation()
+{
+	if (!ValidateCircuit()) 
+	{
+
 	}
-	else {
+	else
+	{
 		this->IsSimulation = true;
 		// Compute all needed voltages and current
 		double current = CalculateCurrent();
-
 	}
 }
 ////////////////////////////////////////////////////////////////////

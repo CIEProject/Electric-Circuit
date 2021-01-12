@@ -16,10 +16,6 @@ void Resistor::Draw(UI* pUI)
 	
 	pUI->labelMsg(getlabel(), xlabel, ylabel);
 	pUI->DrawResistor(*m_pGfxInfo,selected); 
-	
-	
-	
-	
 }
 void Resistor::SaveCircuit(ofstream& CircuitFile)
 {

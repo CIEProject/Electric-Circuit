@@ -55,13 +55,14 @@ void ActionAddRes::Execute()
 
 			
 			pManager->AddComponent(pR);
-			
-	
 }
 
 void ActionAddRes::Undo()
-{}
+{
+
+}
 
 void ActionAddRes::Redo()
-{}
+{
+}
 
