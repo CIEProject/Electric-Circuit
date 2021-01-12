@@ -18,6 +18,7 @@ void ActionSwitchSimulation::Execute()
 		pUI->ClearStatusBar();
 		pUI->dropdown1 = false;
 		pUI->dropdown2 = false;
+		pUI->dropdown3 = false;
 		pUI->ClearToolBarArea();
 		pUI->CreateSimulationToolBar();
 	}

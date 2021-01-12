@@ -6,6 +6,7 @@ UI::UI()
 	imgType = Schem;
 	dropdown1 = false;
 	dropdown2 = false;
+	dropdown3 = false;
 	//Initilaize interface colors
 	DrawColor = BLACK;
 	SelectColor = BLUE;
@@ -126,7 +127,10 @@ ActionType UI::GetUserAction()
 			case ITM_CONNECTION: return ADD_CONNECTION;
 			case ITM_DROP1: return DROP_DOWN1;
 			case ITM_DROP2: return DROP_DOWN2;
+			case ITM_DROP3: return DROP_DOWN3;
 			case ITM_SIMU: return SIM_MODE;
+		
+
 			case ITM_EXIT:	return EXIT;
 
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
@@ -161,6 +165,19 @@ ActionType UI::GetUserAction()
 				case ITM_MODULE2: return MODULE2;
 				case ITM_MODULE3:return MODULE3;
 				case ITM_MODULE4:return MODULE4;
+				}
+			}
+		}
+		if (dropdown3 == true) {
+			dropdown3 = false; //for one time use only
+			if (x >= ITM_DROP3 * ToolItemWidth && x < ((ITM_DROP3 + 1) * ToolItemWidth) &&
+				y >= ToolBarHeight && y <= (ITM_DRP3_CNT + 1) * ToolBarHeight) {
+				int ClickedItem = (y / ToolBarHeight) - 1;
+
+				switch (ClickedItem) {
+				case ITM_COPY: return COPY;
+				case ITM_CUT: return CUT;
+				case ITM_PASTE: return PASTE;
 				}
 			}
 		}
@@ -317,7 +334,22 @@ void UI::CreateDropDown2Menu() {
 		pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
 	}
 }
+void UI::CreateDropDown3Menu() {
+	if (dropdown3== true) {
+		string DropMenuImages[ITM_DRP3_CNT];
+		DropMenuImages[ITM_COPY] = "images\\Menu\\Menu_Copy.jpg";
+		DropMenuImages[ITM_CUT] = "images\\Menu\\Menu_Copy.jpg";
+		DropMenuImages[ITM_PASTE] = "images\\Menu\\Menu_Paste.jpg";
 
+
+		for (int i = 0; i < ITM_DRP3_CNT; i++)
+		{
+			pWind->DrawImage(DropMenuImages[i], ITM_DROP3 * ToolItemWidth, (i + 1) * ToolBarHeight, ToolItemWidth, ToolBarHeight);
+		}
+		pWind->SetPen(RED, 3);
+		pWind->DrawLine(0, ToolBarHeight, width, ToolBarHeight);
+	}
+}
 void UI::CreateDesignToolBar()
 {
 	AppMode = DESIGN;	//Design Mode
@@ -338,6 +370,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_SIMU] = "images\\Menu\\Menu_Play.jpg";
 	MenuItemImages[ITM_DROP1] = "images\\Menu\\Menu_DropDown1.jpg";
 	MenuItemImages[ITM_DROP2] = "images\\Menu\\Menu_DropDown2.jpg";
+	MenuItemImages[ITM_DROP3] = "images\\Menu\\Menu_DropDown3.jpg";
 
 
 	//Draw menu item one image at a time

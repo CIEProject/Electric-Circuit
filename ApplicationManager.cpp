@@ -17,6 +17,7 @@
 #include"Actions/ActionAddLabel.h"
 #include"Actions/ActionDropDown.h"
 #include"Actions/ActionDropDown2.h"
+#include"Actions/ActionDropDown3.h"
 #include"Actions/ActionSwitchReal.h"
 #include"Actions/ActionAmmeter.h"
 #include"Actions/ActionAddModule1.h"
@@ -26,6 +27,9 @@
 #include"Actions/ActionMultimeter.h"
 #include"Actions/ActionOhmmeter.h"
 #include"Actions/ActionOpenCloseSwitch.h"
+#include"Actions/ActionCopy.h"
+#include"Actions/ActionCut.h"
+#include"Actions/ActionPaste.h"
 #include <iostream>
 #include<cmath>
 
@@ -281,11 +285,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DEL:
 		pAct = new ActionDelete(this);
 		break;
+	case COPY:
+		pAct = new ActionCopy(this);
+		break;
+	case CUT:
+		pAct = new ActionCut(this);
+		break;
+	case PASTE:
+		pAct = new ActionPaste(this);
+		break;
 	case DROP_DOWN1:
 		pAct = new ActionDropDown(this);
 		break;
 	case DROP_DOWN2:
 		pAct = new ActionDropDown2(this);
+		break;
+	case DROP_DOWN3:
+		pAct = new ActionDropDown3(this);
 		break;
 	case SWITCH_IMG:
 		pAct = new ActionSwitchReal(this);
@@ -353,6 +369,7 @@ void ApplicationManager::UpdateInterface()
 		}
 	GetUI()->CreateDropDown1Menu();
 	GetUI()->CreateDropDown2Menu();
+	GetUI()->CreateDropDown3Menu();
 }
 
 ////////////////////////////////////////////////////////////////////

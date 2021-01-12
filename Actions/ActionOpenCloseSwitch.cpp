@@ -17,9 +17,6 @@ void ActionOpenCloseSwitch::Execute()
 	if (dynamic_cast<Switch*>(comp)) {
 		comp->OpenClose();
 	}
-
-
-
 }
 void ActionOpenCloseSwitch::Undo()
 {}

@@ -38,7 +38,9 @@ class UI
 		ITM_CONNECTION,
 		ITM_DROP1,
 		ITM_DROP2,
+		ITM_DROP3,
 		ITM_SIMU,
+
 		ITM_EXIT,
 		ITM_DSN_CNT
 		//no. of design menu items ==> This should be the last line in this enum
@@ -61,6 +63,13 @@ class UI
 		ITM_MODULE3,
 		ITM_MODULE4,
 		ITM_DRP2_CNT
+	};
+	enum DsgnDrop3MenuItem
+	{
+		ITM_COPY,
+		ITM_CUT,
+		ITM_PASTE,
+		ITM_DRP3_CNT
 	};
 	enum SimMenuItem //The items of the simulation menu (you should add more items)
 	{
@@ -103,6 +112,7 @@ class UI
 public:
 	bool dropdown1;
 	bool dropdown2;
+	bool dropdown3;
 	UI();
 	static int getToolBarHeight();
 	static int Height();
@@ -127,6 +137,7 @@ public:
 	void CreateDesignToolBar();	//Tool bar of the design mode
 	void CreateDropDown1Menu();
 	void CreateDropDown2Menu();
+	void CreateDropDown3Menu();
 	void CreateSimulationToolBar();//Tool bar of the simulation mode
 	void CreateStatusBar() const;	//Create Status bar
 

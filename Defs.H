@@ -20,6 +20,8 @@ enum ActionType
 	SWITCH_IMG,
 	DROP_DOWN1,
 	DROP_DOWN2,
+	DROP_DOWN3,
+
 	ADD_Label,			//Add Label to a Component, a Connection
 	EDIT_Label,			//Edit Label of a Component, a Connection
 
@@ -32,7 +34,9 @@ enum ActionType
 
 	SAVE,		//Save the whole Circuit to a file
 	LOAD,		//Load a Circuit from a file
-
+	COPY,
+	CUT,
+	PASTE,
 	UNDO,		//Undo the last Action preformed
 	REDO,		//Redo the last Action canceled
 	MODULE1,
