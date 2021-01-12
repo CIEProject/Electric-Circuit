@@ -249,6 +249,9 @@
     <ClCompile Include="Actions\ActionVoltmeter.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionOpenCloseSwitch.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -431,6 +434,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionVoltmeter.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionOpenCloseSwitch.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

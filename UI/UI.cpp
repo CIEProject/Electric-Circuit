@@ -192,6 +192,12 @@ ActionType UI::GetUserAction()
 			default: return DSN_TOOL;
 			}
 		}
+		if (y >= ToolBarHeight && y < height - StatusBarHeight)
+		{
+			xtemp = x;
+			ytemp = y;
+			return SELECT_SIM;	//user wants to select/unselect a component
+		}
 	}
 }
 int UI::getXtemp() {

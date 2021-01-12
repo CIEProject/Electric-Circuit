@@ -51,6 +51,7 @@ public:
 	int getResistance();
 	void setSourceVoltage(int V);
 	int getSourceVoltage();
+	void Component::OpenClose();
 	void setState(int S);
 	int getCompState();
 	void setTerm1Volt(double v);		//sets the voltage at terminal1

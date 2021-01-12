@@ -146,6 +146,12 @@ string Component::getLabel() {
 int Component::getResistance() {
 	return resistance;
 }
+void Component::OpenClose() {
+	if (CompStatus == OPEN)
+		CompStatus = CLOSED;
+	else
+		CompStatus = OPEN;
+}
 void Component::setState(int S) {
 	switch (S) {
 	case 1:

@@ -25,6 +25,7 @@
 #include"Actions/ActionVoltmeter.h"
 #include"Actions/ActionMultimeter.h"
 #include"Actions/ActionOhmmeter.h"
+#include"Actions/ActionOpenCloseSwitch.h"
 #include <iostream>
 #include<cmath>
 
@@ -300,6 +301,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SIMU:
 		pAct = new ActionBulbBuzzer(this);
+		break;
+	case SELECT_SIM:
+		pAct = new ActionOpenCloseSwitch(this);
 		break;
 	case VOLTMETER:
 		pAct = new ActionVoltmeter(this);
