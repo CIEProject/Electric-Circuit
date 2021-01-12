@@ -15,9 +15,8 @@ ActionDesign::~ActionDesign()
 
 void ActionDesign::Execute()
 {
-	UI* pUI = pManager->GetUI();
-	pUI->CreateDesignToolBar();
-	
+	UI* pUI = pManager->GetUI();		//Get a pointer to the user interface
+	pUI->CreateDesignToolBar();			//Draws the design tool bar
 }
 
 void ActionDesign::Undo()

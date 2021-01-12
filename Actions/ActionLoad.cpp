@@ -12,8 +12,7 @@ ActionLoad::~ActionLoad(void)
 
 void ActionLoad::Execute()
 {
-	UI* pUI = pManager->GetUI();
-
+	UI* pUI = pManager->GetUI();		//Gets a pointer to the user interface
 	pManager->Load(file, pUI->GetSrting("Write the name of the file: (Ex: test) ", "") + ".txt");
 	pUI->ClearStatusBar();
 }

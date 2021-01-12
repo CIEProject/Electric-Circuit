@@ -13,7 +13,6 @@ void Module1::Draw(UI* pUI)
 {
 	int xlabel = m_pGfxInfo->PointsList[0].x;
 	int ylabel = m_pGfxInfo->PointsList[0].y + 50;
-
 	pUI->labelMsg(getlabel(), xlabel, ylabel);
 	pUI->DrawModule1(*m_pGfxInfo, selected);
 }
