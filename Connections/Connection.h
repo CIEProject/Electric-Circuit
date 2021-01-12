@@ -21,6 +21,7 @@ public:
 	//////////////////
 	bool validate(Connection*);
 	///////////////
+	Component* getComp();
 	Component* getComp(int n);
 	double lineslope();
 	GraphicsInfo* getgraphics() const;

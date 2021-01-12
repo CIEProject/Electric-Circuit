@@ -38,7 +38,6 @@ class UI
 		ITM_CONNECTION,
 		ITM_DROP1,
 		ITM_DROP2,
-		//Exit item
 		ITM_SIMU,
 		ITM_EXIT,
 		ITM_DSN_CNT

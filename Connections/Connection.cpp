@@ -52,6 +52,9 @@ double Connection::lineslope() {
 
 	return ((y2 - y1) / (x2 - x1));
 }
+Component* Connection::getComp() {
+	return Comp1;
+}
 Component* Connection::getComp(int n) {
 	switch (n) {
 	case 1:

@@ -195,9 +195,10 @@ void ApplicationManager::UnselectAll(Connection* pConn) {
 			ConnList[i]->unSelect();
 	}
 }
-/*reArrange function is used when a component and/or a connection is deleted, it sets the right actual number of components
-and removes the ones that are nullptrs*/
+
 void ApplicationManager::reArrange() {
+	/*reArrange function is used when a component and/or a connection is deleted, it sets the right actual number of components
+and removes the ones that are nullptrs*/
 	Component* tempCompList[MaxCompCount];
 	Connection* tempConnList[MaxConnCount];
 	int counter = 0;
@@ -342,9 +343,9 @@ UI* ApplicationManager::GetUI()
 	return pUI;
 }
 ////////////////////////////////////////////////////////////////////
-// Validates the circuit before going into simultion mode
-bool ApplicationManager::ValidateCircuit() {
 
+bool ApplicationManager::ValidateCircuit() {
+	// Validates the circuit before going into simultion mode
 	////////////////////////////////////////
 	//makes sure that there are reasonable number of connections
 	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0) {
@@ -566,6 +567,24 @@ void ApplicationManager::Load(ifstream& file, string name)
 				if (CompName == "MOD1")
 				{
 					Module1* comp = new Module1(G);
+					comp->Load(Value, Label);
+					AddComponent(comp);
+				}
+				if (CompName == "MOD2")
+				{
+					Module2* comp = new Module2(G);
+					comp->Load(Value, Label);
+					AddComponent(comp);
+				}
+				if (CompName == "MOD3")
+				{
+					Module3* comp = new Module3(G);
+					comp->Load(Value, Label);
+					AddComponent(comp);
+				}
+				if (CompName == "MOD4")
+				{
+					Module4* comp = new Module4(G);
 					comp->Load(Value, Label);
 					AddComponent(comp);
 				}

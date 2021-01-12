@@ -326,13 +326,11 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_GROUND] = "images\\Menu\\Menu_Ground.jpg";
 	MenuItemImages[ITM_SWITCH] = "images\\Menu\\Menu_Switch.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\Menu\\Menu_Exit.jpg";
-	MenuItemImages[ITM_MODULE1] = "images\\Menu\\Menu_Module1.jpg";
 	MenuItemImages[ITM_CONNECTION] = "images\\Menu\\Menu_Wire.jpg";
 	MenuItemImages[ITM_SIMU] = "images\\Menu\\Menu_Play.jpg";
 	MenuItemImages[ITM_DROP1] = "images\\Menu\\Menu_DropDown1.jpg";
 	MenuItemImages[ITM_DROP2] = "images\\Menu\\Menu_DropDown2.jpg";
 
-	//TODO: Prepare image for each menu item and add it to the list
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < ITM_DSN_CNT; i++)
@@ -543,11 +541,9 @@ void UI::DrawModule4(const GraphicsInfo& r_GfxInfo, bool selected) const
 
 	pWind->DrawImage(Module4Image, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, COMP_WIDTH, COMP_HEIGHT);
 }
-//TODO: Add similar functions to draw all other components
 
 void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const
 {
-	//TODO: Add code to draw connection
 	string WireImage;
 	if (selected)
 		pWind->SetPen(RED, PEN_THICKNESS);
