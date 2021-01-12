@@ -82,6 +82,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -121,16 +124,20 @@
     <ClCompile Include="Actions\ActionAddRes.cpp" />
     <ClCompile Include="Actions\ActionAddSwitch.cpp" />
     <ClCompile Include="Actions\ActionAmmeter.cpp" />
+    <ClCompile Include="Actions\ActionBulbBuzzer.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionDesign.cpp" />
     <ClCompile Include="Actions\ActionDropDown.cpp" />
     <ClCompile Include="Actions\ActionDropDown2.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
+    <ClCompile Include="Actions\ActionMultimeter.cpp" />
+    <ClCompile Include="Actions\ActionOhmmeter.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
     <ClCompile Include="Actions\ActionSwitchReal.cpp" />
     <ClCompile Include="Actions\ActionSwitchSimulation.cpp" />
+    <ClCompile Include="Actions\ActionVoltmeter.cpp" />
     <ClCompile Include="Actions\ExitAction.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -197,16 +204,20 @@
     <ClInclude Include="Actions\ActionAddRes.h" />
     <ClInclude Include="Actions\ActionAddSwitch.h" />
     <ClInclude Include="Actions\ActionAmmeter.h" />
+    <ClInclude Include="Actions\ActionBulbBuzzer.h" />
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionDesign.h" />
     <ClInclude Include="Actions\ActionDropDown.h" />
     <ClInclude Include="Actions\ActionDropDown2.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionMultimeter.h" />
+    <ClInclude Include="Actions\ActionOhmmeter.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
     <ClInclude Include="Actions\ActionSwitchReal.h" />
     <ClInclude Include="Actions\ActionSwitchSimulation.h" />
+    <ClInclude Include="Actions\ActionVoltmeter.h" />
     <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />

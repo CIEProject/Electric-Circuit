@@ -184,6 +184,8 @@ ActionType UI::GetUserAction()
 			case ITM_EXIT2: return EXIT;
 			case ITM_AMMETER: return AMMETER;
 			case ITM_VOLTMETER: return VOLTMETER;
+			case ITM_OHMMETER: return OHMMETER;
+			case ITM_MULTIMETER: return MULTIMETER;
 			case ITM_CIRC_SIM: return SIMU;
 			case ITM_DSN: return DSN_MODE;
 
@@ -351,6 +353,8 @@ void UI::CreateSimulationToolBar()
 	SimulationMenuImages[ITM_AMMETER] = "images\\Simulation Menu\\SMenu_Ammeter.jpg";
 	SimulationMenuImages[ITM_VOLTMETER] = "images\\Simulation Menu\\SMenu_Voltmeter.jpg";
 	SimulationMenuImages[ITM_EXIT2] = "images\\Simulation Menu\\SMenu_Exit.jpg";
+	SimulationMenuImages[ITM_MULTIMETER] = "images\\Simulation Menu\\SMenu_Multimeter.jpg";
+	SimulationMenuImages[ITM_OHMMETER] = "images\\Simulation Menu\\SMenu_Ohmmeter.jpg";
 	SimulationMenuImages[ITM_DSN] = "images\\Simulation Menu\\SMenu_SwitchDesign.jpg";
 
 	for (int i = 0; i < ITM_SIM_CNT; i++)
@@ -471,9 +475,17 @@ void UI::DrawBulb(const GraphicsInfo& r_GfxInfo, bool selected) const
 	string BulbImage;
 	if (imgType == Schem) {
 		if (selected)
+		{
 			BulbImage = "Images\\Comp\\Bulb_HI.jpg";
+		}
 		else
+		{
 			BulbImage = "Images\\Comp\\Bulb.jpg";
+			if (get_isOn())
+			{
+				BulbImage = "Images\\Comp\\Bulb_Open.jpg";
+			}
+		}
 	}
 	else {
 		if (selected)
@@ -553,6 +565,12 @@ void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const
 	//pWind->DrawImage(WireImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, length, COMP_HEIGHT);
 
 	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+}
+void UI::set_isOn(bool on) {
+	IsOn = on;
+}
+bool UI::get_isOn()const {
+	return IsOn;
 }
 
 UI::~UI()

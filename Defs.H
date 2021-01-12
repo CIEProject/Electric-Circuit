@@ -43,6 +43,8 @@ enum ActionType
 	SIM_MODE,	//Switch to Simulatiom mode
 	AMMETER,
 	VOLTMETER,
+	MULTIMETER,
+	OHMMETER,
 	SIMU,
 	EXIT,		//Exit the application
 	STATUS_BAR,		//A click on the status bar

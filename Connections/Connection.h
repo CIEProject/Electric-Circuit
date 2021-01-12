@@ -1,6 +1,7 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 #include "..\UI\UI.h"
+
 class Component;	//forward class declaration
 
 class Connection
@@ -28,7 +29,6 @@ public:
 	int WhichComp(Component*);
 	string getLabel();
 	///////////////////////
-
 	void deleteGraphics();
 	void setLabel(string s);
 	void setNewComp(int n, Component*);

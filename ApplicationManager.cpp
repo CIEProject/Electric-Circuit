@@ -21,7 +21,10 @@
 #include"Actions/ActionAmmeter.h"
 #include"Actions/ActionAddModule1.h"
 #include"Actions/ActionDesign.h"
-
+#include"Actions/ActionBulbBuzzer.h"
+#include"Actions/ActionVoltmeter.h"
+#include"Actions/ActionMultimeter.h"
+#include"Actions/ActionOhmmeter.h"
 #include <iostream>
 #include<cmath>
 
@@ -295,6 +298,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case AMMETER:
 		pAct = new ActionAmmeter(this);
 		break;
+	case SIMU:
+		pAct = new ActionBulbBuzzer(this);
+		break;
+	case VOLTMETER:
+		pAct = new ActionVoltmeter(this);
+		break;
+	case MULTIMETER:
+		pAct = new ActionMultimeter(this);
+		break;
+	case OHMMETER:
+		pAct = new ActionOhmmeter(this);
+		break;
 	case MODULE1:
 		pAct = new ActionAddModule1(this,1);
 		break;
@@ -491,6 +506,12 @@ int ApplicationManager::getCompOrder(Component* comp) {
 		if (comp == CompList[i])
 			return i;
 	}
+}
+int ApplicationManager::getCompCount() {
+	return CompCount;
+}
+Component** ApplicationManager::getCompList() {
+	return CompList;
 }
 void ApplicationManager::Load(ifstream& file, string name)
 {

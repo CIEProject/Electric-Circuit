@@ -40,31 +40,42 @@ public:
 
 	
 	UI* GetUI(); //Gets a pointer to UI Object
-	void printInfo(int xi, int yi); //not used 
-	double calculateNetResistance();
-	double calculateNetVoltage();
 	void AddComponent(Component* pComp); //Adds a new component to the list of components
 	void AddConnection(Connection* pConn);//Adds a new connection to the list of connection
-	void test();
+	void printInfo(int xi, int yi); //not used 
+
+
+	/// /////////////////////////////////
+
 	void DelSelected();//deletes all components/connections that are selected by the user, can be more than one at once
 	void DelComponent(Component* pComp);//deletes pComp from the CompList
 	void DelConn(Connection* pConn);//similiar to DelComponent
 	void DelAll();//Deletes all components and connections
+	void reArrange();//description the in the implementation
+	/// ///////////////////////////////
+
+	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
+	Connection* GetConnByCordinates(int x, int y);//returns pointer to the connection if (x,y) is in the component region
+	int getCompOrder(Component* comp);
+	int getCompCount();
+	Component** getCompList();
+	//////////////////////////////////////////////////
 	void UnselectAll();
 	void UnselectAll(Component* pComp);//this function is not used, it was used to unselect all object except the passed object(pComp) which leaves it as it is.
 	void UnselectAll(Connection* pConn);//this function is not used, it was used to unselect all object except the passed object(pConn) which leaves it as it is.
-	void reArrange();//description the in the implementation
-	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
-	Connection* GetConnByCordinates(int x, int y);//returns pointer to the connection if (x,y) is in the component region
-	void SaveCircuit(ofstream& file);
-	int ApplicationManager::getCompOrder(Component* comp);//returns the index of the component in CompList
-	void Load(ifstream& file, string name);
+
+	
+
 	// Simulation Mode Functions //
 	bool ValidateCircuit();
-
-	double CalculateCurrent();
 	void ToSimulation(); // Switches to simulation mode
-
+	double CalculateCurrent();
+	double calculateNetResistance();
+	double calculateNetVoltage();
+	void test();
+	////////////////////////////
+	void Load(ifstream& file, string name);
+	void SaveCircuit(ofstream& file);
 	//destructor
 	~ApplicationManager();
 };

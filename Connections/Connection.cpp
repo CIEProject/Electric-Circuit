@@ -31,6 +31,7 @@ void Connection::Draw(UI* pUI)
 
 	pUI->DrawConnection(*pGfxInfo, selected);
 }
+
 void Connection::setLabel(string s) {
 	c_label = s;
 }
