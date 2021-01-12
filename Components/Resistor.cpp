@@ -35,6 +35,36 @@ void Resistor::Operate()
 {
 
 }
+void Resistor::Edit(UI* pUI) {
+
+	//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit resistace value or 3 to cancel ");
+	string value;
+	int intValue;
+	do {
+		value = pUI->GetSrting("enter 1 to edit the label, 2 to the edit resistace value or 3 to cancel ", "");
+	} while (value != "1" && value != "2" && value != "3");
+	intValue = stod(value);
+	switch (intValue) {
+	case 1:
+	{
+
+		value = pUI->GetSrting(getLabel(), getLabel());
+		setlabel(value);
+		break;
+	}
+	case 2:
+	{
+		value = pUI->GetSrting(to_string(getResistance()), to_string(getResistance()));
+		setresistance(stod(value));
+		break;
+	}
+	case 3:
+		break;
+	}
+
+
+
+}
 void Resistor::Load(int Value, string Label) {
 	resistance = Value;
 	setlabel(Label);

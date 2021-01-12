@@ -26,6 +26,34 @@ void Switch::Operate()
 {
 
 }
+void Switch::Edit(UI* pUI) {
+		//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
+		string value;
+		int intValue;
+		do {
+			value = pUI->GetSrting("enter 1 to edit the label, 2 to the edit Switch status or 3 to cancel ", "");
+		} while (value != "1" && value != "2" && value != "3");
+		intValue = stod(value);
+		switch (intValue) {
+		case 1:
+		{
+
+			value = pUI->GetSrting(getLabel(), getLabel());
+			setlabel(value);
+			break;
+		}
+		case 2:
+		{
+			value = pUI->GetSrting(to_string(getCompState()), to_string(getCompState()));
+			setState(stod(value));
+			break;
+		}
+		case 3:
+			break;
+		}
+	
+	
+}
 void Switch::Load(int Value, string Label) {
 	CompStatus = Status(Value);
 	setlabel(Label);

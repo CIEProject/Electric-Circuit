@@ -86,7 +86,7 @@ class UI
 		//Arbitrary values, you can change as you wish
 		COMP_WIDTH = 50,		//Component Image width
 		COMP_HEIGHT = 50,		//Component Image height
-		PEN_THICKNESS = 6;
+		PEN_THICKNESS = 5;
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color
 	color ConnColor;		//Connector color

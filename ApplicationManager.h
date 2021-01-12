@@ -38,14 +38,14 @@ public:
 
 	void UpdateInterface();	//Redraws all the drawing window
 
-	//Gets a pointer to UI Object
-	UI* GetUI();
-	void printInfo(int xi, int yi);
+	
+	UI* GetUI(); //Gets a pointer to UI Object
+	void printInfo(int xi, int yi); //not used 
 	double calculateNetResistance();
 	double calculateNetVoltage();
 	void AddComponent(Component* pComp); //Adds a new component to the list of components
-	void test();
 	void AddConnection(Connection* pConn);//Adds a new connection to the list of connection
+	void test();
 	void DelSelected();//deletes all components/connections that are selected by the user, can be more than one at once
 	void DelComponent(Component* pComp);//deletes pComp from the CompList
 	void DelConn(Connection* pConn);//similiar to DelComponent

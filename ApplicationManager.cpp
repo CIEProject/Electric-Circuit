@@ -149,7 +149,6 @@ void ApplicationManager::DelConn(Connection* pConn)
 			Component* comp3 = ConnList[i]->getComp(2);
 			comp2->deletecon(ConnList[i]);
 			comp3->deletecon(ConnList[i]);
-			ConnList[i]->deleteGraphics();
 			delete ConnList[i];
 
 			ConnList[i] = nullptr;

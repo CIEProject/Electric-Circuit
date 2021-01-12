@@ -123,3 +123,6 @@ Component* Connection::getOtherComponent(Component* Cmpnt) {
 	else
 		return nullptr;
 }
+Connection::~Connection() {
+	delete pGfxInfo;
+}

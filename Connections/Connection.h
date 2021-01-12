@@ -37,6 +37,6 @@ public:
 	void Load(Component* cmp1, Component* cmp2);
 	void save(ofstream& CircuitFile, int comp1, int comp2);
 	Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection
-
+	~Connection();
 };
 #endif
