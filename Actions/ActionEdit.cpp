@@ -12,6 +12,7 @@ ActionEdit::~ActionEdit(void)
 void ActionEdit::Execute()
 {
 	UI* pUI = pManager->GetUI();
+	pManager->UpdateInterface();
 	pUI->PrintMsg("Select the component/connection you wish to Edit");
 	int x, y;
 
@@ -29,120 +30,10 @@ void ActionEdit::Execute()
 		comp1 = pManager->GetComponentByCordinates(x, y);
 		conn1 = pManager->GetConnByCordinates(x, y);
 		if (comp1 != nullptr) {
-			ALLCOMPS CompNumber = comp1->whichComponent();
-			switch (CompNumber) {
-			case RESISTOR:
-			case BULB:
-			case FUZE:
-			case BUZZER:
-			{
-				//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit resistace value or 3 to cancel ");
-				string value;
-				int intValue;
-					do {
-						value = pUI->GetSrting("enter 1 to edit the label, 2 to the edit resistace value or 3 to cancel ", "");
-					} while (value != "1" && value != "2" && value != "3");
-					intValue = stod(value);
-					switch (intValue) {
-					case 1:
-					{
-						
-						value = pUI->GetSrting(comp1->getLabel(), comp1->getLabel());
-						comp1->setlabel(value);
-						break;
-					}
-					case 2:
-					{
-						value = pUI->GetSrting(to_string(comp1->getResistance()), to_string(comp1->getResistance()));
-						comp1->setresistance(stod(value));
-						break;
-					}
-					case 3:
-						break;
-					}
-					break;
-					
-			}
-
-			case SWITCH:
-			{	//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
-				string value;
-				int intValue;
-				do {
-					value = pUI->GetSrting("enter 1 to edit the label, 2 to the edit Switch status or 3 to cancel ", "");
-				} while (value != "1" && value != "2" && value != "3");
-				intValue = stod(value);
-				switch (intValue) {
-				case 1:
-				{
-
-					value = pUI->GetSrting(comp1->getLabel(), comp1->getLabel());
-					comp1->setlabel(value);
-					break;
-				}
-				case 2:
-				{
-					value = pUI->GetSrting(to_string(comp1->getCompState()), to_string(comp1->getCompState()));
-					comp1->setState(stod(value));
-					break;
-				}
-				case 3:
-					break;
-				}
-				break;
-			}
-			case BATTERY:
-			{	//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
-				string value;
-				int intValue;
-				do {
-					value = pUI->GetSrting("enter 1 to edit the label, 2 to the edit Battery voltage or 3 to cancel ", "");
-				} while (value != "1" && value != "2" && value != "3");
-				intValue = stod(value);
-				switch (intValue) {
-				case 1:
-				{
-
-					value = pUI->GetSrting(comp1->getLabel(), comp1->getLabel());
-					comp1->setlabel(value);
-					break;
-				}
-				case 2:
-				{
-					value = pUI->GetSrting(to_string(comp1->getSourceVoltage()), to_string(comp1->getSourceVoltage()));
-					comp1->setSourceVoltage(stod(value));
-					break;
-				}
-				case 3:
-					break;
-				}
-				break;
-			}
-			case GROUND:
-			{	//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
-				string value;
-				int intValue;
-				do {
-					value = pUI->GetSrting("enter 1 to edit the label or 2 to cancel ", "");
-				} while (value != "1" && value != "2");
-				intValue = stod(value);
-				switch (intValue) {
-				case 1:
-				{
-
-					value = pUI->GetSrting(comp1->getLabel(), comp1->getLabel());
-					comp1->setlabel(value);
-					break;
-				}
-				
-				case 2:
-					break;
-				}
-				break;
-			}
-			}
+			comp1->Edit(pUI);
 		}
 		else if (conn1 != nullptr) {
+		
 		string value;
 		int intValue;
 		do {

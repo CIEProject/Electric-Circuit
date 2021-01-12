@@ -35,6 +35,28 @@ void Ground::Operate()
 {
 
 }
+void Ground::Edit(UI* pUI) {
+		//pUI->PrintMsg("enter 1 to edit the label, 2 to the edit Maximum Fuze current value or 3 to cancel ","");
+		string value;
+		int intValue;
+		do {
+			value = pUI->GetSrting("enter 1 to edit the label or 2 to cancel ", "");
+		} while (value != "1" && value != "2");
+		intValue = stod(value);
+		switch (intValue) {
+		case 1:
+		{
+
+			value = pUI->GetSrting(getLabel(),getLabel());
+			setlabel(value);
+			break;
+		}
+
+		case 2:
+			break;
+		}
+	
+}
 void Ground::Load(int Value, string Label) {
 	setlabel(Label);
 }

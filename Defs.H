@@ -41,8 +41,11 @@ enum ActionType
 	MODULE4,
 	DSN_MODE,	//Switch to Design mode
 	SIM_MODE,	//Switch to Simulatiom mode
+	SELECT_SIM,
 	AMMETER,
 	VOLTMETER,
+	MULTIMETER,
+	OHMMETER,
 	SIMU,
 	EXIT,		//Exit the application
 	STATUS_BAR,		//A click on the status bar

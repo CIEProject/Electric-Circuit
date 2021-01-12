@@ -31,6 +31,7 @@ void Connection::Draw(UI* pUI)
 
 	pUI->DrawConnection(*pGfxInfo, selected);
 }
+
 void Connection::setLabel(string s) {
 	c_label = s;
 }
@@ -122,4 +123,7 @@ Component* Connection::getOtherComponent(Component* Cmpnt) {
 		return Comp1;
 	else
 		return nullptr;
+}
+Connection::~Connection() {
+	delete pGfxInfo;
 }

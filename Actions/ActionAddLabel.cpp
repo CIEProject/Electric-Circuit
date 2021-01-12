@@ -4,6 +4,7 @@
 ActionAddLabel::ActionAddLabel(ApplicationManager* pApp) :Action(pApp)
 {
 	UI* pUI = pManager->GetUI();
+	pManager->UpdateInterface();
 	pUI->PrintMsg("Select the component you wish to label");
 	int x;
 	int y;

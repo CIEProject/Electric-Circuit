@@ -37,19 +37,12 @@ public:
 	Component();
 	void setresistance(double R);
 	bool validate();
-	//Connection** getTerm1_conns();
-	//Connection** getTerm2_conns();
 	void deleteGraphics();
 	void deletecon(Connection* pCon);
 	bool isSelected();
 	void Selection();
 	void unSelect();
-	/*void setMaxFuze(int max) {
-		MaxFuzeCurrent = max;
-	}
-	int getMaxFuze() {
-		return MaxFuzeCurrent;
-	}*/
+
 	void reArrange();
 	int getTermcount(TerminalNum Term);
 	Connection** getTermConnections(TerminalNum Term);
@@ -58,6 +51,7 @@ public:
 	int getResistance();
 	void setSourceVoltage(int V);
 	int getSourceVoltage();
+	void Component::OpenClose();
 	void setState(int S);
 	int getCompState();
 	void setTerm1Volt(double v);		//sets the voltage at terminal1
@@ -70,6 +64,7 @@ public:
 	//double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
 	virtual void Operate() = 0; // activates components such as bulb and buzzer
 	virtual ALLCOMPS whichComponent() = 0;
+	virtual void Edit(UI* pUI )=0;
 	virtual void Draw(UI*) = 0;	//for each component to Draw itself
 	virtual void Load(int Value, string) = 0;
 	virtual void SaveCircuit(ofstream& CircuitFile) = 0;

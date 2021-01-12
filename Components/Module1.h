@@ -8,6 +8,7 @@ public:
 	virtual void Draw(UI*);	
 	virtual void Operate();
 	virtual void Load(int Value, string);
+	virtual void Edit(UI* pUI);
 	virtual void SaveCircuit(ofstream& CircuitFile);
 	virtual ALLCOMPS whichComponent();
 };

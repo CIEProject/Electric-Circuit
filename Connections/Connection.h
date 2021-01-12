@@ -1,6 +1,7 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 #include "..\UI\UI.h"
+
 class Component;	//forward class declaration
 
 class Connection
@@ -28,7 +29,6 @@ public:
 	int WhichComp(Component*);
 	string getLabel();
 	///////////////////////
-
 	void deleteGraphics();
 	void setLabel(string s);
 	void setNewComp(int n, Component*);
@@ -37,6 +37,6 @@ public:
 	void Load(Component* cmp1, Component* cmp2);
 	void save(ofstream& CircuitFile, int comp1, int comp2);
 	Component* getOtherComponent(Component* Cmpnt); // Get component connected to the other end of the connection
-
+	~Connection();
 };
 #endif

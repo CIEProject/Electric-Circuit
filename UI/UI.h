@@ -68,6 +68,8 @@ class UI
 		ITM_CIRC_SIM,	//Circuit Simulate menu item
 		ITM_AMMETER,
 		ITM_VOLTMETER,
+		ITM_MULTIMETER,
+		ITM_OHMMETER,
 		ITM_DSN,
 		ITM_EXIT2,
 		//TODO:Add more items names here
@@ -86,7 +88,7 @@ class UI
 		//Arbitrary values, you can change as you wish
 		COMP_WIDTH = 50,		//Component Image width
 		COMP_HEIGHT = 50,		//Component Image height
-		PEN_THICKNESS = 6;
+		PEN_THICKNESS = 5;
 	color DrawColor;		//Drawing color
 	color SelectColor;		//Highlighting color
 	color ConnColor;		//Connector color
@@ -95,6 +97,7 @@ class UI
 
 	UI* pU;
 	window* pWind;
+	bool IsOn;
 	//ApplicationManager* pmanager;
 	int xtemp, ytemp;
 public:
@@ -115,7 +118,7 @@ public:
 	//Returns a string entered by the user
 
 	ActionType GetUserAction(); //Reads the user click and maps it to an action
-	int getXtemp();
+	int getXtemp(); //for select action
 	int getYtemp();
 
 	// Output Functions  ---------------------------
@@ -151,7 +154,9 @@ public:
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
-	void labelMsg(string msg, int x = 25, int y = height - StatusBarHeight + 10);
+	void labelMsg(string msg, int x = 25, int y = height - StatusBarHeight + 10); //for labeling components
+	void set_isOn(bool);
+	bool get_isOn()const;
 	~UI();
 };
 
