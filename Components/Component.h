@@ -27,61 +27,64 @@ protected:
 	bool selected;
 	GraphicsInfo* m_pGfxInfo;	//The parameters required to draw a component
 public:
-	double term1_volt, term2_volt;
-	static void resetID();
-	void addTerm1Conn(Connection*);
-	void addTerm2Conn(Connection*);
-	void setlabel(string s);
-	string getlabel()const;
 	Component(GraphicsInfo* r_GfxInfo);
 	Component();
-	void setresistance(double R);
-	bool validate();
-	void deleteGraphics();
-	void deletecon(Connection* pCon);
-	bool isSelected();
-	void Selection();
-	void unSelect();
-	void Select();
-
-	void reArrange();
+	//////////////////////////////////////
+	double term1_volt, term2_volt;
+	//////////////////////////////////////
 	int getTermcount(TerminalNum Term);
 	Connection** getTermConnections(TerminalNum Term);
-	string getLabel();
-	GraphicsInfo* getGraphics();
-	int getResistance();
+	void addTerm1Conn(Connection*);
+	void addTerm2Conn(Connection*);
+	//////////////////////////////////////
 	void setSourceVoltage(int V);
 	int getSourceVoltage();
-	void Component::OpenClose();
-	void setState(int S);
-	int getCompState();
-	GraphicsInfo* get_m_pGfxInfo();
 	void setTerm1Volt(double v);		//sets the voltage at terminal1
 	void setTerm2Volt(double v);		//sets the voltage at terminal2
 	double getTerm1Volt();				//returns the voltage at terminal1
 	double getTerm2Volt();				//returns the voltage at terminal2
-	//double getResistance();
-	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
-
-	//double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
-	virtual void Operate() = 0; // activates components such as bulb and buzzer
-	virtual ALLCOMPS whichComponent() = 0;
-	virtual void Edit(UI* pUI )=0;
-	virtual void Draw(UI*) = 0;	//for each component to Draw itself
-	virtual void Load(int Value, string) = 0;
-	virtual void SaveCircuit(ofstream& CircuitFile) = 0;
+	double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
+	double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
+	//////////////////////////////////////
+	void setlabel(string s);
+	string getlabel()const;
+	string getLabel()const;
+	void setresistance(double R);
+	int getResistance();
+	GraphicsInfo* getGraphics();
+	GraphicsInfo* get_m_pGfxInfo();
 	int getCompCenterX(UI*); // get horizontal/vertical centers of the component
 	int getCompCenterY(UI*);
 	int getGraphicsInfoY();
 	int getGraphicsInfoX();
-	//virtual int GetOutStatus()=0;	//returns status of output if BULB/BUZZER, return -1
-	//virtual int GetInputStatus()=0;	//returns status of SWITCH, return -1
-
-//virtual void setInputStatus(STATUS s)=0;	//set status of SWITCH
-
+	//////////////////////////////////////
+	bool validate();
+	void deleteGraphics();
+	void deletecon(Connection* pCon);
+	void reArrange();
+	//////////////////////////////////////
+	bool isSelected();
+	void Selection();
+	void unSelect();
+	void Select();
+	//////////////////////////////////////
+	void Component::OpenClose(); //switches state from open to closed
+	void setState(int S); //sets state
+	int getCompState();
+	//////////////////////////////////////
 	bool isInRegion(int x, int y); // whether this point lies inside the component
 	TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
 	Connection* getOtherFirstTerminalConnections(Connection*);
+	//////////////////////////////////////
+	virtual void Operate() = 0; // activates components such as bulb and buzzer
+	virtual ALLCOMPS whichComponent() = 0;
+	//////////////////////////////////////
+	virtual void Edit(UI* pUI )=0;
+	virtual void Draw(UI*) = 0;	//for each component to Draw itself
+	virtual void Load(int Value, string) = 0;
+	virtual void SaveCircuit(ofstream& CircuitFile) = 0;
+
+	static void resetID();
 	//Destructor must be virtual
 	virtual ~Component();
 };

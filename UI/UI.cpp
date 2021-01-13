@@ -254,41 +254,7 @@ void UI::CreateStatusBar() const
 	pWind->DrawLine(0, height - StatusBarHeight, width, height - StatusBarHeight);
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-void UI::PrintMsg(string msg) const
-{
-	ClearStatusBar();	//Clear Status bar to print message on it
-	// Set the Message offset from the Status Bar
-	int MsgX = 25;
-	int MsgY = StatusBarHeight - 10;
 
-	// Print the Message
-	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
-	pWind->SetPen(MsgColor);
-	pWind->DrawString(MsgX, height - MsgY, msg);
-}
-void UI::PrintMsgWithNoClear(string msg) const {
-	// Set the Message offset from the Status Bar
-	int MsgX = 25;
-	int MsgY = StatusBarHeight - 10;
-
-	// Print the Message
-	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
-	pWind->SetPen(MsgColor);
-	pWind->DrawString(MsgX, height - MsgY, msg);
-}
-void UI::labelMsg(string msg, int x, int y)
-{
-	//ClearStatusBar();
-
-	int MsgX = x;
-	int MsgY = y;
-
-	// Print the Message
-	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
-	pWind->SetPen(MsgColor);
-	pWind->DrawString(MsgX, MsgY, msg);
-}
 //////////////////////////////////////////////////////////////////////////////////
 void UI::ClearStatusBar()const
 {
@@ -629,6 +595,41 @@ void UI::DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected) const
 	//pWind->DrawImage(WireImage, r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, length, COMP_HEIGHT);
 
 	pWind->DrawLine(r_GfxInfo.PointsList[0].x, r_GfxInfo.PointsList[0].y, r_GfxInfo.PointsList[1].x, r_GfxInfo.PointsList[1].y);
+}
+//////////////////////////////////////////////////////////////////////////////////
+void UI::PrintMsg(string msg) const
+{
+	ClearStatusBar();	//Clear Status bar to print message on it
+	// Set the Message offset from the Status Bar
+	int MsgX = 25;
+	int MsgY = StatusBarHeight - 10;
+
+	// Print the Message
+	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, height - MsgY, msg);
+}
+void UI::PrintMsgWithNoClear(string msg) const {
+	// Set the Message offset from the Status Bar
+	int MsgX = 25;
+	int MsgY = StatusBarHeight - 10;
+
+	// Print the Message
+	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, height - MsgY, msg);
+}
+void UI::labelMsg(string msg, int x, int y)
+{
+	//ClearStatusBar();
+
+	int MsgX = x;
+	int MsgY = y;
+
+	// Print the Message
+	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, MsgY, msg);
 }
 void UI::set_isOn(bool on) {
 	IsOn = on;

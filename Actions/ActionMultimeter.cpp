@@ -24,7 +24,7 @@ void ActionMultimeter::Execute()
 	pManager->GetUI()->PrintMsg("Select a component: ");
 	pUI->GetPointClicked(x, y);
 	Component* pComp = pManager->GetComponentByCordinates(x, y);
-	string label = pComp->getLabel();
+	string label = pComp->getlabel();
 	double resistance = pComp->getResistance();
 	double current = pManager->CalculateCurrent();
 	double voltage = pManager->calculateNetVoltage();

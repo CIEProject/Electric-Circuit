@@ -13,6 +13,8 @@ void ActionSelect::Execute()
 	pUI->PrintMsg("tap to select or unselect");
 
 	pUI->GetPointClicked(x_0, y_0);
+	//x_0 = pUI->getXtemp();
+	//y_0 = pUI->getYtemp();
 
 	if (pManager->GetComponentByCordinates(x_0, y_0) == nullptr)
 	{

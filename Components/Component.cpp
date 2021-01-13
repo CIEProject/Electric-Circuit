@@ -143,7 +143,7 @@ void Component::unSelect() {
 void Component::Select() {
 	selected = true;
 }
-string Component::getLabel() {
+string Component::getLabel()const {
 	return m_Label;
 }
 int Component::getResistance() {
@@ -184,6 +184,15 @@ double Component::getTerm1Volt() {
 }
 double Component::getTerm2Volt() {
 	return term2_volt;
+}
+double Component::getSourceVoltage(TerminalNum Term) {
+	if (Term == TERM1)
+		return -sourceVoltage;
+	else if(Term==TERM2)
+		return sourceVoltage;
+}
+double Component::CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm) {
+	return 0; //still havent figured it out
 }
 TerminalNum Component::whichTerminal(Connection* Conn) {
 	for (int i = 0; i < term1_conn_count; i++) {

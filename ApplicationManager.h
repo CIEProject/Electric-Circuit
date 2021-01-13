@@ -76,7 +76,7 @@ public:
 
 	// Simulation Mode Functions //
 	bool ValidateCircuit();
-	void ToSimulation(); // Not Used 
+	void ToSimulation(); 
 	double CalculateCurrent();
 	double calculateNetResistance();
 	double calculateNetVoltage();
