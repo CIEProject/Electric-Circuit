@@ -26,7 +26,31 @@ void Component::addTerm1Conn(Connection* c) {
 void Component::addTerm2Conn(Connection* c) {
 	term2_conns[term2_conn_count++] = c;
 }
-int Component::getTermcount(TerminalNum Term) {
+void Component::UpdateConnsGraphics(UI* pUI) {
+	for (int i = 0; i < term1_conn_count; i++) {
+		int a1 = term1_conns[i]->WhichComp(this);
+		if (a1 == 1) {
+			term1_conns[i]->getgraphics()->PointsList[0].x=m_pGfxInfo->PointsList[0].x;
+			term1_conns[i]->getgraphics()->PointsList[0].y= m_pGfxInfo->PointsList[0].y+pUI->getCompHeight()/2;
+		}
+		if (a1 == 2) {
+			term1_conns[i]->getgraphics()->PointsList[1].x = m_pGfxInfo->PointsList[0].x;
+			term1_conns[i]->getgraphics()->PointsList[1].y = m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+		}
+	}
+	for (int i = 0; i < term2_conn_count; i++) {
+		int a1 = term2_conns[i]->WhichComp(this);
+		if (a1 == 1) {
+			term2_conns[i]->getgraphics()->PointsList[0].x = m_pGfxInfo->PointsList[0].x;
+			term2_conns[i]->getgraphics()->PointsList[0].y = m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+		}
+		if (a1 == 2) {
+			term2_conns[i]->getgraphics()->PointsList[1].x = m_pGfxInfo->PointsList[0].x;
+			term2_conns[i]->getgraphics()->PointsList[1].y = m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+		}
+	}
+}
+int Component::getTermcount(TerminalNum Term)const {
 	switch (Term) {
 	case TERM1:
 		return term1_conn_count;
@@ -59,7 +83,7 @@ string Component::getlabel()const {
 void Component::setresistance(double R) {
 	resistance = R;
 }
-bool Component::validate() {
+bool Component::validate()const {
 	//makes sure that this components has only one connection at each terminal
 	if (term1_conn_count == 1 && term2_conn_count == 1)
 		return true;
@@ -69,23 +93,23 @@ bool Component::validate() {
 void Component::setSourceVoltage(int V) {
 	sourceVoltage = V;
 }
-int Component::getSourceVoltage() {
+int Component::getSourceVoltage()const {
 	return sourceVoltage;
 }
 
-int Component::getCompCenterX(UI* pUI) {
+int Component::getCompCenterX(UI* pUI)const {
 	return m_pGfxInfo->PointsList[0].x + pUI->getCompWidth() / 2;
 }
-int Component::getCompCenterY(UI* pUI) {
+int Component::getCompCenterY(UI* pUI)const {
 	return m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
 }
 GraphicsInfo* Component::getGraphics() {
 	return m_pGfxInfo;
 }
-int Component::getGraphicsInfoY() {
+int Component::getGraphicsInfoY()const {
 	return m_pGfxInfo->PointsList[0].x;
 }
-int Component::getGraphicsInfoX() {
+int Component::getGraphicsInfoX()const {
 	return m_pGfxInfo->PointsList[0].y;
 }
 void Component::deleteGraphics() {
@@ -128,7 +152,7 @@ void Component::reArrange() {
 	term2_conn_count = counter;
 }
 
-bool Component::isSelected() {
+bool Component::isSelected()const {
 	return selected;
 }
 void Component::Selection() {
@@ -146,7 +170,7 @@ void Component::Select() {
 string Component::getLabel()const {
 	return m_Label;
 }
-int Component::getResistance() {
+int Component::getResistance()const {
 	return resistance;
 }
 void Component::OpenClose() {
@@ -167,7 +191,7 @@ void Component::setState(int S) {
 		CompStatus = CLOSED;
 	}
 }
-int Component::getCompState() {
+int Component::getCompState()const {
 	return CompStatus;
 }
 GraphicsInfo* Component::get_m_pGfxInfo() {
@@ -179,13 +203,13 @@ void Component::setTerm1Volt(double v) {
 void Component::setTerm2Volt(double v) {
 	term2_volt = v;
 }	//sets the voltage at terminal2
-double Component::getTerm1Volt() {
+double Component::getTerm1Volt()const {
 	return term1_volt;
 }
-double Component::getTerm2Volt() {
+double Component::getTerm2Volt() const {
 	return term2_volt;
 }
-double Component::getSourceVoltage(TerminalNum Term) {
+double Component::getSourceVoltage(TerminalNum Term)const {
 	if (Term == TERM1)
 		return -sourceVoltage;
 	else if(Term==TERM2)
@@ -194,7 +218,7 @@ double Component::getSourceVoltage(TerminalNum Term) {
 double Component::CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm) {
 	return 0; //still havent figured it out
 }
-TerminalNum Component::whichTerminal(Connection* Conn) {
+TerminalNum Component::whichTerminal(Connection* Conn)const {
 	for (int i = 0; i < term1_conn_count; i++) {
 		if (term1_conns[i] == Conn)
 			return TERM1;
@@ -205,7 +229,7 @@ TerminalNum Component::whichTerminal(Connection* Conn) {
 			return TERM2;
 		}
 }
-bool Component::isInRegion(int x, int y) {
+bool Component::isInRegion(int x, int y) const {
 	int x1, y1, x2, y2;
 	x1 = m_pGfxInfo->PointsList[0].x;
 	y1 = m_pGfxInfo->PointsList[0].y;
@@ -229,12 +253,5 @@ Connection* Component::getOtherFirstTerminalConnections(Connection* conn) {
 }
 Component::~Component()
 {
-	/*for (int i = 0; i < term1_conn_count; i++) {
-		delete term1_conns[i];
-		term1_conns[i] = nullptr;
-	}
-	for (int i = 0; i < term1_conn_count; i++) {
-		delete	term2_conns[i];
-		term1_conns[i] = nullptr;
-	}*/
+	delete m_pGfxInfo;
 }

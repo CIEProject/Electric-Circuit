@@ -3,7 +3,6 @@
 #include<fstream>
 #include<iosfwd >
 #include "Defs.h"
-//#include "UI\UI.h"
 #include "Actions\Action.h"
 #include "Components\Component.h"
 
@@ -62,9 +61,9 @@ public:
 
 	Component* GetComponentByCordinates(int x, int y); //returns pointer to the component if (x,y) is in the component region
 	Connection* GetConnByCordinates(int x, int y);//returns pointer to the connection if (x,y) is in the component region
-	int getCompOrder(Component* comp);
-	int getCompCount();
-	int getConnCount();
+	int getCompOrder(Component* comp)const;
+	int getCompCount()const;
+	int getConnCount()const;
 	Component** getCompList();
 	Connection** getConnList();
 	//////////////////////////////////////////////////
@@ -75,7 +74,7 @@ public:
 	
 
 	// Simulation Mode Functions //
-	bool ValidateCircuit();
+	bool ValidateCircuit()const;
 	void ToSimulation(); 
 	double CalculateCurrent();
 	double calculateNetResistance();
@@ -83,7 +82,7 @@ public:
 	void CalculateTermVoltages();
 	////////////////////////////
 	void ErasePointers();
-	int GetNumberOfSelectedComponents();
+	int GetNumberOfSelectedComponents()const;
 	void ApplicationManager::ClearTheClipboard();
 	void ApplicationManager::CopySelectedComponent(int i);
 	void PointToTheNextComponent(int COMP);

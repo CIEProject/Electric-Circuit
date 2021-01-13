@@ -23,6 +23,7 @@ void ActionMove::Execute()
 	int compWidth = pUI->getCompWidth();
 	int compHeight = pUI->getCompHeight();
 	pUI->GetPointClicked(Cx, Cy);
+	CompIndex = -1;
 	while (Button != 4)
 	//while (pUI->pWind->GetMouseClick(Cx, Cy) == NO_CLICK)
 	{
@@ -38,6 +39,8 @@ void ActionMove::Execute()
 				CompIndex = i;
 			}
 		}
+		if (CompIndex == -1)
+			break;
 		if (pManager->getCompList()[CompIndex]->isSelected())
 			pManager->getCompList()[CompIndex]->unSelect();
 		
@@ -75,7 +78,10 @@ void ActionMove::Execute()
 		}
 		
 		pManager->UpdateInterfaceWithoutClrDrwArea();
+		
 	}
+	if(CompIndex!=-1)
+		pManager->getCompList()[CompIndex]->UpdateConnsGraphics(pUI);
 	pUI->ClearStatusBar();
 	pManager->UpdateInterface();
 }

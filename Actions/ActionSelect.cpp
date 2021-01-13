@@ -11,7 +11,7 @@ ActionSelect::~ActionSelect(void)
 void ActionSelect::Execute()
 {
 	pUI->PrintMsg("tap to select or unselect");
-
+		
 	pUI->GetPointClicked(x_0, y_0);
 	//x_0 = pUI->getXtemp();
 	//y_0 = pUI->getYtemp();
@@ -22,44 +22,44 @@ void ActionSelect::Execute()
 		Cy = y_0;
 		Old_X = Cx;
 		Old_Y = Cy;
-		if (Cx > Minimum_X && Cx < Maximum_X && Cy > Minimum_Y && Cy < Maximum_Y) 
+
+		while (123456789101112)
 		{
-			while (12345678910)
+			
+			if (Cx < Minimum_X || Cx > Maximum_X)
 			{
-				if (Cx < Minimum_X || Cx > Maximum_X)
-				{
-					Cx = Old_X;
-				}
-				if (Cy < Minimum_Y || Cy > Maximum_Y)
-				{
-					Cy = Old_Y;
-				}
-
-				{
-					pUI->pWind->SetPen(WHITE);
-					pUI->pWind->SetBrush(WHITE);
-					pUI->pWind->DrawRectangle(Cx, y_0, Old_X, Cy, FILLED);
-					pUI->pWind->DrawRectangle(x_0, Cy, Old_X, Old_Y, FILLED);
-					pUI->pWind->DrawRectangle(Old_X, y_0, Cx, Cy, FILLED);
-					pUI->pWind->DrawRectangle(Old_X, Cy, x_0, Old_Y, FILLED);
-					pUI->pWind->DrawRectangle(Old_X, Old_Y, x_0, Cy, FILLED);
-					pUI->pWind->DrawRectangle(Old_X, Cy, Cx, y_0, FILLED);
-					pUI->pWind->DrawRectangle(x_0, Old_Y, Old_X, Cy, FILLED);
-					pUI->pWind->DrawRectangle(Cx, Cy, Old_X, y_0, FILLED);
-				}
-
-				if (Cx != Old_X || Cy != Old_Y)
-				{
-					pUI->pWind->SetPen(BLACK, 2);
-					pUI->pWind->DrawRectangle(x_0, y_0, Cx, Cy, FILLED);
-					Old_X = Cx;
-					Old_Y = Cy;
-				}
-				pManager->UpdateInterfaceWithoutClrDrwArea();
-				if (!pUI->pWind->GetButtonState(LEFT_BUTTON, Cx, Cy) == BUTTON_UP)
-					break;
+				Cx = Old_X;
 			}
+			if (Cy < Minimum_Y || Cy > Maximum_Y)
+			{
+				Cy = Old_Y;
+			}
+
+			{
+				pUI->pWind->SetPen(WHITE);
+				pUI->pWind->SetBrush(WHITE);
+				pUI->pWind->DrawRectangle(Cx, y_0, Old_X, Cy, FILLED);
+				pUI->pWind->DrawRectangle(x_0, Cy, Old_X, Old_Y, FILLED);
+				pUI->pWind->DrawRectangle(Old_X, y_0, Cx, Cy, FILLED);
+				pUI->pWind->DrawRectangle(Old_X, Cy, x_0, Old_Y, FILLED);
+				pUI->pWind->DrawRectangle(Old_X, Old_Y, x_0, Cy, FILLED);
+				pUI->pWind->DrawRectangle(Old_X, Cy, Cx, y_0, FILLED);
+				pUI->pWind->DrawRectangle(x_0, Old_Y, Old_X, Cy, FILLED);
+				pUI->pWind->DrawRectangle(Cx, Cy, Old_X, y_0, FILLED);
+			}
+
+			if (Cx != Old_X || Cy != Old_Y)
+			{
+				pUI->pWind->SetPen(BLACK, 2);
+				pUI->pWind->DrawRectangle(x_0, y_0, Cx, Cy, FILLED);
+				Old_X = Cx;
+				Old_Y = Cy;
+			}
+			pManager->UpdateInterfaceWithoutClrDrwArea();
+			if (!pUI->pWind->GetButtonState(LEFT_BUTTON, Cx, Cy) == BUTTON_DOWN)
+				break;
 		}
+
 		if (Cx < Minimum_X || Cx > Maximum_X)
 		{
 			Cx = Old_X;

@@ -32,48 +32,49 @@ public:
 	//////////////////////////////////////
 	double term1_volt, term2_volt;
 	//////////////////////////////////////
-	int getTermcount(TerminalNum Term);
+	int getTermcount(TerminalNum Term)const;
 	Connection** getTermConnections(TerminalNum Term);
 	void addTerm1Conn(Connection*);
 	void addTerm2Conn(Connection*);
+	void UpdateConnsGraphics(UI* pUI);
 	//////////////////////////////////////
 	void setSourceVoltage(int V);
-	int getSourceVoltage();
+	int getSourceVoltage()const;
 	void setTerm1Volt(double v);		//sets the voltage at terminal1
 	void setTerm2Volt(double v);		//sets the voltage at terminal2
-	double getTerm1Volt();				//returns the voltage at terminal1
-	double getTerm2Volt();				//returns the voltage at terminal2
-	double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
+	double getTerm1Volt()const;				//returns the voltage at terminal1
+	double getTerm2Volt()const;				//returns the voltage at terminal2
+	double getSourceVoltage(TerminalNum Term)const; // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
 	double CalculateTermVoltage(TerminalNum term, double voltAtTerm, double currIntoTerm);	//Calculates the output voltage according to the inputs, sets terminal voltages
 	//////////////////////////////////////
 	void setlabel(string s);
 	string getlabel()const;
 	string getLabel()const;
 	void setresistance(double R);
-	int getResistance();
+	int getResistance()const;
 	GraphicsInfo* getGraphics();
 	GraphicsInfo* get_m_pGfxInfo();
-	int getCompCenterX(UI*); // get horizontal/vertical centers of the component
-	int getCompCenterY(UI*);
-	int getGraphicsInfoY();
-	int getGraphicsInfoX();
+	int getCompCenterX(UI*)const; // get horizontal/vertical centers of the component
+	int getCompCenterY(UI*)const;
+	int getGraphicsInfoY()const;
+	int getGraphicsInfoX()const;
 	//////////////////////////////////////
-	bool validate();
+	bool validate()const;
 	void deleteGraphics();
 	void deletecon(Connection* pCon);
 	void reArrange();
 	//////////////////////////////////////
-	bool isSelected();
+	bool isSelected()const;
 	void Selection();
 	void unSelect();
 	void Select();
 	//////////////////////////////////////
 	void Component::OpenClose(); //switches state from open to closed
 	void setState(int S); //sets state
-	int getCompState();
+	int getCompState()const;
 	//////////////////////////////////////
-	bool isInRegion(int x, int y); // whether this point lies inside the component
-	TerminalNum whichTerminal(Connection* Conn); // returns the terminal to which a connection is connected
+	bool isInRegion(int x, int y)const; // whether this point lies inside the component
+	TerminalNum whichTerminal(Connection* Conn)const; // returns the terminal to which a connection is connected
 	Connection* getOtherFirstTerminalConnections(Connection*);
 	//////////////////////////////////////
 	virtual void Operate() = 0; // activates components such as bulb and buzzer
