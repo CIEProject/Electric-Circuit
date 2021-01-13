@@ -102,14 +102,15 @@ string UI::GetSrting(string msg, string value)
 ActionType UI::GetUserAction(ApplicationManager* pApp)
 {
 	int x, y;
-	while (pWind->GetMouseClick(x, y) == NO_CLICK) {
-		pWind->GetMouseCoord(x, y);
-		pApp->printInfo(x, y);
-	}
+	
 	//pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if (AppMode == DESIGN)	//application is in design mode
 	{
+		while (pWind->GetMouseClick(x, y) == NO_CLICK) {
+			pWind->GetMouseCoord(x, y);
+			pApp->printInfo(x, y);
+		}
 		//[1] If user clicks on the Toolbar
 		if (y >= 0 && y < ToolBarHeight)
 		{
@@ -204,6 +205,7 @@ ActionType UI::GetUserAction(ApplicationManager* pApp)
 	}
 	/// ////////////////////////
 	else {  ///simulation mode actions
+		pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 		if (y >= 0 && y < ToolBarHeight)
 		{
 			int ClickedItemOrder = (x / ToolItemWidth);

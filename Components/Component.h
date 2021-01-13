@@ -58,8 +58,8 @@ public:
 	GraphicsInfo* get_m_pGfxInfo();
 	void setTerm1Volt(double v);		//sets the voltage at terminal1
 	void setTerm2Volt(double v);		//sets the voltage at terminal2
-	//double getTerm1Volt();				//returns the voltage at terminal1
-	//double getTerm2Volt();				//returns the voltage at terminal2
+	double getTerm1Volt();				//returns the voltage at terminal1
+	double getTerm2Volt();				//returns the voltage at terminal2
 	//double getResistance();
 	//double getSourceVoltage(TerminalNum Term); // entering from terminal Term. Returns voltage jump/drop for battery, 0 otherwise
 

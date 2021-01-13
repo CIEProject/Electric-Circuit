@@ -11,17 +11,7 @@ ActionSwitchSimulation::~ActionSwitchSimulation(void)
 
 void ActionSwitchSimulation::Execute()
 {
-	if (pManager->ValidateCircuit())
-	{
-		pManager->UnselectAll();
-		UI* pUI = pManager->GetUI();
-		pUI->ClearStatusBar();
-		pUI->dropdown1 = false;
-		pUI->dropdown2 = false;
-		pUI->dropdown3 = false;
-		pUI->ClearToolBarArea();
-		pUI->CreateSimulationToolBar();
-	}
+	pManager->ToSimulation();
 }
 
 void ActionSwitchSimulation::Undo()

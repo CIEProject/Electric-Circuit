@@ -179,6 +179,12 @@ void Component::setTerm1Volt(double v) {
 void Component::setTerm2Volt(double v) {
 	term2_volt = v;
 }	//sets the voltage at terminal2
+double Component::getTerm1Volt() {
+	return term1_volt;
+}
+double Component::getTerm2Volt() {
+	return term2_volt;
+}
 TerminalNum Component::whichTerminal(Connection* Conn) {
 	for (int i = 0; i < term1_conn_count; i++) {
 		if (term1_conns[i] == Conn)

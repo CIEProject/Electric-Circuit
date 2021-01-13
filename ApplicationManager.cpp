@@ -53,185 +53,6 @@ ApplicationManager::ApplicationManager()
 	pUI = new UI;
 }
 ////////////////////////////////////////////////////////////////////
-double ApplicationManager::calculateNetResistance() {
-	double NetR = 0;
-	for (int i = 0; i < CompCount; i++) {
-		NetR += CompList[i]->getResistance();
-	}
-	return NetR;
-}
-double ApplicationManager::calculateNetVoltage() {
-	double NetV = 0;
-	for (int i = 0; i < CompCount; i++) {
-		NetV += CompList[i]->getSourceVoltage();
-	}
-	return NetV;
-}
-void ApplicationManager::test() {
-	double remainingVoltage = calculateNetVoltage();
-	double AllVoltage = calculateNetVoltage();
-	double current;
-	Component* comp1 = nullptr, * ground = nullptr;
-	Connection* conn1;
-	int temp;
-	for (int i = 0; i < CompCount; i++) {
-		if (dynamic_cast<Ground*>(CompList[i])) {
-			comp1 = CompList[i];
-		}
-	}
-	ground = comp1;
-	current = calculateNetVoltage() / calculateNetResistance();
-	conn1 = comp1->getTermConnections(TERM1)[0];
-	comp1 = conn1->getOtherComponent(comp1);
-	switch (comp1->whichTerminal(conn1)) {
-	case TERM1:
-		comp1->setTerm1Volt(0);
-		comp1->setTerm2Volt(comp1->getResistance() * current);
-		break;
-	case TERM2:
-		comp1->setTerm2Volt(0);
-		comp1->setTerm1Volt(comp1->getResistance() * current);
-		break;
-	}
-	pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
-	remainingVoltage -= comp1->getResistance() * current;
-	while (comp1 != ground) {
-		conn1 = comp1->getOtherFirstTerminalConnections(conn1);
-		comp1 = conn1->getOtherComponent(comp1);
-		switch (comp1->whichTerminal(conn1)) {
-		case TERM1:
-			comp1->setTerm1Volt(AllVoltage - remainingVoltage);
-			comp1->setTerm2Volt(comp1->getResistance() * current + AllVoltage - remainingVoltage);
-			break;
-		case TERM2:
-			comp1->setTerm2Volt(AllVoltage - remainingVoltage);
-			comp1->setTerm1Volt(comp1->getResistance() * current + AllVoltage - remainingVoltage);
-			break;
-		}
-		pUI->GetSrting(to_string(comp1->getResistance() * current + AllVoltage - remainingVoltage));
-		remainingVoltage -= comp1->getResistance() * current;
-	}
-}
-void ApplicationManager::AddComponent(Component* pComp)
-{
-	CompList[CompCount++] = pComp;
-}
-void ApplicationManager::DelSelected() {
-	for (int i = 0; i < CompCount; i++) {
-		if (CompList[i] != nullptr) {
-			if (CompList[i]->isSelected()) {
-				Connection** one = CompList[i]->getTermConnections(TERM1);
-				Connection** two = CompList[i]->getTermConnections(TERM2);
-				for (int j = 0; j < 20; j++) {
-					DelConn(one[j]);
-					DelConn(two[j]);
-				}
-				DelComponent(CompList[i]);
-			}
-		}
-	}
-	for (int i = 0; i < ConnCount; i++) {
-		if (ConnList[i] != nullptr)
-			if (ConnList[i]->isSelected())
-				DelConn(ConnList[i]);
-	}
-
-	reArrange();
-	for (int i = 0; i < CompCount; i++)
-		CompList[i]->reArrange();
-}
-void ApplicationManager::DelComponent(Component* pComp)
-{
-	for (int i = 0; i < CompCount; i++) {
-		if (CompList[i] == pComp) {
-			CompList[i]->deleteGraphics();
-			delete CompList[i];
-			CompList[i] = nullptr;
-		}
-	}
-}
-void ApplicationManager::DelConn(Connection* pConn)
-{
-	for (int i = 0; i < ConnCount; i++) {
-		if (ConnList[i] == pConn && pConn != nullptr) {
-			Component* comp2 = ConnList[i]->getComp(1);
-			Component* comp3 = ConnList[i]->getComp(2);
-			comp2->deletecon(ConnList[i]);
-			comp3->deletecon(ConnList[i]);
-			delete ConnList[i];
-
-			ConnList[i] = nullptr;
-		}
-	}
-}
-void ApplicationManager::DelAll() {
-	for (int i = 0; i < CompCount; i++) {
-		DelComponent(CompList[i]);
-	}
-
-	for (int i = 0; i < ConnCount; i++) {
-		DelConn(ConnList[i]);
-	}
-}
-void ApplicationManager::AddConnection(Connection* pConn) {
-	ConnList[ConnCount++] = pConn;
-}
-void ApplicationManager::UnselectAll() {
-	for (int i = 0; i < CompCount; i++) {
-		if (CompList[i] != nullptr)
-			CompList[i]->unSelect();
-	}
-	for (int i = 0; i < ConnCount; i++)
-		if (ConnList[i] != nullptr)
-			ConnList[i]->unSelect();
-}
-void ApplicationManager::UnselectAll(Component* pComp) {
-	for (int i = 0; i < CompCount; i++) {
-		if (CompList[i] != pComp && CompList[i] != nullptr)
-			CompList[i]->unSelect();
-	}
-	for (int i = 0; i < ConnCount; i++)
-		if (ConnList[i] != nullptr)
-			ConnList[i]->unSelect();
-}
-void ApplicationManager::UnselectAll(Connection* pConn) {
-	for (int i = 0; i < CompCount; i++)
-		if (CompList[i] != nullptr)
-			CompList[i]->unSelect();
-	for (int i = 0; i < ConnCount; i++) {
-		if (ConnList[i] != nullptr && ConnList[i] != pConn)
-			ConnList[i]->unSelect();
-	}
-}
-
-void ApplicationManager::reArrange() {
-	/*reArrange function is used when a component and/or a connection is deleted, it sets the right actual number of components
-and removes the ones that are nullptrs*/
-	Component* tempCompList[MaxCompCount];
-	Connection* tempConnList[MaxConnCount];
-	int counter = 0;
-	for (int i = 0; i < CompCount; i++)
-		if (CompList[i] != nullptr) {
-			tempCompList[counter] = CompList[i];
-			counter++;
-		}
-	for (int i = 0; i < CompCount; i++) {
-		CompList[i] = tempCompList[i];
-		tempCompList[i] = nullptr;
-	}
-	CompCount = counter;
-	counter = 0;
-	for (int i = 0; i < ConnCount; i++)
-		if (ConnList[i] != nullptr) {
-			tempConnList[counter] = ConnList[i];
-			counter++;
-		}
-	for (int i = 0; i < ConnCount; i++) {
-		ConnList[i] = tempConnList[i];
-		tempConnList[i] = nullptr;
-	}
-	ConnCount = counter;
-}
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
@@ -335,16 +156,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ActionOhmmeter(this);
 		break;
 	case MODULE1:
-		pAct = new ActionAddModule1(this,1);
+		pAct = new ActionAddModule1(this, 1);
 		break;
 	case MODULE2:
-		pAct = new ActionAddModule1(this,2);
+		pAct = new ActionAddModule1(this, 2);
 		break;
 	case MODULE3:
-		pAct = new ActionAddModule1(this,3);
+		pAct = new ActionAddModule1(this, 3);
 		break;
 	case MODULE4:
-		pAct = new ActionAddModule1(this,4);
+		pAct = new ActionAddModule1(this, 4);
 		break;
 	case EXIT:
 		pAct = new ExitAction(this);
@@ -359,7 +180,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 }
 ////////////////////////////////////////////////////////////////////
-
 void ApplicationManager::UpdateInterface()
 {
 	pUI->ClearDrawingArea();
@@ -375,84 +195,23 @@ void ApplicationManager::UpdateInterface()
 	GetUI()->CreateDropDown2Menu();
 	GetUI()->CreateDropDown3Menu();
 }
-
-////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 UI* ApplicationManager::GetUI()
 {
 	return pUI;
 }
 ////////////////////////////////////////////////////////////////////
-
-bool ApplicationManager::ValidateCircuit() {
-	// Validates the circuit before going into simultion mode
-	////////////////////////////////////////
-	//makes sure that there are reasonable number of connections
-	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0) {
-		pUI->PrintMsg("Not all components are connected, please make sure they are in series");
-		return false;
-	}
-	else {
-		///////////////////////////////////////////////
-		for (int i = 0; i < CompCount; i++) {
-			if (!(CompList[i]->validate())) {
-				pUI->PrintMsg("each component must have only one connection per terminal ");
-				return false;
-			}
-		}
-		int counter = 0;
-		////////////////////////////////////////////
-		//makes sure there is only one ground
-		for (int i = 0; i < CompCount; i++) {
-			if (dynamic_cast<Ground*>(CompList[i]))
-				counter++;
-		}
-		if (counter != 1) {
-			pUI->PrintMsg("the cirucit must have one ground only");
-			return false;
-		}
-		///////////////////////////////////////////
-
-		for (int i = 0; i < ConnCount - 1; i++) {
-			for (int j = i + 1; j < ConnCount; j++) {
-				if (!(ConnList[i]->validate(ConnList[j]))) {
-					pUI->PrintMsg("you cant establish a connection between two components only ");
-					return false;
-				}
-			}
-		}
-
-		/// ////////////////////////////////////////
-		//the main idea of the following part is that it makes sure
-		//that there are only circuit and not two or three series connected circuits.
-
-		Connection* conn1;
-		Component* comp1;
-		counter = 0;
-
-		for (int i = 0; i < CompCount; i++) {
-			comp1 = CompList[i];
-
-			conn1 = comp1->getTermConnections(TERM1)[0];
-			comp1 = conn1->getOtherComponent(comp1);
-			counter = 1;
-			while (comp1 != CompList[i] && counter <= CompCount) {
-				conn1 = comp1->getOtherFirstTerminalConnections(conn1);
-				comp1 =conn1->getOtherComponent(comp1);
-				counter++;
-			}
-
-			if (counter != CompCount) {
-				pUI->PrintMsg("you cannot make multiple circuits");
-				return false;
-			}
-		}
-		////////////////////////////////////////////
-		return true;
-	}
+void ApplicationManager::AddComponent(Component* pComp)
+{
+	CompList[CompCount++] = pComp;
 }
+void ApplicationManager::AddConnection(Connection* pConn) {
+	ConnList[ConnCount++] = pConn;
+}
+////////////////////////////////////////////////////////////////////
 void ApplicationManager::printInfo(int xi, int yi) {
 	static int counter = 0;
-	if(yi >= pUI->getToolBarHeight() && yi < pUI->Height() - pUI->getStatusBarHeight()){
+	if (yi >= pUI->getToolBarHeight() && yi < pUI->Height() - pUI->getStatusBarHeight()) {
 		Component* pcomp = GetComponentByCordinates(xi, yi);
 		if (pcomp != nullptr) {
 			if (counter == 0)
@@ -492,12 +251,114 @@ void ApplicationManager::printInfo(int xi, int yi) {
 				pUI->PrintMsgWithNoClear("Switch, state= " + to_string(pcomp->getCompState()));
 			}
 		}
-		else if(counter!=0)
+		else if (counter != 0)
 			pUI->ClearStatusBar();
 	}
 	else
 		counter = 0;
 }
+/// ///////////////////////////////////////
+void ApplicationManager::DelSelected() {
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] != nullptr) {
+			if (CompList[i]->isSelected()) {
+				Connection** one = CompList[i]->getTermConnections(TERM1);
+				Connection** two = CompList[i]->getTermConnections(TERM2);
+				for (int j = 0; j < 20; j++) {
+					DelConn(one[j]);
+					DelConn(two[j]);
+				}
+				DelComponent(CompList[i]);
+			}
+		}
+	}
+	for (int i = 0; i < ConnCount; i++) {
+		if (ConnList[i] != nullptr)
+			if (ConnList[i]->isSelected())
+				DelConn(ConnList[i]);
+	}
+
+	reArrange();
+	for (int i = 0; i < CompCount; i++)
+		CompList[i]->reArrange();
+}
+void ApplicationManager::DelComponent(Component* pComp)
+{
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] == pComp) {
+			CompList[i]->deleteGraphics();
+			delete CompList[i];
+			CompList[i] = nullptr;
+		}
+	}
+}
+void ApplicationManager::RemoveComponent(Component* pComp) {
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] != nullptr&&CompList[i]==pComp) {
+			
+				Connection** one = CompList[i]->getTermConnections(TERM1);
+				Connection** two = CompList[i]->getTermConnections(TERM2);
+				for (int j = 0; j < 20; j++) {
+					DelConn(one[j]);
+					DelConn(two[j]);
+				}
+				CompList[i] = nullptr;
+			
+		}
+	}
+}
+void ApplicationManager::DelConn(Connection* pConn)
+{
+	for (int i = 0; i < ConnCount; i++) {
+		if (ConnList[i] == pConn && pConn != nullptr) {
+			Component* comp2 = ConnList[i]->getComp(1);
+			Component* comp3 = ConnList[i]->getComp(2);
+			comp2->deletecon(ConnList[i]);
+			comp3->deletecon(ConnList[i]);
+			delete ConnList[i];
+
+			ConnList[i] = nullptr;
+		}
+	}
+}
+void ApplicationManager::DelAll() {
+	for (int i = 0; i < CompCount; i++) {
+		DelComponent(CompList[i]);
+	}
+
+	for (int i = 0; i < ConnCount; i++) {
+		DelConn(ConnList[i]);
+	}
+}
+void ApplicationManager::reArrange() {
+	/*reArrange function is used when a component and/or a connection is deleted, it sets the right actual number of components
+and removes the ones that are nullptrs*/
+	Component* tempCompList[MaxCompCount];
+	Connection* tempConnList[MaxConnCount];
+	int counter = 0;
+	for (int i = 0; i < CompCount; i++)
+		if (CompList[i] != nullptr) {
+			tempCompList[counter] = CompList[i];
+			counter++;
+		}
+	for (int i = 0; i < CompCount; i++) {
+		CompList[i] = tempCompList[i];
+		tempCompList[i] = nullptr;
+	}
+	CompCount = counter;
+	counter = 0;
+	for (int i = 0; i < ConnCount; i++)
+		if (ConnList[i] != nullptr) {
+			tempConnList[counter] = ConnList[i];
+			counter++;
+		}
+	for (int i = 0; i < ConnCount; i++) {
+		ConnList[i] = tempConnList[i];
+		tempConnList[i] = nullptr;
+	}
+	ConnCount = counter;
+}
+/// ///////////////////////////////////////////////////////////
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	for (int i = 0; i < CompCount; i++) {
 		if (CompList[i]->isInRegion(x, y))
@@ -553,21 +414,6 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 	if (isExist == 0)
 		return nullptr;
 }
-
-void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
-{
-	CircuitFile << CompCount << endl;
-	for (int i = 0; i < CompCount; i++)
-		CompList[i]->SaveCircuit(CircuitFile);
-	Component::resetID();
-	CircuitFile << "Connections \n" << ConnCount << endl;
-	for (int i = 0; i < ConnCount; i++) {
-		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
-		int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
-		ConnList[i]->save(CircuitFile, comp1, comp2);
-	}
-}
-
 int ApplicationManager::getCompOrder(Component* comp) {
 	for (int i = 0; i < CompCount; i++) {
 		if (comp == CompList[i])
@@ -585,6 +431,195 @@ Component** ApplicationManager::getCompList() {
 }
 Connection** ApplicationManager::getConnList() {
 	return ConnList;
+}
+/// ///////////////////////////////////////////////////////////
+void ApplicationManager::UnselectAll() {
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] != nullptr)
+			CompList[i]->unSelect();
+	}
+	for (int i = 0; i < ConnCount; i++)
+		if (ConnList[i] != nullptr)
+			ConnList[i]->unSelect();
+}
+void ApplicationManager::UnselectAll(Component* pComp) {
+	for (int i = 0; i < CompCount; i++) {
+		if (CompList[i] != pComp && CompList[i] != nullptr)
+			CompList[i]->unSelect();
+	}
+	for (int i = 0; i < ConnCount; i++)
+		if (ConnList[i] != nullptr)
+			ConnList[i]->unSelect();
+}
+void ApplicationManager::UnselectAll(Connection* pConn) {
+	for (int i = 0; i < CompCount; i++)
+		if (CompList[i] != nullptr)
+			CompList[i]->unSelect();
+	for (int i = 0; i < ConnCount; i++) {
+		if (ConnList[i] != nullptr && ConnList[i] != pConn)
+			ConnList[i]->unSelect();
+	}
+}
+/// ///////////////////////////////////////////////////////////
+bool ApplicationManager::ValidateCircuit() {
+	// Validates the circuit before going into simultion mode
+	////////////////////////////////////////
+	//makes sure that there are reasonable number of connections
+	if (CompCount != ConnCount || ConnCount == 1 || ConnCount == 0) {
+		pUI->PrintMsg("Not all components are connected, please make sure they are in series");
+		return false;
+	}
+	else {
+		///////////////////////////////////////////////
+		for (int i = 0; i < CompCount; i++) {
+			if (!(CompList[i]->validate())) {
+				pUI->PrintMsg("each component must have only one connection per terminal ");
+				return false;
+			}
+		}
+		int counter = 0;
+		////////////////////////////////////////////
+		//makes sure there is only one ground
+		for (int i = 0; i < CompCount; i++) {
+			if (dynamic_cast<Ground*>(CompList[i]))
+				counter++;
+		}
+		if (counter != 1) {
+			pUI->PrintMsg("the cirucit must have one ground only");
+			return false;
+		}
+		///////////////////////////////////////////
+
+		for (int i = 0; i < ConnCount - 1; i++) {
+			for (int j = i + 1; j < ConnCount; j++) {
+				if (!(ConnList[i]->validate(ConnList[j]))) {
+					pUI->PrintMsg("you cant establish a connection between two components only ");
+					return false;
+				}
+			}
+		}
+
+		/// ////////////////////////////////////////
+		//the main idea of the following part is that it makes sure
+		//that there are only circuit and not two or three series connected circuits.
+
+		Connection* conn1;
+		Component* comp1;
+		counter = 0;
+
+		for (int i = 0; i < CompCount; i++) {
+			comp1 = CompList[i];
+
+			conn1 = comp1->getTermConnections(TERM1)[0];
+			comp1 = conn1->getOtherComponent(comp1);
+			counter = 1;
+			while (comp1 != CompList[i] && counter <= CompCount) {
+				conn1 = comp1->getOtherFirstTerminalConnections(conn1);
+				comp1 = conn1->getOtherComponent(comp1);
+				counter++;
+			}
+
+			if (counter != CompCount) {
+				pUI->PrintMsg("you cannot make multiple circuits");
+				return false;
+			}
+		}
+		////////////////////////////////////////////
+		return true;
+	}
+}
+void ApplicationManager::ToSimulation()
+{
+	if (!ValidateCircuit())
+	{
+	//any useful prompt has been written inside ValidateCircuit Function
+	}
+	else
+	{
+		this->IsSimulation = true;
+		UnselectAll();
+		pUI->ClearStatusBar();
+		pUI->dropdown1 = false;
+		pUI->dropdown2 = false;
+		pUI->dropdown3 = false;
+		pUI->ClearToolBarArea();
+		pUI->CreateSimulationToolBar();
+		CalculateTermVoltages();
+		// Compute all needed voltages and current
+	}
+}
+double ApplicationManager::calculateNetResistance() {
+	double NetR = 0;
+	for (int i = 0; i < CompCount; i++) {
+		NetR += CompList[i]->getResistance();
+	}
+	return NetR;
+}
+double ApplicationManager::calculateNetVoltage() {
+	double NetV = 0;
+	for (int i = 0; i < CompCount; i++) {
+		NetV += CompList[i]->getSourceVoltage();
+	}
+	return NetV;
+}
+void ApplicationManager::CalculateTermVoltages() {
+	double remainingVoltage = calculateNetVoltage();
+	double AllVoltage = calculateNetVoltage();
+	double current;
+	Component* comp1 = nullptr, * ground = nullptr;
+	Connection* conn1;
+	int temp;
+	for (int i = 0; i < CompCount; i++) {
+		if (dynamic_cast<Ground*>(CompList[i])) {
+			comp1 = CompList[i];
+		}
+	}
+	ground = comp1;
+	current = calculateNetVoltage() / calculateNetResistance();
+	conn1 = comp1->getTermConnections(TERM1)[0];
+	comp1 = conn1->getOtherComponent(comp1);
+	switch (comp1->whichTerminal(conn1)) {
+	case TERM1:
+		comp1->setTerm1Volt(0);
+		comp1->setTerm2Volt(comp1->getResistance() * current+ comp1->getSourceVoltage());
+		break;
+	case TERM2:
+		comp1->setTerm2Volt(0);
+		comp1->setTerm1Volt(comp1->getResistance() * current+ comp1->getSourceVoltage());
+		break;
+	}
+
+	remainingVoltage -= comp1->getResistance() * current;
+	while (comp1 != ground) {
+		conn1 = comp1->getOtherFirstTerminalConnections(conn1);
+		comp1 = conn1->getOtherComponent(comp1);
+		switch (comp1->whichTerminal(conn1)) {
+		case TERM1:
+			comp1->setTerm1Volt(AllVoltage - remainingVoltage);
+			comp1->setTerm2Volt(comp1->getResistance() * current + AllVoltage - remainingVoltage+ comp1->getSourceVoltage());
+			break;
+		case TERM2:
+			comp1->setTerm2Volt(AllVoltage - remainingVoltage);
+			comp1->setTerm1Volt(comp1->getResistance() * current + AllVoltage - remainingVoltage+ comp1->getSourceVoltage());
+			break;
+		}
+		remainingVoltage -= comp1->getResistance() * current;
+
+	}
+}
+//////////////////////////////////////////////////////////////////
+void ApplicationManager::SaveCircuit(ofstream& CircuitFile)
+{
+	CircuitFile << CompCount << endl;
+	for (int i = 0; i < CompCount; i++)
+		CompList[i]->SaveCircuit(CircuitFile);
+	Component::resetID();
+	CircuitFile << "Connections \n" << ConnCount << endl;
+	for (int i = 0; i < ConnCount; i++) {
+		int comp1 = getCompOrder(ConnList[i]->getComp(1)) + 1;
+		int comp2 = getCompOrder(ConnList[i]->getComp(2)) + 1;
+		ConnList[i]->save(CircuitFile, comp1, comp2);
+	}
 }
 void ApplicationManager::Load(ifstream& file, string name)
 {
@@ -710,27 +745,14 @@ void ApplicationManager::Load(ifstream& file, string name)
 	file.close();
 }
 ////////////////////////////////////////////////////////////////////
-void ApplicationManager::ToSimulation()
-{
-	if (!ValidateCircuit()) 
-	{
 
-	}
-	else
-	{
-		this->IsSimulation = true;
-		// Compute all needed voltages and current
-		double current = CalculateCurrent();
-	}
-}
 ////////////////////////////////////////////////////////////////////
 // Calculates current passing through the circuit
 double ApplicationManager::CalculateCurrent() {
 	return calculateNetVoltage() / calculateNetResistance();
 }
 
-// Calculates voltage at each component terminal
-
+/////////////////////////////////////////
 int ApplicationManager::GetNumberOfSelectedComponents()
 {
 	int Count = 0;

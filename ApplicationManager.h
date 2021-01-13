@@ -54,6 +54,7 @@ public:
 
 	void DelSelected();//deletes all components/connections that are selected by the user, can be more than one at once
 	void DelComponent(Component* pComp);//deletes pComp from the CompList
+	void RemoveComponent(Component* pComp);//removes pComp from the CompList
 	void DelConn(Connection* pConn);//similiar to DelComponent
 	void DelAll();//Deletes all components and connections
 	void reArrange();//description the in the implementation
@@ -75,11 +76,11 @@ public:
 
 	// Simulation Mode Functions //
 	bool ValidateCircuit();
-	void ToSimulation(); // Switches to simulation mode
+	void ToSimulation(); // Not Used 
 	double CalculateCurrent();
 	double calculateNetResistance();
 	double calculateNetVoltage();
-	void test();
+	void CalculateTermVoltages();
 	////////////////////////////
 	void ErasePointers();
 	int GetNumberOfSelectedComponents();
