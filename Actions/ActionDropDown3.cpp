@@ -11,6 +11,8 @@ ActionDropDown3::~ActionDropDown3(void)
 void ActionDropDown3::Execute()
 {
 	UI* pUI = pManager->GetUI();
+	pUI->dropdown1 = false;
+	pUI->dropdown2 = false;
 	if (pUI->dropdown3)
 		pUI->dropdown3 = false;
 	else

@@ -21,6 +21,7 @@ struct GraphicsInfo
 		PointsList = new Point[PointsCount];	//allocate required points
 	}
 };
+class ApplicationManager;
 
 class UI
 {
@@ -88,7 +89,7 @@ class UI
 
 	MODE AppMode;		//Application Mode (design or simulation)
 	ImageType imgType;
-	static const int	width = 1200, height = 650,	//Window width and height
+	static const int	width = 1360,height = 650,	//Window width and height
 		wx = 15, wy = 15,			//Window starting coordinates
 		StatusBarHeight = 50,	//Status Bar Height
 		ToolBarHeight = 80,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
@@ -106,9 +107,9 @@ class UI
 
 	UI* pU;
 	window* pWind;
-	bool IsOn;
+	bool IsOn; //true if the series is fully connected and all the switches are closed
 	//ApplicationManager* pmanager;
-	int xtemp, ytemp;
+	int xtemp, ytemp; //these variables store x,y and are called when the user selects a component
 public:
 	bool dropdown1;
 	bool dropdown2;
@@ -127,7 +128,7 @@ public:
 	//the other "value" parameter was added so the user can edit the label without having to write it again
 	//Returns a string entered by the user
 
-	ActionType GetUserAction(); //Reads the user click and maps it to an action
+	ActionType GetUserAction(ApplicationManager* pApp); //Reads the user click and maps it to an action
 	int getXtemp(); //for select action
 	int getYtemp();
 
@@ -145,7 +146,7 @@ public:
 	void ClearDrawingArea() const;	//Clears the drawing area
 	void ClearToolBarArea()const;
 	void SwitchImageType();
-	// Draws a resistor
+	// Draws Components
 	void DrawResistor(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawBattery(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawGround(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
@@ -159,14 +160,13 @@ public:
 	void DrawModule3(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 	void DrawModule4(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
-	///TODO: Make similar functions for drawing all other components, connections, .. etc
-
 	// Draws Connection
 	void DrawConnection(const GraphicsInfo& r_GfxInfo, bool selected = false) const;
 
 	void PrintMsg(string msg) const;	//Print a message on Status bar
+	void PrintMsgWithNoClear(string msg) const;	//Print a message on Status bar without clearing the old msg
 	void labelMsg(string msg, int x = 25, int y = height - StatusBarHeight + 10); //for labeling components
-	void set_isOn(bool);
+	void set_isOn(bool); 
 	bool get_isOn()const;
 	~UI();
 };

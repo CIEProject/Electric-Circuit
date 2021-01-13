@@ -1,5 +1,6 @@
 #include "UI.h"
 #include "..\CMUgraphicsLib\auxil.h"
+#include"..\ApplicationManager.h"
 UI::UI()
 {
 	AppMode = DESIGN;	//Design Mode is the startup mode
@@ -98,11 +99,14 @@ string UI::GetSrting(string msg, string value)
 }
 
 //This function reads the position where the user clicks to determine the desired action
-ActionType UI::GetUserAction()
+ActionType UI::GetUserAction(ApplicationManager* pApp)
 {
 	int x, y;
-
-	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+	while (pWind->GetMouseClick(x, y) == NO_CLICK) {
+		pWind->GetMouseCoord(x, y);
+		pApp->printInfo(x, y);
+	}
+	//pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if (AppMode == DESIGN)	//application is in design mode
 	{
@@ -138,10 +142,13 @@ ActionType UI::GetUserAction()
 		}
 
 		//[2] User clicks on the drawing area
+		//////////drop down menus actions
 		if (dropdown1 == true) {
 			dropdown1 = false; //for one time use only
 			if (x >= ITM_DROP1 * ToolItemWidth && x < ((ITM_DROP1 + 1) * ToolItemWidth) &&
 				y >= ToolBarHeight && y <= (ITM_DRP1_CNT + 1) * ToolBarHeight) {
+				dropdown2 = false; //so that they will close after this action
+				dropdown3 = false;
 				int ClickedItem = (y / ToolBarHeight) - 1;
 
 				switch (ClickedItem) {
@@ -156,8 +163,10 @@ ActionType UI::GetUserAction()
 		}
 		if (dropdown2 == true) {
 			dropdown2 = false; //for one time use only
+
 			if (x >= ITM_DROP2 * ToolItemWidth && x < ((ITM_DROP2 + 1) * ToolItemWidth) &&
 				y >= ToolBarHeight && y <= (ITM_DRP2_CNT + 1) * ToolBarHeight) {
+				dropdown3 = false;
 				int ClickedItem = (y / ToolBarHeight) - 1;
 
 				switch (ClickedItem) {
@@ -192,7 +201,8 @@ ActionType UI::GetUserAction()
 		//[3] User clicks on the status bar
 		return STATUS_BAR;
 	}
-	else {
+	/// ////////////////////////
+	else {  ///simulation mode actions
 		if (y >= 0 && y < ToolBarHeight)
 		{
 			int ClickedItemOrder = (x / ToolItemWidth);
@@ -213,8 +223,9 @@ ActionType UI::GetUserAction()
 		{
 			xtemp = x;
 			ytemp = y;
-			return SELECT_SIM;	//user wants to select/unselect a component
+			return SELECT_SIM;	//user wants to open/close a switch
 		}
+		return STATUS_BAR;
 	}
 }
 int UI::getXtemp() {
@@ -244,6 +255,16 @@ void UI::CreateStatusBar() const
 void UI::PrintMsg(string msg) const
 {
 	ClearStatusBar();	//Clear Status bar to print message on it
+	// Set the Message offset from the Status Bar
+	int MsgX = 25;
+	int MsgY = StatusBarHeight - 10;
+
+	// Print the Message
+	pWind->SetFont(20, BOLD | ITALICIZED, BY_NAME, "Arial");
+	pWind->SetPen(MsgColor);
+	pWind->DrawString(MsgX, height - MsgY, msg);
+}
+void UI::PrintMsgWithNoClear(string msg) const {
 	// Set the Message offset from the Status Bar
 	int MsgX = 25;
 	int MsgY = StatusBarHeight - 10;

@@ -42,7 +42,7 @@ public:
 	UI* GetUI(); //Gets a pointer to UI Object
 	void AddComponent(Component* pComp); //Adds a new component to the list of components
 	void AddConnection(Connection* pConn);//Adds a new connection to the list of connection
-	void printInfo(int xi, int yi); //not used 
+	void printInfo(int xi, int yi); //prints information about the components on which the mouse is standing
 
 
 	/// /////////////////////////////////

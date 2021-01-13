@@ -234,7 +234,7 @@ and removes the ones that are nullptrs*/
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
-	return pUI->GetUserAction();
+	return pUI->GetUserAction(this);
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -447,10 +447,52 @@ bool ApplicationManager::ValidateCircuit() {
 	}
 }
 void ApplicationManager::printInfo(int xi, int yi) {
-	Component* pcomp = GetComponentByCordinates(xi, yi);
-	if (pcomp != nullptr) {
-		pUI->PrintMsg(to_string(pcomp->getResistance()));
+	static int counter = 0;
+	if(yi >= pUI->getToolBarHeight() && yi < pUI->Height() - pUI->getStatusBarHeight()){
+		Component* pcomp = GetComponentByCordinates(xi, yi);
+		if (pcomp != nullptr) {
+			if (counter == 0)
+				pUI->ClearStatusBar();
+			counter++;
+			if (dynamic_cast<Battery*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Battery, Source Voltage= " + to_string(pcomp->getSourceVoltage()));
+			}
+			else if (dynamic_cast<Bulb*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Bulb, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Buzzer*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Buzzer, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Fuze*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Fuse, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Ground*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Ground, No Resistance");
+			}
+			else if (dynamic_cast<Module1*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Module Number 1, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Module2*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Module Number 2, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Module3*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Module Number 3, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Module4*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Module Number 4, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Resistor*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Resistor, Resistance= " + to_string(pcomp->getResistance()));
+			}
+			else if (dynamic_cast<Switch*>(pcomp)) {
+				pUI->PrintMsgWithNoClear("Switch, state= " + to_string(pcomp->getCompState()));
+			}
+		}
+		else if(counter!=0)
+			pUI->ClearStatusBar();
 	}
+	else
+		counter = 0;
 }
 Component* ApplicationManager::GetComponentByCordinates(int x, int y) {
 	for (int i = 0; i < CompCount; i++) {
