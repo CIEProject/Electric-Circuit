@@ -328,7 +328,7 @@ void UI::CreateDropDown3Menu() {
 	if (dropdown3== true) {
 		string DropMenuImages[ITM_DRP3_CNT];
 		DropMenuImages[ITM_COPY] = "images\\Menu\\Menu_Copy.jpg";
-		DropMenuImages[ITM_CUT] = "images\\Menu\\Menu_Copy.jpg";
+		DropMenuImages[ITM_CUT] = "images\\Menu\\Menu_Cut.jpg";
 		DropMenuImages[ITM_PASTE] = "images\\Menu\\Menu_Paste.jpg";
 
 
@@ -361,7 +361,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_DROP1] = "images\\Menu\\Menu_DropDown1.jpg";
 	MenuItemImages[ITM_DROP2] = "images\\Menu\\Menu_DropDown2.jpg";
 	MenuItemImages[ITM_DROP3] = "images\\Menu\\Menu_DropDown3.jpg";
-	MenuItemImages[ITM_MOVE] = "images\\Menu\\Menu_Copy.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\Menu\\Menu_Move.jpg";
 
 
 	//Draw menu item one image at a time
