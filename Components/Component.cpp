@@ -26,6 +26,30 @@ void Component::addTerm1Conn(Connection* c) {
 void Component::addTerm2Conn(Connection* c) {
 	term2_conns[term2_conn_count++] = c;
 }
+void Component::UpdateConnsGraphics(UI* pUI) {
+	for (int i = 0; i < term1_conn_count; i++) {
+		int a1 = term1_conns[i]->WhichComp(this);
+		if (a1 == 1) {
+			term1_conns[i]->getgraphics()->PointsList[0].x=m_pGfxInfo->PointsList[0].x;
+			term1_conns[i]->getgraphics()->PointsList[0].y= m_pGfxInfo->PointsList[0].y+pUI->getCompHeight()/2;
+		}
+		if (a1 == 2) {
+			term1_conns[i]->getgraphics()->PointsList[1].x = m_pGfxInfo->PointsList[0].x;
+			term1_conns[i]->getgraphics()->PointsList[1].y = m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+		}
+	}
+	for (int i = 0; i < term2_conn_count; i++) {
+		int a1 = term2_conns[i]->WhichComp(this);
+		if (a1 == 1) {
+			term2_conns[i]->getgraphics()->PointsList[0].x = m_pGfxInfo->PointsList[0].x;
+			term2_conns[i]->getgraphics()->PointsList[0].y = m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+		}
+		if (a1 == 2) {
+			term2_conns[i]->getgraphics()->PointsList[1].x = m_pGfxInfo->PointsList[0].x;
+			term2_conns[i]->getgraphics()->PointsList[1].y = m_pGfxInfo->PointsList[0].y + pUI->getCompHeight() / 2;
+		}
+	}
+}
 int Component::getTermcount(TerminalNum Term)const {
 	switch (Term) {
 	case TERM1:

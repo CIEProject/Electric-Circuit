@@ -36,6 +36,7 @@ public:
 	Connection** getTermConnections(TerminalNum Term);
 	void addTerm1Conn(Connection*);
 	void addTerm2Conn(Connection*);
+	void UpdateConnsGraphics(UI* pUI);
 	//////////////////////////////////////
 	void setSourceVoltage(int V);
 	int getSourceVoltage()const;
