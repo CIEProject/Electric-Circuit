@@ -363,7 +363,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_DROP3] = "images\\Menu\\Menu_DropDown3.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\Menu\\Menu_Move.jpg";
 
-
+		
 	//Draw menu item one image at a time
 	for (int i = 0; i < ITM_DSN_CNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * ToolItemWidth, 0, ToolItemWidth, ToolBarHeight);
