@@ -286,7 +286,6 @@ void ApplicationManager::DelComponent(Component* pComp)
 {
 	for (int i = 0; i < CompCount; i++) {
 		if (CompList[i] == pComp) {
-			CompList[i]->deleteGraphics();
 			delete CompList[i];
 			CompList[i] = nullptr;
 		}
@@ -414,16 +413,16 @@ Connection* ApplicationManager::GetConnByCordinates(int x, int y) {
 	if (isExist == 0)
 		return nullptr;
 }
-int ApplicationManager::getCompOrder(Component* comp) {
+int ApplicationManager::getCompOrder(Component* comp) const {
 	for (int i = 0; i < CompCount; i++) {
 		if (comp == CompList[i])
 			return i;
 	}
 }
-int ApplicationManager::getCompCount() {
+int ApplicationManager::getCompCount() const {
 	return CompCount;
 }
-int ApplicationManager::getConnCount() {
+int ApplicationManager::getConnCount() const {
 	return ConnCount;
 }
 Component** ApplicationManager::getCompList() {
@@ -461,7 +460,7 @@ void ApplicationManager::UnselectAll(Connection* pConn) {
 	}
 }
 /// ///////////////////////////////////////////////////////////
-bool ApplicationManager::ValidateCircuit() {
+bool ApplicationManager::ValidateCircuit()const {
 	// Validates the circuit before going into simultion mode
 	////////////////////////////////////////
 	//makes sure that there are reasonable number of connections
@@ -753,12 +752,12 @@ double ApplicationManager::CalculateCurrent() {
 }
 
 /////////////////////////////////////////
-int ApplicationManager::GetNumberOfSelectedComponents()
+int ApplicationManager::GetNumberOfSelectedComponents()const
 {
 	int Count = 0;
-	for (int i = 0; i < getCompCount(); i++)
+	for (int i = 0; i < CompCount; i++)
 	{
-		if (getCompList()[i]->isSelected())
+		if (CompList[i]->isSelected())
 			Count++;
 	}
 	return Count;
@@ -806,7 +805,19 @@ void ApplicationManager::PointToTheNextComponent(int COMP)
 	}
 	CompCount--; // hana2as 3add el components kolo 1 
 }
-
+void ApplicationManager::ErasePointers()
+{
+	for (int i = 0; i < CompCount; i++)
+	{
+		delete CompList[i];
+		CompList[i] = nullptr;
+	}
+	for (int i = 0; i < ConnCount; i++)
+	{
+		delete ConnList[i];
+		ConnList[i] = nullptr;
+	}
+}
 int ApplicationManager::getNumberOfCopiedComponents() const
 {
 	return NumberOfCopiedComponents;
@@ -836,7 +847,6 @@ void ApplicationManager::UpdateInterfaceWithoutClrDrwArea()
 		if (CompList[i] != nullptr) {
 			CompList[i]->Draw(pUI);
 		}
-	//CompList[i]->Draw(pUI);
 
 	for (int i = 0; i < ConnCount; i++)
 		if (ConnList[i] != nullptr)
@@ -847,6 +857,7 @@ void ApplicationManager::UpdateInterfaceWithoutClrDrwArea()
 ////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()
 {
+	DelAll();
 	delete pW;
 	delete pUI;
 }

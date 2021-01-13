@@ -11,7 +11,7 @@ ActionSelect::~ActionSelect(void)
 void ActionSelect::Execute()
 {
 	pUI->PrintMsg("tap to select or unselect");
-
+		
 	pUI->GetPointClicked(x_0, y_0);
 	//x_0 = pUI->getXtemp();
 	//y_0 = pUI->getYtemp();
@@ -25,6 +25,7 @@ void ActionSelect::Execute()
 
 		while (123456789101112)
 		{
+			
 			if (Cx < Minimum_X || Cx > Maximum_X)
 			{
 				Cx = Old_X;
