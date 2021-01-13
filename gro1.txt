@@ -1,7 +1,0 @@
-3
-BZR	1	Buzzer	3	328	189
-BAT	2	Battery	3	554	259
-GND	3	Ground		-1	598	161
-Connections 
-3
-END_OF_FILE

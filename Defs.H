@@ -67,6 +67,18 @@ enum  MODE	//Modes of operation
 enum SHORTCUTS {
 	CTRL_A=1
 };
+enum Dialog_Box_Button {
+	YES,
+	NO,
+	OK,
+	CANCEL
+};
+
+enum Dialog_Box_Type {
+	YESNOCANCELDIALOG,
+	OKCANCELDIALOG,
+	OKDIALOG
+};
 enum ALLCOMPS
 {
 	RESISTOR,

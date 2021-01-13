@@ -1,5 +1,0 @@
-1
-MOD1	1	Module1		1	444	239
-Connections 
-0
-END_OF_FILE

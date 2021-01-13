@@ -1,7 +1,0 @@
-3
-BAT	1	Battery	20	478	184
-GND	2	Ground	-1	286	247
-RES	3	Resistor	1	460	351
-Connections 
-3
-END_OF_FILE

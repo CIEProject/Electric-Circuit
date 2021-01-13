@@ -1,8 +1,0 @@
-4
-MOD1	1	Module1		1	490	231
-GND	2	Ground		-1	314	185
-BAT	3	Battery		20	730	235
-RES	4	Resistor		1	318	333
-Connections 
-0
-END_OF_FILE
