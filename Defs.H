@@ -64,6 +64,9 @@ enum  MODE	//Modes of operation
 	DESIGN,
 	SIMULATION
 };
+enum SHORTCUTS {
+	CTRL_A=1
+};
 enum ALLCOMPS
 {
 	RESISTOR,

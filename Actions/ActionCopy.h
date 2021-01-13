@@ -2,17 +2,19 @@
 #define ACTION_COPY_H
 
 #include "Action.h"
-//Class responsible for adding a new resistor action
+#include "..\ApplicationManager.h"
+
 class ActionCopy : public Action
 {
+private:
+	int Cx = 0, Cy = 0;
+	bool SelectedComponents;
 public:
+
 	ActionCopy(ApplicationManager* pApp);
-	virtual ~ActionCopy(void);
-
-	//Execute action (code depends on action type)
+	~ActionCopy(void);
 	virtual void Execute();
-
 	virtual void Undo();
 	virtual void Redo();
 };
-#endif 
+#endif

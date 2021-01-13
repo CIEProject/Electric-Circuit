@@ -132,6 +132,7 @@ ActionType UI::GetUserAction(ApplicationManager* pApp)
 			case ITM_DROP1: return DROP_DOWN1;
 			case ITM_DROP2: return DROP_DOWN2;
 			case ITM_DROP3: return DROP_DOWN3;
+			case ITM_MOVE: return MOVE;
 			case ITM_SIMU: return SIM_MODE;
 		
 
@@ -392,6 +393,7 @@ void UI::CreateDesignToolBar()
 	MenuItemImages[ITM_DROP1] = "images\\Menu\\Menu_DropDown1.jpg";
 	MenuItemImages[ITM_DROP2] = "images\\Menu\\Menu_DropDown2.jpg";
 	MenuItemImages[ITM_DROP3] = "images\\Menu\\Menu_DropDown3.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\Menu\\Menu_Copy.jpg";
 
 
 	//Draw menu item one image at a time

@@ -134,6 +134,7 @@
     <ClCompile Include="Actions\ActionDropDown3.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
+    <ClCompile Include="Actions\ActionMove.cpp" />
     <ClCompile Include="Actions\ActionMultimeter.cpp" />
     <ClCompile Include="Actions\ActionOhmmeter.cpp" />
     <ClCompile Include="Actions\ActionOpenCloseSwitch.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Actions\ActionDropDown3.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionMove.h" />
     <ClInclude Include="Actions\ActionMultimeter.h" />
     <ClInclude Include="Actions\ActionOhmmeter.h" />
     <ClInclude Include="Actions\ActionOpenCloseSwitch.h" />

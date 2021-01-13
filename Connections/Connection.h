@@ -18,6 +18,7 @@ public:
 
 	bool isSelected();
 	void unSelect();
+	void Select();
 	void Selection();
 	//////////////////
 	bool validate(Connection*);

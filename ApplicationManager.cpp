@@ -30,6 +30,7 @@
 #include"Actions/ActionCopy.h"
 #include"Actions/ActionCut.h"
 #include"Actions/ActionPaste.h"
+#include"Actions/ActionMove.h"
 #include <iostream>
 #include<cmath>
 
@@ -303,6 +304,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DROP_DOWN3:
 		pAct = new ActionDropDown3(this);
 		break;
+	case MOVE:
+		pAct = new ActionMove(this);
+		break;
 	case SWITCH_IMG:
 		pAct = new ActionSwitchReal(this);
 		break;
@@ -573,8 +577,14 @@ int ApplicationManager::getCompOrder(Component* comp) {
 int ApplicationManager::getCompCount() {
 	return CompCount;
 }
+int ApplicationManager::getConnCount() {
+	return ConnCount;
+}
 Component** ApplicationManager::getCompList() {
 	return CompList;
+}
+Connection** ApplicationManager::getConnList() {
+	return ConnList;
 }
 void ApplicationManager::Load(ifstream& file, string name)
 {
@@ -721,6 +731,97 @@ double ApplicationManager::CalculateCurrent() {
 
 // Calculates voltage at each component terminal
 
+int ApplicationManager::GetNumberOfSelectedComponents()
+{
+	int Count = 0;
+	for (int i = 0; i < getCompCount(); i++)
+	{
+		if (getCompList()[i]->isSelected())
+			Count++;
+	}
+	return Count;
+}
+
+void ApplicationManager::ClearTheClipboard()
+{
+	for (int i = 0; i < NumberOfCopiedComponents; i++)
+		ListOfCopiedComponents[i] = nullptr;
+	NumberOfCopiedComponents = 0;
+}
+
+void ApplicationManager::CopySelectedComponent(int i)
+{
+	CompList[i]->unSelect(); // 3a4an nl8y el selection
+	ListOfCopiedComponents[NumberOfCopiedComponents] = CompList[i];
+	NumberOfCopiedComponents++;
+}
+
+void ApplicationManager::MoveComponents(int i)
+{
+	CompList[i]->unSelect();
+	ListOfMovingComponents[NumberOfMovingComponents] = CompList[i];
+	NumberOfMovingComponents++;
+}
+void ApplicationManager::ClearListOfMovingComponents()
+{
+	for (int i = 0; i < NumberOfMovingComponents; i++)
+		ListOfMovingComponents[i] = nullptr;
+	NumberOfMovingComponents = 0;
+}
+
+void ApplicationManager::CreateACopyOfCopiedComponents()
+{
+	for (int i = 0; i < NumberOfCopiedComponents; i++)
+		CopyOfListOfCopiedComponents[i] = ListOfCopiedComponents[i];
+}
+
+void ApplicationManager::PointToTheNextComponent(int COMP)
+{
+	for (int i = COMP; i < CompCount; i++)
+	{
+		CompList[i] = CompList[i + 1]; //3a4an n point 3ala el component ely ba3deh badaloh
+		UpdateInterface();
+	}
+	CompCount--; // hana2as 3add el components kolo 1 
+}
+
+int ApplicationManager::getNumberOfCopiedComponents() const
+{
+	return NumberOfCopiedComponents;
+}
+
+int ApplicationManager::getNumberOfMovingComponents() const
+{
+	return NumberOfMovingComponents;
+}
+
+Component** ApplicationManager::getListOfCopiedComponents()
+{
+	return this->ListOfCopiedComponents;
+}
+Component** ApplicationManager::getListOfMovingComponents()
+{
+	return this->ListOfMovingComponents;
+}
+
+Component** ApplicationManager::getCopyOfListOfCopiedComponents()
+{
+	return this->CopyOfListOfCopiedComponents;
+}
+void ApplicationManager::UpdateInterfaceWithoutClrDrwArea()
+{
+	for (int i = 0; i < CompCount; i++)
+		if (CompList[i] != nullptr) {
+			CompList[i]->Draw(pUI);
+		}
+	//CompList[i]->Draw(pUI);
+
+	for (int i = 0; i < ConnCount; i++)
+		if (ConnList[i] != nullptr)
+		{
+			ConnList[i]->Draw(pUI);
+		}
+}
 ////////////////////////////////////////////////////////////////////
 ApplicationManager::~ApplicationManager()
 {

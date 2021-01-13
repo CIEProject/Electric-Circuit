@@ -264,6 +264,9 @@
     <ClCompile Include="Actions\ActionDropDown3.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionMove.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -461,6 +464,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionDropDown3.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionMove.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

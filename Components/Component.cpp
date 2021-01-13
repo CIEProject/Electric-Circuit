@@ -140,6 +140,9 @@ void Component::Selection() {
 void Component::unSelect() {
 	selected = false;
 }
+void Component::Select() {
+	selected = true;
+}
 string Component::getLabel() {
 	return m_Label;
 }
@@ -166,6 +169,9 @@ void Component::setState(int S) {
 }
 int Component::getCompState() {
 	return CompStatus;
+}
+GraphicsInfo* Component::get_m_pGfxInfo() {
+	return m_pGfxInfo;
 }
 void Component::setTerm1Volt(double v) {
 	term1_volt = v;

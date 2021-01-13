@@ -22,6 +22,11 @@ private:
 	int CompCount;		//Actual number of Components
 	int ConnCount;		//Actual number of Connections
 	int drawningpenwidth;
+	int NumberOfCopiedComponents;
+	int NumberOfMovingComponents;
+	Component* ListOfCopiedComponents[200];
+	Component* CopyOfListOfCopiedComponents[200];
+	Component* ListOfMovingComponents[200];
 	Component* CompList[MaxCompCount];	//List of all Components (Array of pointers)
 	Connection* ConnList[MaxConnCount];	//List of all Connections (Array of pointers)
 	window* pW;
@@ -58,7 +63,9 @@ public:
 	Connection* GetConnByCordinates(int x, int y);//returns pointer to the connection if (x,y) is in the component region
 	int getCompOrder(Component* comp);
 	int getCompCount();
+	int getConnCount();
 	Component** getCompList();
+	Connection** getConnList();
 	//////////////////////////////////////////////////
 	void UnselectAll();
 	void UnselectAll(Component* pComp);//this function is not used, it was used to unselect all object except the passed object(pComp) which leaves it as it is.
@@ -74,6 +81,23 @@ public:
 	double calculateNetVoltage();
 	void test();
 	////////////////////////////
+	void ErasePointers();
+	int GetNumberOfSelectedComponents();
+	void ApplicationManager::ClearTheClipboard();
+	void ApplicationManager::CopySelectedComponent(int i);
+	void PointToTheNextComponent(int COMP);
+	int getNumberOfCopiedComponents() const;
+	Component** getListOfCopiedComponents();
+	void CreateACopyOfCopiedComponents();
+	Component** getCopyOfListOfCopiedComponents();
+	void MoveComponents(int i);
+	void ClearListOfMovingComponents();
+	Component** getListOfMovingComponents();
+	int getNumberOfMovingComponents() const;
+	void UpdateInterfaceWithoutClrDrwArea();
+
+
+	/////////////////////////
 	void Load(ifstream& file, string name);
 	void SaveCircuit(ofstream& file);
 	//destructor

@@ -113,6 +113,9 @@ void Connection::Selection() {
 void Connection::unSelect() {
 	selected = false;
 }
+void Connection::Select() {
+	selected = true;
+}
 GraphicsInfo* Connection::getgraphics() const {
 	return pGfxInfo;
 }

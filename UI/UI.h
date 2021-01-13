@@ -40,6 +40,7 @@ class UI
 		ITM_DROP1,
 		ITM_DROP2,
 		ITM_DROP3,
+		ITM_MOVE,
 		ITM_SIMU,
 
 		ITM_EXIT,
@@ -106,11 +107,12 @@ class UI
 	color BkGrndColor;		//Back ground color
 
 	UI* pU;
-	window* pWind;
+
 	bool IsOn; //true if the series is fully connected and all the switches are closed
 	//ApplicationManager* pmanager;
 	int xtemp, ytemp; //these variables store x,y and are called when the user selects a component
 public:
+	window* pWind;
 	bool dropdown1;
 	bool dropdown2;
 	bool dropdown3;

@@ -42,6 +42,7 @@ public:
 	bool isSelected();
 	void Selection();
 	void unSelect();
+	void Select();
 
 	void reArrange();
 	int getTermcount(TerminalNum Term);
@@ -54,6 +55,7 @@ public:
 	void Component::OpenClose();
 	void setState(int S);
 	int getCompState();
+	GraphicsInfo* get_m_pGfxInfo();
 	void setTerm1Volt(double v);		//sets the voltage at terminal1
 	void setTerm2Volt(double v);		//sets the voltage at terminal2
 	//double getTerm1Volt();				//returns the voltage at terminal1
