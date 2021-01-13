@@ -1,5 +1,5 @@
-#ifndef ACTION_EXIT_H
-#define ACTION_EXIT_H
+#ifndef EXIT_ACTION_H
+#define EXIT_ACTION_H
 
 #include "Action.h"
 class ExitAction : public Action

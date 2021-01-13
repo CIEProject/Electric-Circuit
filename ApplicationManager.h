@@ -101,6 +101,7 @@ public:
 	/////////////////////////
 	void Load(ifstream& file, string name);
 	void SaveCircuit(ofstream& file);
+	bool Closed = false;
 	//destructor
 	~ApplicationManager();
 };

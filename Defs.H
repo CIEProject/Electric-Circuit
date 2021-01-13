@@ -52,6 +52,7 @@ enum ActionType
 	OHMMETER,
 	SIMU,
 	EXIT,		//Exit the application
+	EXIT3,
 	STATUS_BAR,		//A click on the status bar
 	DSN_TOOL,	//A click on an empty place in the design tool bar
 };

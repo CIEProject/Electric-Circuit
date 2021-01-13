@@ -270,6 +270,9 @@
     <ClCompile Include="UI\Dialog_Box.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionExit.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h">
@@ -474,6 +477,9 @@
     </ClInclude>
     <ClInclude Include="UI\Dialog_Box.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionExit.h">
+      <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

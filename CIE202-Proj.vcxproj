@@ -133,6 +133,7 @@
     <ClCompile Include="Actions\ActionDropDown2.cpp" />
     <ClCompile Include="Actions\ActionDropDown3.cpp" />
     <ClCompile Include="Actions\ActionEdit.cpp" />
+    <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionMove.cpp" />
     <ClCompile Include="Actions\ActionMultimeter.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Actions\ActionDropDown2.h" />
     <ClInclude Include="Actions\ActionDropDown3.h" />
     <ClInclude Include="Actions\ActionEdit.h" />
+    <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionMove.h" />
     <ClInclude Include="Actions\ActionMultimeter.h" />

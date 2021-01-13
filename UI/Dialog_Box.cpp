@@ -5,7 +5,7 @@ Dialog_Box::~Dialog_Box()
 }
 Dialog_Box::Dialog_Box(string string, Dialog_Box_Type BType)
 {
-	pWind = new window(450, 250, 390, 200); //600->390 // 100->175
+	pWind = new window(450, 250, 390, 200);
 	pWind->SetWaitClose(false);
 	Dialog_Box_Message = string;
 	DType = BType;

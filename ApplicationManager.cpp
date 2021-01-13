@@ -31,6 +31,7 @@
 #include"Actions/ActionCut.h"
 #include"Actions/ActionPaste.h"
 #include"Actions/ActionMove.h"
+#include"Actions/ActionExit.h"
 #include <iostream>
 #include<cmath>
 
@@ -56,7 +57,10 @@ ApplicationManager::ApplicationManager()
 ActionType ApplicationManager::GetUserAction()
 {
 	//Call input to get what action is reuired from the user
-	return pUI->GetUserAction(this);
+	if (Closed == false)
+		return pUI->GetUserAction(this);
+	else 
+		return EXIT3;
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -167,8 +171,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case MODULE4:
 		pAct = new ActionAddModule1(this, 4);
 		break;
-	case EXIT:
+	case EXIT3:
+		Closed = true;
 		pAct = new ExitAction(this);
+		break;
+	case EXIT:
+		pAct = new ActionExit(this);
 		break;
 	}
 	if (pAct)

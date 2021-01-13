@@ -8,6 +8,7 @@ int main()
 	ActionType ActType;
 	//Create an object of ApplicationManager
 	ApplicationManager AppManager;
+	//bool Closed = false;
 
 	do
 	{
@@ -19,7 +20,7 @@ int main()
 
 		//Update the drawing window
 		AppManager.UpdateInterface();
-	} while (ActType != EXIT);
+	} while (ActType != EXIT3);
 
 	return 0;
 }
